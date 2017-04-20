@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin:0px;
+	padding:0px;
+	font-family: 'Poppins', sans-serif;
+	}
+	
+#login-main-wrapper {
+	width:100%;
+	height:100vh;
+	background:#EFF1F0;
+	border-top:7px solid #205090;
+	border-bottom:7px solid #205090;
+	}
+	
+#login-wrapper {
+  height: auto;
+  left: 0;
+  margin: 0 auto;
+  max-width: 500px;
+  position: absolute;
+  right: 0;
+  top: 80px;
+}
+	
+.login-header {
+	width:100%;
+	height:auto;
+	background: url(../Images/bg.png) repeat scroll 0 0 / 300px 300px, rgba(0, 0, 0, 0) linear-gradient(to right, #c52a3d, #155395) repeat scroll 0 0;
+	padding:20px 20px;
+}
+
+.login-header h1 {
+	font-size:30px;
+	font-weight:500;
+	color:#ffffff;
+	text-align:center;}
+	
+.login-container {
+	width:100%;
+	height:auto;
+	padding:30px;
+	background:#ffffff;
+	box-sizing:border-box;
+	border:1px solid #d2d2d2;
+	}
+	
+.login-button {
+	width:auto;
+	height:auto;
+	padding:10px 20px;
+	margin:5px 5px;
+	background:#c42b3d;
+	color:#ffffff;
+	font-size:18px;
+	font-weight:500;
+	text-align:center;
+	text-decoration:none;
+	}
+	
+.login-button {
+  background: #FF6666 none repeat scroll 0 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  height: auto;
+  margin-left: 14px;
+  padding: 10px 40px;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  margin-top: 6px;
+  float: left;
+}
+
+.login-button:hover {
+	text-decoration:none;
+	color:#000000;}
+	
+.forgot-password {
+  color: #3fa2cc;
+  float: right;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 15px;
+  margin-top: 18px;
+  text-align: right;
+}
+
+.lbl-1 {
+	display: inline-block;
+    font-weight: 500;
+	font-size:14px;
+    margin-bottom: 5px;
+    max-width: 100%;
+	}
+	
+.powered-by {
+	font-size:18px;
+	font-weight:500;
+	text-align:center;
+	margin-top:30px;
+	color:#4f4f4f;
+	}
+

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:aop="http://www.springframework.org/schema/aop"		
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <!-- View Resolver configuration for Spring MVC. Specifies which view technology is used to render the view. -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	<property name="prefix" value="/WEB-INF/jsp/"/>
+	<property name="suffix" value=".jsp"/>
+	<property name="exposedContextBeanNames"> <!-- Specifies which beans are exposed in each request by default. Here property file beans are listed which we use in JSP. -->
+	    <list>
+		<value>projectProperties</value>
+		<value>hospitalProperties</value>
+	    </list>
+	</property>
+    </bean>
+
+    <!-- Enables support for annotations such as @Controller, @Service, @Repository @RequestMapping etc. -->
+    <mvc:annotation-driven>
+	<mvc:async-support default-timeout="30000"/><!-- Have to define when reverse ajax is to be implemented with Spring Framework and enables spring to handle async requests. -->
+    </mvc:annotation-driven>
+    
+    <tx:annotation-driven /><!-- Enables support for annotation driven Transaction Management ie. @Transactional. -->
+
+    <context:annotation-config /><!-- Enables supoort for general annotations like @Autowired, @Required, @PostConstruct etc. -->
+    
+    <task:annotation-driven/><!-- Enables Async task execution with annotations like @Async, @Scheduled etc. -->
+    
+    <aop:aspectj-autoproxy />
+    
+    <bean id="loggingAspect" class="com.hisd.common.interceptors.LoggingAspect">
+    </bean>
+    
+    <mvc:interceptors>
+      <bean class="com.hisd.common.interceptors.CustomInterceptor" />
+	</mvc:interceptors> 
+    
+    
+    <!-- Defines the package patterns to scan for classes having @Controller, @Service, @Repository, @Component and @RequestMapping annotations. Creates bean for scanned classes in Spring bean container. -->
+    <context:component-scan base-package="com.hisd.**.controller, 
+    									com.hisd.**.repository, 
+    									com.hisd.**.daoimpl, 
+    									com.hisd.**.services, 
+    									com.hisd.**.model,
+    									com.hisd.**.utility"/>
+
+    <!-- Tells spring to skip the request with specified mapping pattern to go through DispatcherServlet. And instead of that provides the specified static content from location defined. -->
+    <mvc:resources location="/resources/" mapping="/resources/**" />
+
+    <!-- Conversion service defined for TimeZone conversion. Specified bean class implements Converter interface to convert String values to Date with UTC time zone. -->    
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<property name="converters">
+	    <set>
+		<bean class="com.hisd.common.utility.UtcTimeZoneConverter"/>
+	    </set>
+	</property>
+    </bean>
+    
+    <!-- <bean id="conversionServiceExposingInterceptor" class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
+	<constructor-arg ref="conversionService"/>
+    </bean> -->
+    
+    <!-- Defines interceptors for Locale change and Theme change before the request goes to DispatcherServlet for further operation. -->
+    <mvc:interceptors>
+	<ref bean="localeChangeInterceptor"/>
+	<ref bean="themeChangeInterceptor" />
+	<!-- <ref bean="conversionServiceExposingInterceptor"/> -->
+    </mvc:interceptors>
+
+    <!-- Interceptor for change in Locale -->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	<property name="paramName" value="language"/>
+    </bean>
+
+    <!-- LocaleResolver configuration for internationalization. Here cookie resolver used. Stores and reads the locale value from cookie. -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	<property name="defaultLocale" value="1"/>
+	<property name="cookiePath" value="/${contextName}/" />
+	<property name="cookieName" value="locale"/>
+	<property name="cookieMaxAge" value="86400"/>
+ 	<property name="cookieHttpOnly" value="true"/>
+ 	<property name="cookieSecure" value="true"/>
+    </bean>
+
+    <!-- Provides the list of base location for Localized property files. Default encoding must be UTF-8 to support multilingual text. -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	<property name="basenames">
+	    <list>
+		<value>/WEB-INF/i18n/labels</value>
+		<value>/WEB-INF/i18n/messages</value>
+		<value>/WEB-INF/i18n/common/labels</value>
+		<value>/WEB-INF/i18n/common/messages</value>
+		<value>/WEB-INF/i18n/domestic/labels</value>
+		<value>/WEB-INF/i18n/domestic/messages</value>
+		<value>/WEB-INF/i18n/bidder/labels</value>
+		<value>/WEB-INF/i18n/bidder/messages</value>
+		<value>/project</value>
+	    </list>
+	</property>
+	<property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    
+    <!--  Configuration for Theme Selection -->
+    <!-- Note: property files for theme-XXX should be exist into build path. For our project it should be in:/WEB-INF/classes/ -->
+    <bean id="themeSource"
+	  class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+	<property name="basenamePrefix"  value="classapth:/"/>
+    </bean>
+
+    <!-- Interceptor for change in theme -->
+    <bean id="themeChangeInterceptor"
+	  class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+	<property name="paramName" value="theme" />
+    </bean>
+
+    <!-- ThemeResolver configuration for using different themes. Here cookie resolver used. Stores and reads the theme value from cookie. -->
+    <bean id="themeResolver"
+	  class="org.springframework.web.servlet.theme.CookieThemeResolver">
+	<property name="defaultThemeName" value="theme-1" />
+	<property name="cookiePath" value="/${contextName}/" />
+	<property name="cookieName" value="theme"/>
+	<property name="cookieMaxAge" value="86400"/>
+ 	<property name="cookieHttpOnly" value="true"/> 
+ 	<property name="cookieSecure" value="true"/> 
+    </bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000000" />
+	</bean>
+    
+</beans>

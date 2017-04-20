@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+       http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
+
+	<!-- Loads the specified property files to use in xml configuration. -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">        
+          <property name="locations">
+          	<list>
+          		<value>classpath:/project.properties</value>
+          		<value>classpath:/mysql.jdbc.properties</value>
+          	</list>
+          </property>
+    </bean>
+    
+    <!-- Defines the bean for property files. To use in @Value annotation in controllers, services etc. -->
+    <util:properties id="projectProperties" location="classpath:/project.properties"/>
+    <util:properties id="hospitalProperties" location="classpath:/hospital.properties"/>
+    
+    <!-- DataSource configuration for Database to use. Also defines connection pooling related configurations. -->
+    <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+        <property name="driverClassName">
+            <value>${jdbc.driverClassName}</value>
+        </property>        
+        <property name="url">
+            <value>${jdbc.url}</value>
+        </property>
+         <property name="username">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+        <property name="maxActive" value="100"/>
+        <property name="maxWait" value="10000"/>
+        <property name="maxIdle" value="10"/>
+        <!-- To avoid the "Cannot release connection exception occurs when the connection in pool is idle and system tries to use it. -->
+        <property name="testWhileIdle" value="true"/>
+        <property name="validationQuery" value="Select 1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
+    </bean>
+
+	<!-- SessionFactory bean configuration for Hibernate. -->
+	<!-- depends-on="flyway" -->
+    <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" id="sessionFactory" primary="true" >
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="packagesToScan" value="com.hisd.**.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="current_session_context_class">thread</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.connection.autocommit">true</prop>
+                <prop key="hibernate.max_fetch_depth">5</prop>
+                <prop key="hibernate.default_batch_fetch_size">16</prop>
+                <prop key="hibernate.jdbc.batch_size">25</prop>
+                <prop key="hibernate.jdbc.fetch_size">8</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+<!--                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+ -->			</props>
+        </property>
+    </bean>
+    
+   	<!-- Specifies Hibernate Transaction Manager to use for Database transactions management. -->
+   	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" p:sessionFactory-ref="sessionFactory" />
+
+	<!-- HibernateTemplate bean configuration for creating HQL, insert update etc operations using HibernateTemplate. -->
+    <bean  class="org.springframework.orm.hibernate5.HibernateTemplate" id="hibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
+	<!-- Defines the path for Login form when authentication is required redirected to this location. -->
+   <bean id="authenticationEntryPoint"  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
+	 	p:loginFormUrl="/sessionexpired"/>
+	 	
+	<!-- For using spring expression in spring security authorize tag in jsp --> 	    
+	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
+	<!-- SpringSecurity configuration. Role based access for URL patterns. Also defines the set of customized filters and their position. --> 
+    <security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
+
+<!--         <security:intercept-url pattern="/${contextName}/" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+<!--         <security:intercept-url pattern="/ajaxcall/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+<!--     	<security:intercept-url pattern="/common/bidder/**" access="ROLE_BIDDER"/> -->
+<!--         <security:intercept-url pattern="/commmon/buyer/**" access="ROLE_OFFICER,ROLE_ADMIN"/> -->
+<!--         <security:intercept-url pattern="/common/admin/**" access="ROLE_ADMIN"/> -->
+<!--         <security:intercept-url pattern="/common/**" access="ROLE_OFFICER,ROLE_BIDDER,ROLE_ADMIN,IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+<!--         <security:intercept-url pattern="/bidder/**" access="ROLE_BIDDER"/> -->
+<!--         <security:intercept-url pattern="/buyer/**" access="ROLE_OFFICER,ROLE_ADMIN"/> -->
+<!--         <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/> -->
+<!--         <security:intercept-url pattern="/ajax/**" access="ROLE_OFFICER,ROLE_BIDDER,ROLE_ADMIN" /> -->
+<!--         <security:logout logout-success-url="/logout" /> -->
+<!--         <security:custom-filter position="LAST" ref="secureFilter" /> -->
+<!--         <security:custom-filter after="CONCURRENT_SESSION_FILTER" ref="secureFilter" /> -->
+<!--         <security:custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/> -->
+    </security:http>
+ 
+ 
+	<!-- Defines the bean for AuthenticationFilter. Authentication manager, login success handler, failure handler are defined. -->
+    <bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
+  		p:authenticationManager-ref="customAuthenticationManager"
+  		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"
+  		p:authenticationSuccessHandler-ref="customAuthenticationSuccessHandler" />
+
+    <!-- CustomAuthenticationFilter bean. Used for spring authentication of Login. -->
+    <bean id="customAuthenticationManager" class="com.hisd.common.utility.CustomAuthenticationFilter">
+        <constructor-arg type="org.hibernate.SessionFactory" ref="sessionFactory"/>
+        <constructor-arg type="int" value="${login.failedattempt}"></constructor-arg>
+        <constructor-arg type="com.hisd.common.utility.EncryptDecryptUtils" ref="encryptDecryptUtils"></constructor-arg>
+<!--         <constructor-arg type="com.hisd.common.utility.SendMessageUtil" ref="sendMessageUtil"/>
+ -->        <constructor-arg type="int" value="${bidder.status.incomplete}"></constructor-arg>
+        <constructor-arg type="int" value="${userhistory.actiontype.create}"></constructor-arg>
+        <constructor-arg type="int" value="${bidder.status.pending}"></constructor-arg>
+        <constructor-arg type="boolean" value="${performance_instance}"></constructor-arg>
+    </bean>
+    
+    <!-- Custom filter for login failure handler. -->
+    <bean id="customAuthenticationFailureHandler" class="com.hisd.common.web.security.filters.AuthFailureFilter">
+        <constructor-arg type="String" value="loginfailed"></constructor-arg>
+        <constructor-arg type="org.hibernate.SessionFactory" ref="sessionFactory"></constructor-arg>                
+    </bean>
+    
+    <!-- Custom filter for login success handler. --> 
+    <bean id="customAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler" 
+ 		p:defaultTargetUrl="/submitLogin" /> 
+ 
+    <!-- Custom bean for Mail sending utility. -->
+     <bean id="sendMessageUtil1" class="com.hisd.common.utility.SendMessageUtil" lazy-init="true">
+        <property name="mailSender" ref="JavaMailSender"/>
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="from" value="${mail.from}"/>
+    </bean>
+      
+    <!-- SecureFilter bean defination. -->
+    <bean id="secureFilter" class="com.hisd.common.web.security.filters.SecureFilter">        
+        <constructor-arg type="org.hibernate.SessionFactory" ref="sessionFactory"/>        
+        <!-- <constructor-arg type="com.hisd.common.utility.SendMessageUtil" ref="sendMessageUtil1"/> -->        
+        <constructor-arg type="String" value="${exception.mailto}"></constructor-arg>
+        <constructor-arg ref="skipFilterPages"></constructor-arg>        
+        <constructor-arg type="boolean" value="${exception.mail}"></constructor-arg>
+        <constructor-arg type="String" value="${contextName}"></constructor-arg>
+    </bean> 
+    
+    <!-- Spring Framework Session Registry. -->    
+<!-- 	<bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl"/> -->
+	
+	<!-- EncryptDecryptUtils bean -->
+    <bean id="encryptDecryptUtils" class="com.hisd.common.utility.EncryptDecryptUtils" />
+    
+    <!-- Spring JDBC Template using the datasource created.-->            
+    <bean id="springJdbc" class="org.springframework.jdbc.core.JdbcTemplate">
+    	<constructor-arg ref="dataSource"/>
+    </bean>  
+	
+    <!-- List of URLs to be skipped in SecureFilter -->       
+    <util:list id="skipFilterPages" value-type="java.lang.String">
+        <value>/${contextName}/</value>
+        <value>/pagenotfound</value>
+        <value>/common/submitLogin</value>
+        <value>/loginfailed</value>        
+        <value>/logout</value>        
+        <value>/checkbrowser</value>
+        <value>/sessionexpired</value>        
+        <value>/ajaxsessionexpired</value>      
+        <value>/exception</value>        
+        <value>/error</value>
+        <value>/forgotpassword</value>
+        <value>/ajaxcall/checklogin</value>
+        <value>/ajaxcall/getserverdatetime</value>
+        <value>/chngpassword</value>
+        <value>/contactus</value>
+        <value>/aboutus</value>
+    </util:list>   
+    <security:authentication-manager/>
+    
+     <bean id="flyway" class="com.hisd.common.utility.FlywayInitializer"
+		init-method="init">
+		<property name="flyway" ref="flyway-core" />
+		<property name="applyRepair" value="true" />
+	</bean>
+	<bean id="flyway-core" class="org.flywaydb.core.Flyway">
+		<property name="dataSource" ref="dataSource" />
+		<property name="baselineOnMigrate" value="true"></property>
+		<property name="locations">
+			<array>
+				<value>classpath:migration/sql</value>
+			</array>
+		</property>
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<property name="host" value="smtp.gmail.com" />
+	<property name="port" value="587" />
+	<property name="username" value="eprocurement.help@gmail.com" />
+	<property name="password" value="helpeprocurement" />
+
+	<property name="javaMailProperties">
+	   <props>
+       	      <prop key="mail.smtp.auth">true</prop>
+       	      <prop key="mail.smtp.starttls.enable">true</prop>
+       	   </props>
+	</property>
+	</bean>
+	
+</beans>
