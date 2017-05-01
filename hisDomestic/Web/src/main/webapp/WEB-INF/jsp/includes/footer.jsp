@@ -10,7 +10,6 @@ Copyright &copy; 2017, All Rights Reserved. Powered By : Cahoot Technologies
     var VALIDATE_MSG_INVALID_PASSWORD = '<spring:message code="password_validation_msg" />';
     
   </script>
-
 <script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.min.js"></script>
 	<script
@@ -31,8 +30,8 @@ Copyright &copy; 2017, All Rights Reserved. Powered By : Cahoot Technologies
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/site-settings.min.js"></script>
 	<script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/layout.min.js"></script>
-	 <script
-		src="${pageContext.servletContext.contextPath}/resources/hospital/js/default.js"></script> 
+	 <script 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/default.js"></script>  
+<%-- 	 <script		src="${pageContext.servletContext.contextPath}/resources/hospital/js/doctorDefault.js"></script> --%>
 		 <script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/validationDefault.js"></script> 
 		<script
@@ -43,6 +42,8 @@ Copyright &copy; 2017, All Rights Reserved. Powered By : Cahoot Technologies
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/simplemde.min.js"></script>
 		<script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.form-validator.min.js"></script>
+		<script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/hospital/js/form_validation.min.js"></script>
 <!-- 		<script -->
 <%-- 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.2.3.min.js"></script>   --%>
 		

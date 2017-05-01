@@ -490,6 +490,7 @@ public class AdminController {
 							tblPatient.setAppid(patientBean.getAppid());
 							tblPatient.setTblUser(tblUser);
 							tblAppointment.setAppid(patientBean.getAppid());
+							tblAppointment.setStatus(1);
 							tblAppointment.setAppdate(commonService
 									.convertStirngToUTCDate(
 											clientdateformatehhmm,
@@ -905,8 +906,7 @@ public class AdminController {
 	@RequestMapping(value = "/domestic/complaints/deleteComplaints/{compaintsId}", method = RequestMethod.POST)
 	
 	public String deleteComplaints(HttpServletRequest request,HttpServletResponse response, ModelMap modelMap,@PathVariable("compaintsId")int compaintsId) throws Exception{
-		boolean success;
-		success = adminService.deleteComplatints(compaintsId, 2);
+		 adminService.deleteComplatints(compaintsId, 2);
 		 modelMap.addAttribute("complaints", adminService.complaintsList());
 		 String page ="admin/ComplaintsMaster";	
 		return page;

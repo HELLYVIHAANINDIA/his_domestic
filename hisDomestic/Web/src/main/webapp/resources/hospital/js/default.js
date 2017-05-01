@@ -1,9 +1,14 @@
-function changeTab(tabId,hdPatientId){
-	
+function changeTab(tabId,hdPatientId,hdUserTypeId){
 	if(tabId != undefined){
+		var url ;
+		if(hdUserTypeId != 2){
+			url = contextPath+"/domestic/user/tabcontent/"+tabId+"/"+hdPatientId;	
+		}else{
+			url = contextPath+"/domestic/Doctor/tabcontent/"+tabId+"/"+hdPatientId+"/"+0	;
+		}
 		$.ajax({
 			type: "POST",
-			url: contextPath+"/domestic/user/tabcontent/"+tabId+"/"+hdPatientId,
+			url: url,
 			success: function success(result){
 				$("#divCallPage").html("");
 	 			$("#divCallPage").html(result);
@@ -14,14 +19,14 @@ function changeTab(tabId,hdPatientId){
 }
 $(document).ready(function() {
 	var hdTabId = $("#hdTabId").val();
-	
+	var hdUserTypeId = $("#hdUserTypeId").val();
 	var hdsuperAdmin = $("#hdsuperAdmin").val();
 	var hdPatientId = $("#hdPatientId").val();
 	if(hdTabId == 2){
-		changeTab(hdTabId,hdPatientId);
+		changeTab(hdTabId,hdPatientId,hdUserTypeId);
 	}
 	else if(hdsuperAdmin){
-		changeTab(hdTabId,hdPatientId);
+		changeTab(hdTabId,hdPatientId,hdUserTypeId);
 	}
 });
 

@@ -31,6 +31,8 @@
 	href="${pageContext.request.contextPath}/resources/hospital/css/simplemde.min.css">
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/hospital/css/switchery.min.css">
  
 	
 </head>

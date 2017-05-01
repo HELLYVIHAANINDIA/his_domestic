@@ -15,8 +15,6 @@
 		</section>
 	</div>
 	<!--Body Part End-->
-	
-	
 </div>
 </body>
 </html>

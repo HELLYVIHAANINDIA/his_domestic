@@ -9,15 +9,20 @@
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
 
 <script>
+//Cancel Appointment-----
 function cancleAppointment(hdAppointmentId){
 	$("#hdAppointmentId").val(hdAppointmentId);
 	$("#frmcancleAppointment").submit();
 } 
+//End Cancel Appointment-----------------
+//Resedule Appointment --------------------
 function reseduleAppointment(hdAppointmentId)
 {
 	$("#hdAppointmentId").val(hdAppointmentId);
 	$("#frmcancleAppointment").submit();
 	}
+	//End Resedule Appointment---------------------
+//Date Time Picker --------	
 $(document).ready(function() {
 	
 	$(".dateBoxappointment").each(function(){
@@ -28,6 +33,7 @@ $(document).ready(function() {
 		});
 	});
 })
+//End Date Time Picker---------------
 </script>
 <section id="content-wrapper">
 
@@ -73,8 +79,9 @@ $(document).ready(function() {
 							<c:forEach items="${patientData}" var="appdata" varStatus="cnt">
 								<tr>
 									<td>
-									
+									<!--Cancle Button  -->
 									<a href="#" class="tag square-tag tag-danger" data-toggle="modal" data-target="#bordermodal${appdata[12]}">Cancel</a>
+									 <!--First PopupMenu  -->
 									  	<div class="modal fade border-modal" id="bordermodal${appdata[12]}" tabindex="-1" role="dialog" aria-labelledby="bordermodal" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -93,8 +100,9 @@ $(document).ready(function() {
 												</div>
 											</div>
 										</div>
+										<!--End First PopupMenu  -->
 										
-										
+										 <!--Second PopupMenu  -->
 											<div class="modal fade" id="appointmentCancle${appdata[12]}" role="dialog">
 												<div class="modal-dialog modal-md">
 													<div class="modal-content">
@@ -117,8 +125,11 @@ $(document).ready(function() {
 													</div>
 												</div>
 											</div>
-									
+											<!--End Second PopupMenu  -->
+									<!-- End Cancel Button   -->
+									<!-- Reschedule Appointment  -->
 										<a href="#" class="tag square-tag tag-warning"data-dismiss="modal" data-toggle="modal" data-target="#appointmentReschedule${appdata[12]}">Reschedule</a>
+										<!--Popup Menu  -->
 										<div class="modal fade" id="appointmentReschedule${appdata[12]}" role="dialog" >
 												<div class="modal-dialog modal-md">
 													<div class="modal-content">
@@ -148,10 +159,10 @@ $(document).ready(function() {
 													</div>
 												</div>
 											</div>
+											<!-- End Popup Menu  -->
+											<!-- End Reschedule Appointment  -->
 										
-										<%-- <c:if test="${appdata[11] eq 0}">
-											<a href="${pageContext.servletContext.contextPath}/domestic/user/tabcontent/7/${appdata[10]}" class="tag square-tag tag-success">Arrived</a></td>
-										</c:if> --%>
+									
 									</td>	
 									<td>${appdata[0]}</td>
 									<td>${appdata[1]}</td>

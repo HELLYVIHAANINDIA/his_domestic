@@ -7,7 +7,7 @@ function newAppointment(patientid) {
 	
 			$.ajax({
 				type: "POST",
-				url: contextPath+"/domestic/user/tabcontent/6/"+patientid,
+				url: contextPath+"/domestic/user/tabcontent/7/"+patientid,
 				success: function success(result){
 					/* $("#viewRegister").html("");
 		 			$("#viewRegister").html(result); */

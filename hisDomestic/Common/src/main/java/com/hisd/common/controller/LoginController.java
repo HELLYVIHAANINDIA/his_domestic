@@ -327,7 +327,7 @@ public class LoginController {
 				userLoginDtl = commonServices.getDepartmentById(userId);
 				isEmailverified = userLoginDtl.get(0)[2]!=null ? Integer.parseInt(userLoginDtl.get(0)[2].toString()) : 0 ;
 			}else{
-				userLoginDtl = commonServices.getBidderDtls(userId);
+//				userLoginDtl = commonServices.GETBIDDERDTLS(userId);
 				isEmailverified = userLoginDtl.get(0)[7]!=null ? Integer.parseInt(userLoginDtl.get(0)[7].toString()) : 0 ;
 			}
 			modelMap.addAttribute("isEmailVerified",isEmailverified);

@@ -1,3 +1,4 @@
+
 <div id="header-icon">
 	<div class="header-width">
 		<div class="col-xl-12">
@@ -18,7 +19,7 @@
 								<li><a href="#">DropDown-3</a></li>
 							</ul></li>
 
-						<li class="active"><a href="#" onclick="changeTab(1,0)"> <i
+						<li class="active"><a href="#" onclick="changeTab(1,0,1)"> <i
 								class="fa fa-user icon_tags_alt header-icon" aria-hidden="true"
 								id="1"></i> Create User
 						</a>  <ul class="dropNav">
@@ -50,7 +51,7 @@
 								Masters
 						</a>
 							<ul class="dropNav">
-								<li><a href="#" onclick="changeTab(5,0)">Complaints Master <i aria-hidden="true"></i>
+								<li><a href="#" onclick="changeTab(5,0,1)">Complaints Master <i aria-hidden="true"></i>
 								</a>
 									<!-- <ul class="submenu-sub">
 										<li><a href="#">Sub-DropDown-1</a></li>

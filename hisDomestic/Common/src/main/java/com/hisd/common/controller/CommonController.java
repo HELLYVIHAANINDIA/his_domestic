@@ -51,14 +51,14 @@ public class CommonController {
 
 	
 	    
-    @ResponseBody
+   /* @ResponseBody
     @RequestMapping(value = "/etender/commonDataGrid",method = {RequestMethod.GET, RequestMethod.POST})
     public String commonDataGrid(HttpServletRequest request,HttpServletResponse response) throws Exception{
     	String res = commonService.setListingData(request);
         response.setContentType("application/json");
         response.setHeader("Cache-Control", "no-store");
     	return res;
-    }
+    }*/
     
     @RequestMapping(value = "/listingDemo.htm",method = RequestMethod.GET)
     public ModelAndView listingDemo(HttpServletRequest request,HttpServletResponse response) throws Exception{
@@ -66,7 +66,7 @@ public class CommonController {
     	return modelAndView;
     }
     
-    @RequestMapping(value = "/etender/commonListPage/{listingId}",method = {RequestMethod.GET, RequestMethod.POST})
+   /* @RequestMapping(value = "/etender/commonListPage/{listingId}",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView commonListPage(@PathVariable("listingId") int listingId, HttpServletRequest request,HttpServletResponse response) throws SQLException,ArrayIndexOutOfBoundsException,NullPointerException{
     	ModelAndView modelAndView = new ModelAndView("etender/CommonListingPage");
     	List<CommonListing> list = commonService.getCommonListPageData(listingId);
@@ -74,70 +74,8 @@ public class CommonController {
     		modelAndView.addObject("listingDemo", list.get(0));
     	}
     	return modelAndView;
-    }
+    }*/
     
-    @RequestMapping(value = "/common/addEditMarquee/{tenderId}",method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView addEditMarquee(HttpServletRequest request,@PathVariable("tenderId") int tenderId,HttpServletResponse response) throws Exception{
-    	ModelAndView modelAndView = new ModelAndView("/common/addEditMarquee");
-    	List<TblMarquee> tblMarquee = commonService.getTblMarquee(tenderId,8,0);
-    	if(tblMarquee != null && !tblMarquee.isEmpty()){
-    		/*String startDate = commonService.convertSqlToClientDate(client_dateformate_hhmm, tbl.getStartDate());
-    		String endDate = commonService.convertSqlToClientDate(client_dateformate_hhmm, tbl.getEndDate());
-    		modelAndView.addObject("startDate",startDate);
-    		modelAndView.addObject("endDate",endDate);*/
-    		modelAndView.addObject("tblMarquee",tblMarquee.get(0));
-    	}
-    	return modelAndView;
-    }
-    @ResponseBody
-    @RequestMapping(value = "/common/removeMarquee/{marqueeId}",method = {RequestMethod.GET, RequestMethod.POST})
-    public String removeMarquee(@PathVariable("marqueeId") Integer marqueeId,HttpServletRequest request,HttpServletResponse response) throws Exception{
-    	commonService.deleteMarqueeById(marqueeId);
-    	return "success";
-    }
-    
-    
-    @ResponseBody
-    @RequestMapping(value = "/common/viewMarquee/{tenderId}",method = {RequestMethod.GET, RequestMethod.POST})
-    public String viewMarquee(@PathVariable("tenderId") int tenderId, HttpServletRequest request,HttpServletResponse response) throws Exception{
-    	List<TblMarquee> tblMarquee = commonService.getTblMarquee(tenderId,8,0);
-    	String marqueeText = "";
-    	if(tblMarquee != null && !tblMarquee.isEmpty()){
-    	}
-    	return marqueeText;
-    }
-    
-    @RequestMapping(value = "/common/submitMarquee",method = {RequestMethod.POST})
-    public ModelAndView submitMarquee(HttpServletRequest request,HttpServletResponse response,final RedirectAttributes redirectAttributes) throws Exception{
-    	ModelAndView modelAndView = null;
-    	String marqueeId = request.getParameter("marqueeId");
-    	String marequeeText = request.getParameter("txtaMarquee");
-    	String tenderId = request.getParameter("tenderId");
-    	TblMarquee tblMarquee = null;
-    	if("0".equals(marqueeId)){
-    		tblMarquee = new TblMarquee();
-    	}else{
-    		tblMarquee = new TblMarquee(Integer.parseInt(marqueeId));
-    	}
-//    	tblMarquee.setStartDate(commonService.convertStirngToUTCDate(client_dateformate_hhmm, startDate));
-//    	tblMarquee.setEndDate(commonService.convertStirngToUTCDate(client_dateformate_hhmm, endDate));
-    	tblMarquee.setMarqueeText(marequeeText);
-    	tblMarquee.setCreatedBy(commonService.getSessionUserId(request));
-    	tblMarquee.setCreatedOn(commonService.getServerDateTime());
-    	tblMarquee.setIsActive(1);
-    	tblMarquee.setTblProcess(new TblProcess(8));
-    	tblMarquee.setTenderId(Integer.parseInt(tenderId));
-    	commonService.saveMarquee(tblMarquee);
-    	if(Integer.parseInt(tenderId) == 0){
-//    		redirectAttributes.addFlashAttribute(CommonKeywords.SUCCESS_MSG.toString(),msg_marquee_success);
-    		modelAndView = new ModelAndView("redirect:/common/addEditMarquee/0");
-    	}else{
-//    		redirectAttributes.addFlashAttribute(CommonKeywords.SUCCESS_MSG.toString(),msg_bidder_message_success);
-    		modelAndView = new ModelAndView("redirect:/etender/buyer/tenderDashboard/"+tenderId);
-    	}
-    	//redirectAttributes.addFlashAttribute("message", "saved successfully");
-    	return modelAndView;
-    }
     
     
     @RequestMapping(value = "/common/audittrial", method = RequestMethod.GET)

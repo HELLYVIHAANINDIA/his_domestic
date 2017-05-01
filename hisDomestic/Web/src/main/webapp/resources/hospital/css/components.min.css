@@ -17763,3 +17763,10 @@ body.bounce .pace {
 .validationMsg {
   color: red;
 }	
+
+.scr {
+	border:2px solid #ccc;
+	 height: 100px;
+        overflow-y: scroll;
+    width: 1140p
+}

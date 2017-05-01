@@ -24,6 +24,14 @@ public class TblComplaints implements Serializable {
 	@Column(name = "complaintsstatus")
 	public int complaintsstatus;
 
+	public TblComplaints(){
+		super();
+	}
+	
+	public TblComplaints(int complaintsid) {
+		this.complaintsid = complaintsid;
+	}
+
 	public int getComplaintsid() {
 		return complaintsid;
 	}

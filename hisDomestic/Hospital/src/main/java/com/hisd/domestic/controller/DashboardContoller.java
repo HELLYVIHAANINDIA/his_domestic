@@ -30,7 +30,7 @@ public class DashboardContoller {
         String page = REDIRECT_SESSION_EXPIRED;
 	    try{
 			HttpSession session = request.getSession();
-			int tabid;
+			int tabid = 0;
 		    SessionBean sessionBean=(SessionBean)session.getAttribute(CommonKeywords.SESSION_OBJ.toString());
 		    if(sessionBean!=null){
 		    	modelMap.addAttribute("userType",sessionBean.getUserTypeId());
@@ -50,7 +50,10 @@ public class DashboardContoller {
 				    		tabid = 7;
 				    		hdPatientId = Integer.parseInt(model.asMap().get("redirectPatientId").toString());
 				    	}
-		    		}else{
+		    		}else if(sessionBean.getUserTypeId() == 2){
+		    			tabid = 0;
+		    		}
+		    		else {
 		    			tabid = 3;
 		    		}
 		    	}

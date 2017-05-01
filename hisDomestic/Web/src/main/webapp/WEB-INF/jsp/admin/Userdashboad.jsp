@@ -160,7 +160,7 @@ $(document).ready(function() {
 									
 									<td>${appdata[0]}</td>
 									<td>${appdata[1]}</td>
-									<td> </td>
+									<td></td>
 									<td>${appdata[2]} ${appdata[3]}</td>
 									<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy"
 											value="${appdata[4]}"></fmt:formatDate></td>

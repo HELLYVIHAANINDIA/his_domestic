@@ -84,9 +84,12 @@
 						}
 
 						var pageStatus = '${pageStatus}';
+						
 
 						if (pageStatus == 'edit') {
+							alert("hi");
 							var countryId = '${patient.dtcountryId}';
+							alert(countryId);
 							var stateId = '${patient.dtstateId}';
 							var referenceId = '${patient.selreferenceid}';
 							var socialeconomicId = '${patient.txtsocialeconomicstatusid}';

@@ -7,15 +7,16 @@
 				<nav id="nav" class="topmenu" role="navigation">
 
 					<ul class="menu-list live-search-list">
-						<li><a href="#" onclick="changeTab(0,0)"> <i
+						<li><a href="#" onclick="changeTab(0,0,1)"> <i
 								class="fa fa-desktop icon_desktop header-icon"
 								aria-hidden="true"></i> Dashboard
 						</a> <!-- <ul class="dropNav">
 								<li><a href="#">DropDown-1</a></li>
 								<li><a href="#">DropDown-2</a></li>
 								<li><a href="#">DropDown-3</a></li>
-							</ul></li> -->
-						<li><a href="#" onclick="changeTab(2,0)"> <i
+							</ul> -->
+							</li>
+						<li><a href="#" onclick="changeTab(2,0,1)"> <i
 								class="fa fa-user icon_tags_alt header-icon" aria-hidden="true"></i>
 								Patient Registration
 						</a></li>
@@ -24,7 +25,7 @@
 								aria-hidden="true"></i> Patient Registration Follow-up
 						</a></li>
  -->
-						<li><a href="#" onclick="changeTab(3,0)"> <i
+						<li><a href="#" onclick="changeTab(3,0,1)"> <i
 								class="fa fa-check-square-o icon_tags_alt header-icon"
 								aria-hidden="true"></i> Appointment
 						</a></li>

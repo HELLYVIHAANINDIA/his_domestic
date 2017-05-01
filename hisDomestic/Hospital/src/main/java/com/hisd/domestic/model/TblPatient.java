@@ -179,6 +179,18 @@ public class TblPatient implements Serializable {
 	public void setAddictionother(String addictionother) {
 		this.addictionother = addictionother;
 	}
+	@Override
+	public String toString() {
+		return "TblPatient [patientid=" + patientid + ", patientcrno="
+				+ patientcrno + ", regdate=" + regdate + ", age=" + age
+				+ ", referenceid=" + referenceid + ", socialeconomicstatusid="
+				+ socialeconomicstatusid + ", paybyid=" + paybyid
+				+ ", tblConsultingDoctor=" + tblConsultingDoctor
+				+ ", isdiabetic=" + isdiabetic + ", ishignbp=" + ishignbp
+				+ ", refothersname=" + refothersname + ", patbyname="
+				+ patbyname + ", tblUser=" + tblUser + ", appid=" + appid
+				+ ", addictionother=" + addictionother + "]";
+	}
 	
 
 	

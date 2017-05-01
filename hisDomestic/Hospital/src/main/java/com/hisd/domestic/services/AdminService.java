@@ -441,15 +441,19 @@ public class AdminService {
 		query.append(" INNER JOIN tblpatient.tblUser tbluser");
 		query.append(" INNER JOIN tblappointment.tblCaseType tblcasetype");
 		query.append(" INNER JOIN tblpatient.tblConsultingDoctor tblconsultingdoctor");
-		query.append(" WHERE tblpatient.appid = tblappointment.appid AND tblappointment.status IN( 0,1)");
+		
 		if(!search.isEmpty()){
+			query.append(" WHERE tblpatient.appid = tblappointment.appid AND tblappointment.status IN(0,1)");
 			query.append(" AND (tblpatient.patientcrno Like '%"+search+"%'  OR tbluser.firstname Like '%"+search+"%'  OR tbluser.mobileno Like '%"+search+"%')");
+			
 		}
 		if(currentDate!=null && !currentDate.isEmpty()){
 			parameter = new HashMap<String, Object>();
 			parameter.put("currentDate", currentDate);
 			parameter.put("dateFormate", sqlDateFormate);
+			query.append(" WHERE tblpatient.appid = tblappointment.appid AND tblappointment.status IN(0)");
 			query.append("AND DATE_FORMAT(tblappointment.appdate,:dateFormate) =DATE_FORMAT(:currentDate,:dateFormate)");
+			
 			
 		}
 		query.append(" ORDER BY tblpatient.patientid desc");
