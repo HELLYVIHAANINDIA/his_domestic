@@ -136,8 +136,8 @@ public class AdminController {
 				clientDateFormate,
 				patientObj[5] != null ? patientObj[5].toString() : regDate));
 		patientBean.setDtgender(patientObj[6].toString());
-		patientBean.setBirthdate(commonService.convertSqlToClientDate(
-				clientDateFormate, patientObj[7].toString()));
+		patientBean.setBirthdate( patientObj[7]!= null ? commonService.convertSqlToClientDate(
+				clientDateFormate, patientObj[7].toString()): "");
 		patientBean.setTxtage(Integer.parseInt(patientObj[8].toString()));
 		patientBean.setTxtcountrycodemobileno(patientObj[9].toString());
 		patientBean.setTxtmobileno(patientObj[10].toString());

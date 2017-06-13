@@ -13,7 +13,7 @@
 		 		<%@include file="../includes/AdminMenu.jsp"%> 
 			</c:when>
 			<c:when test="${userType eq 2}">
-				<%@include file="../includes/DoctorMenu.jsp"%>
+				<%@include file="../includes/UserMenu.jsp"%>
 			</c:when>
 		</c:choose>
 	</c:otherwise>

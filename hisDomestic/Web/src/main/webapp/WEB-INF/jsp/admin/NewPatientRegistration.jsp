@@ -37,13 +37,17 @@
 		});
 	});
 	//Addiction
-	$(function() {
+	function addictionother(){
+	
+		alert($("#chk1").is(":checked"));
 		if ($("#chk1").is(":checked")) {
+			
 			$("#divOtherAddictiob").show();
 		} else {
 			$("#divOtherAddictiob").hide();
 		}
-	});
+	
+	}
 	$(document)
 			.ready(
 					function() {
@@ -87,9 +91,7 @@
 						
 
 						if (pageStatus == 'edit') {
-							alert("hi");
 							var countryId = '${patient.dtcountryId}';
-							alert(countryId);
 							var stateId = '${patient.dtstateId}';
 							var referenceId = '${patient.selreferenceid}';
 							var socialeconomicId = '${patient.txtsocialeconomicstatusid}';
@@ -381,7 +383,7 @@
 			<div class="clear"></div>
 		</h4>
 		<form action="${pageContext.servletContext.contextPath}/domestic/user/SavePatient"
-			method="post" onsubmit="return validatePatient();">
+			method="post" onsubmit="return validatePatient()">
 			<input type="hidden" value="" id="appoinmentPatientTabId"
 				name="appoinmentPatientTabId"> <input type="hidden" value=""
 				id="newAppointmenttabid" name="newAppointmenttabid">
@@ -515,8 +517,8 @@
 								id="clientDateFormate" value='dd-MMM-yyyy'> <input
 								type="text" class="form-control dateBox" name="txtdateofbirth"
 								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"
-								placeholder="dd-MMM-yyyy" title="Date of Birth"
-								onblur="validateEmptyDt(this)" value="${patient.birthdate}">
+								placeholder="dd-MMM-yyyy" title="Date of Birth"  tovalid="true" validarr="required"
+								onblur="validateEmptyDt(this)" value="${patient.birthdate}" validationmsg="Allows ">
 						</div>
 
 					</div>
@@ -876,10 +878,10 @@
 													 <div class="checkbox-squared">
 													 	<c:choose >
 													 		<c:when test="${addictionData[1]  eq  'checked'}">
-													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" checked="checked">
+													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" checked="checked" onchange="addictionother()">
 													 		</c:when>
 															<c:otherwise>
-													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox">
+													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" onchange="addictionother()">
 													 		</c:otherwise>													 		
 													 	</c:choose>
 															<label for="chk${addiction.key}"></label> 

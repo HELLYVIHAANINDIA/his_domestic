@@ -33,7 +33,6 @@ public class TblUser implements Serializable {
 	private String lastname;
 	@Column(name = "gender")
 	private String gender;
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dob")
 	private Date bod;
 	@Column(name = "mobileno")
