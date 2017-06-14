@@ -30,8 +30,8 @@ Copyright &copy; 2017, All Rights Reserved. Powered By : Cahoot Technologies
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/site-settings.min.js"></script>
 	<script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/layout.min.js"></script>
-	 <script 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/default.js"></script>  
-<%-- 	 <script		src="${pageContext.servletContext.contextPath}/resources/hospital/js/doctorDefault.js"></script> --%>
+	 <script src="${pageContext.servletContext.contextPath}/resources/hospital/js/default.js"></script>  
+ 	 <script src="${pageContext.servletContext.contextPath}/resources/hospital/js/Doctor.js"></script> 
 		 <script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/validationDefault.js"></script> 
 		<script

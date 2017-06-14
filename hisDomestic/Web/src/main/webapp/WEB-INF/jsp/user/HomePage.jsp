@@ -3,6 +3,8 @@
 <input type="hidden" value="${issuperadmin}" name="hdsuperAdmin" id="hdsuperAdmin">
 <input type="hidden" value="${hdPatientId}" name="hdPatientId" id="hdPatientId">
 <input type="hidden" value="${userType}" name="hdUserTypeId" id="hdUserTypeId">
+
+
 <c:choose>
 	<c:when test="${issuperadmin}">
 		<%@include file="../includes/SuperAdminMenu.jsp"%>
@@ -13,7 +15,7 @@
 		 		<%@include file="../includes/AdminMenu.jsp"%> 
 			</c:when>
 			<c:when test="${userType eq 2}">
-				<%@include file="../includes/UserMenu.jsp"%>
+				<%@include file="../includes/DoctorMenu.jsp"%>
 			</c:when>
 		</c:choose>
 	</c:otherwise>

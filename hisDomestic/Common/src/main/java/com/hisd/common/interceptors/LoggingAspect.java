@@ -150,7 +150,7 @@ public class LoggingAspect {
 		}
 			if(request!=null){
 				if(!isSkipURL) {
-	        		commonDao.save(auditLog);
+//	        		commonDao.save(auditLog);
 	        	}
 			}
 		}

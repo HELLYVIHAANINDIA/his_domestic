@@ -19,12 +19,13 @@ function reseduleAppointment(hdAppointmentId)
 	$("#frmcancleAppointment").submit();
 	}
 function arrivedAppointment(patientId,hdAppointmentId){
-   
+	
 	$("#hdAppointmentId").val(hdAppointmentId);
 	$("#hdPatientid").val(patientId);
 	$("#frmcancleAppointment").submit();
 	
 }
+
 $(document).ready(function() {
 	
 	$(".dateBoxappointment").each(function(){
@@ -156,8 +157,12 @@ $(document).ready(function() {
 										    <input type="hidden" name="hdAppointmentId" value="" id="hdAppointmentId" class="form-control">
 											<a href="#" class="tag square-tag tag-success" onclick="arrivedAppointment(${appdata[10]} , ${appdata[12]})">Arrived</a>
 									   </c:if>
+									   <c:if test="${usertypeid eq 2}">
+									    <input type="hidden" name="hdAppointmentId" value="" id="hdAppointmentId" class="form-control">
+											<a href="${pageContext.servletContext.contextPath}/domestic/doctor/getacknowlege/${appdata[10]}" class="tag square-tag tag-success">Acknowledge</a>
+									   
+									   </c:if>
 									</td>
-									
 									<td>${appdata[0]}</td>
 									<td>${appdata[1]}</td>
 									<td></td>
@@ -180,3 +185,5 @@ $(document).ready(function() {
 		</div>
 	      
 </section>
+
+
