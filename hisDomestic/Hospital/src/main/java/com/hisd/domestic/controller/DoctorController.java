@@ -29,11 +29,13 @@ import com.hisd.common.services.CommonService;
 import com.hisd.common.services.ExceptionHandlerService;
 import com.hisd.common.utility.CommonKeywords;
 import com.hisd.common.utility.SessionBean;
+import com.hisd.domestic.databean.Clinicalbean;
 import com.hisd.domestic.databean.PatientBean;
 import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAddiction;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblCaseType;
+import com.hisd.domestic.model.TblClinical;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDesignation;
 import com.hisd.domestic.model.TblPatient;
@@ -249,7 +251,31 @@ public class DoctorController {
 	public String getacknowlege(@PathVariable("patientid") Integer patientid,HttpServletRequest request,HttpServletResponse response, ModelMap modelMap){
 	    String page = "admin/Patientpriscription";
 	    modelMap.addAttribute("patient",doctorService.getpatientinfo(patientid));
+	    modelMap.addAttribute("complaints", doctorService.getAllComplaints());
+	    modelMap.addAttribute("medicien", doctorService.getAllMedicins());
+	    modelMap.addAttribute("report", doctorService.getAllReports());
 		return page;
 		
 	}
+	@RequestMapping(value="/domestic/doctor/saveClinical/{patientid}",method= RequestMethod.POST)
+	public void saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+		String page = REDIRECT_SESSION_EXPIRED;
+		boolean success = false;
+		try {
+			HttpSession session = request.getSession();
+			SessionBean sessionBean = (SessionBean) session
+					.getAttribute(CommonKeywords.SESSION_OBJ.toString());
+			Clinicalbean clinicalbean = new Clinicalbean();
+			TblClinical tblClinical = new TblClinical();
+			TblPatient tblPatient = new TblPatient();
+			tblClinical.setTblPatient(new TblPatient(patientid));
+			tblClinical.setHistory(clinicalbean.getTxthistory());
+			tblClinical.setComments(clinicalbean.getTxtcomments());
+			tblClinical.setRemark(clinicalbean.getTxtremark());
+			
+	}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+}
 }

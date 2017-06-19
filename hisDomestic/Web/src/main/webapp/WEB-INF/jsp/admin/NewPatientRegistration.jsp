@@ -38,8 +38,6 @@
 	});
 	//Addiction
 	function addictionother(){
-	
-		alert($("#chk1").is(":checked"));
 		if ($("#chk1").is(":checked")) {
 			
 			$("#divOtherAddictiob").show();

@@ -18,21 +18,26 @@ import com.hisd.common.daogeneric.Operation_enum;
 import com.hisd.common.daointerface.HibernateQueryDao;
 import com.hisd.common.daointerface.TblAppointmentDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
+import com.hisd.common.daointerface.TblMedicineDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
 import com.hisd.common.daointerface.TblPatientDao;
 import com.hisd.common.daointerface.TblPatientRefrenceDao;
 import com.hisd.common.daointerface.TblReferenceDao;
+import com.hisd.common.daointerface.TblReportDao;
 import com.hisd.common.daointerface.TblUserDao;
 import com.hisd.common.daointerface.TblUserLoginDao;
 import com.hisd.common.services.CommonDAO;
 import com.hisd.common.utility.EncryptDecryptUtils;
+import com.hisd.domestic.databean.Clinicalbean;
 import com.hisd.domestic.databean.PatientBean;
 import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblComplaints;
+import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
+import com.hisd.domestic.model.TblReports;
 import com.hisd.domestic.model.TblUser;
 import com.hisd.domestic.model.TblUserLogin;
 
@@ -61,6 +66,11 @@ public class DoctorService {
 	TblPatientRefrenceDao tblPatientRefrenceDao;
     @Autowired
     TblComplaintsDao tblComplaintsDao;
+    @Autowired
+    TblMedicineDao tblMedicineDao;
+    @Autowired
+    TblReportDao tblReportDao;
+    
     
 	@Value("#{projectProperties['passwordkey']}")
 	private String passwordkey;
@@ -99,12 +109,39 @@ public class DoctorService {
 		Map<String, Object>parameter = null;
 		parameter = new HashMap<String, Object>();
 		parameter.put("patientid", patientid);
-		query.append("SELECT tblPatient.patientcrno, tblUser.firstname,tblUser.lastname,tblPatient.age,tblUser.gender,tblUser.countrycodemobileno,tblUser.mobileno,tblConsultingdoctor.consultingdoctorname ");
+		query.append("SELECT tblPatient.patientcrno, tblUser.firstname,tblUser.lastname,tblPatient.age,tblUser.gender,tblUser.countrycodemobileno,tblUser.mobileno,tblConsultingdoctor.consultingdoctorname,tblPatient.patientid");
 		query.append(" FROM TblPatient tblPatient INNER JOIN tblPatient.tblUser tblUser ");
 		query.append(" INNER JOIN tblPatient.tblConsultingDoctor  tblConsultingdoctor");
 		query.append(" WHERE tblPatient.patientid =:patientid");
 		List<Object[]> tblpatient = hibernateQueryDao.createNewQuery(query.toString(), parameter);
 		return tblpatient;
+		
+	}
+	@Transactional
+	public List<TblComplaints> getAllComplaints(){
+	    return	tblComplaintsDao.getAllTblComplaints();
+		
+	}
+	@Transactional
+	public List<TblMedicine> getAllMedicins(){
+		return tblMedicineDao.getAllTblMedicine();
+	}
+	@Transactional
+	public List<TblReports> getAllReports(){
+		return tblReportDao.getAllTblReports();
+	}
+	
+	public Clinicalbean getClinicalDatabean(HttpServletRequest request) throws Exception{
+		Clinicalbean clinicalbean = new Clinicalbean();
+		
+		clinicalbean.setTxthistory(request.getParameter("txthistory"));
+		clinicalbean.setTxtcomments(request.getParameter("txtcomments"));
+		clinicalbean.setComlaintsList(request.getParameterValues("chkcomplain"));
+		clinicalbean.setMedicineList(request.getParameterValues("chkmedicien"));
+		clinicalbean.setReportList(request.getParameterValues("ctkreport"));
+		clinicalbean.setTxtremark(request.getParameter("txtremark"));
+		
+		return clinicalbean;
 		
 	}
 }

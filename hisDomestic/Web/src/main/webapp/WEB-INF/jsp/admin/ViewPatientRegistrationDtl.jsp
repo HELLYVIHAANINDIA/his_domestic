@@ -17,7 +17,6 @@ function newAppointment(patientid) {
 	
 }
  function bookApp(patientid){
-	alert(patientid);
 	$("#hdPatientId1").val(patientid);
 	$("#frmPatientView").submit();
 } 

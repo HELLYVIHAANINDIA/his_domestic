@@ -2,7 +2,6 @@
 
 <script type="text/javascript">
 function deleteComplaints(complaintsId) {
-	alert(complaintsId);
 	 $.ajax({
 		type: "POST",
 		url: contextPath+"/domestic/complaints/deleteComplaints/"+complaintsId,
