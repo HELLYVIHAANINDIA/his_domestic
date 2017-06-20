@@ -27,13 +27,13 @@ public class TblPatientAddiction implements Serializable {
 	private TblAddiction tblAddiction;
 	
 	@Column(name = "patientid")
-	private int patientid;
+	private Integer patientid;
 	
 	public TblPatientAddiction(){
 		super();
 	}
 	
-	public TblPatientAddiction(int patientid){
+	public TblPatientAddiction(Integer patientid){
 		this.patientid=patientid;
 	}
 	
@@ -50,7 +50,7 @@ public class TblPatientAddiction implements Serializable {
 	public void setTblAddiction(TblAddiction tblAddiction) {
 		this.tblAddiction = tblAddiction;
 	}
-	public int getPatientid() {
+	public Integer getPatientid() {
 		return patientid;
 	}
 	public void setPatientid(int patientid) {

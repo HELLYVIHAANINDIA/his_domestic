@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -36,12 +37,16 @@ import com.hisd.domestic.model.TblAddiction;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblCaseType;
 import com.hisd.domestic.model.TblClinical;
+import com.hisd.domestic.model.TblClinicalReport;
+import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDesignation;
+import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
 import com.hisd.domestic.model.TblReferenceType;
+import com.hisd.domestic.model.TblReports;
 import com.hisd.domestic.model.TblUser;
 import com.hisd.domestic.model.TblUserLogin;
 import com.hisd.domestic.model.TblUserType;
@@ -91,7 +96,7 @@ public class DoctorController {
 					modelMap.addAttribute("appointmentList",doctorService.appointmentList(commonService.convertStirngToUTCDateWithoutTimeStamp(new Date())));
 					break;
 					
-				case 7:
+			case 7:
 					getNewPatientRegistration(patientid, modelMap);
 					page = "admin/NewPatientRegistration";
 					break;
@@ -248,34 +253,117 @@ public class DoctorController {
 		return jsonStr;
 	}
 	@RequestMapping(value = "/domestic/doctor/getacknowlege/{patientid}", method = {RequestMethod.POST, RequestMethod.GET })
-	public String getacknowlege(@PathVariable("patientid") Integer patientid,HttpServletRequest request,HttpServletResponse response, ModelMap modelMap){
+	public String getacknowlege(@PathVariable("patientid") Integer patientid,HttpServletRequest request,HttpServletResponse response, ModelMap modelMap) throws Exception{
 	    String page = "admin/Patientpriscription";
 	    modelMap.addAttribute("patient",doctorService.getpatientinfo(patientid));
-	    modelMap.addAttribute("complaints", doctorService.getAllComplaints());
-	    modelMap.addAttribute("medicien", doctorService.getAllMedicins());
-	    modelMap.addAttribute("report", doctorService.getAllReports());
+	    List<TblComplaints> listAllComplaints = doctorService.getAllComplaints();
+	    List<Object[]>listComplaints = doctorService.getReportName(patientid,1);
+	    Map<Integer,String> hashMapComplain = new LinkedHashMap<Integer, String>();
+	    for (TblComplaints tblComplaints : listAllComplaints) {
+			for (Object[] objects : listComplaints) {
+				if(tblComplaints.complaintsid == Integer.parseInt(objects[2].toString())){
+					hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_checked");
+					break;
+				}else{
+					hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_notselected");
+				}
+			}
+		}
+	    Map<Integer,String> hashMapMedicien = new LinkedHashMap<Integer, String>();
+	   List<TblMedicine>listAllMedicine = doctorService.getAllMedicins();
+	 List<Object[]>listMedicien = doctorService.getReportName(patientid,2);
+	  for (TblMedicine tblMedicine : listAllMedicine) {
+		  for (Object[] objects : listMedicien) {
+			if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[2].toString())){
+				hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_checked");
+				break;
+			}else{
+				hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_notselected");
+			}
+		}
+		
+	}
+	  Map<Integer,String> hashMapReport = new LinkedHashMap<Integer, String>();
+	  List<TblReports>listAllReport = doctorService.getAllReports();
+	  List<Object[]>listReport = doctorService.getReportName(patientid,3);
+	  for (TblReports tblReports : listAllReport) {
+		for (Object[] objects : listReport) {
+			if(tblReports.getReport_id() == Integer.parseInt(objects[2].toString())){
+				hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_checked");
+				break;
+			}else{
+				hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_notselected");
+			}
+		}
+	}
+	    modelMap.addAttribute("complaints", hashMapComplain);
+	    modelMap.addAttribute("medicien", hashMapMedicien);
+	    modelMap.addAttribute("report", hashMapReport);
+	    modelMap.addAttribute("clinicalDetail", doctorService.getClinicalDetail(patientid));
+	   // modelMap.addAttribute("clinicalCompliants", doctorService.getReportName(patientid,1));
+		// modelMap.addAttribute("clinicalMedical", doctorService.getReportName(patientid,2));
+		// modelMap.addAttribute("clinicalReport", doctorService.getReportName(patientid,3));
 		return page;
 		
 	}
-	@RequestMapping(value="/domestic/doctor/saveClinical/{patientid}",method= RequestMethod.POST)
-	public void saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+	@SuppressWarnings("null")
+	@RequestMapping(value="/domestic/doctor/saveClinical/{patientid}",  method= RequestMethod.POST)
+	public String saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
 		String page = REDIRECT_SESSION_EXPIRED;
 		boolean success = false;
 		try {
 			HttpSession session = request.getSession();
 			SessionBean sessionBean = (SessionBean) session
 					.getAttribute(CommonKeywords.SESSION_OBJ.toString());
-			Clinicalbean clinicalbean = new Clinicalbean();
+			Clinicalbean clinicalbean = doctorService.getClinicalDatabean(request);
 			TblClinical tblClinical = new TblClinical();
-			TblPatient tblPatient = new TblPatient();
 			tblClinical.setTblPatient(new TblPatient(patientid));
 			tblClinical.setHistory(clinicalbean.getTxthistory());
 			tblClinical.setComments(clinicalbean.getTxtcomments());
 			tblClinical.setRemark(clinicalbean.getTxtremark());
-			
+			List<TblClinicalReport>complainList = new ArrayList<TblClinicalReport>();
+			         
+			           for(String obj:clinicalbean.getComlaintsList()){
+			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
+			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
+			        	   tblClinicalReport.setClnicalreportid(Integer.parseInt(obj));
+			        	   tblClinicalReport.setStatusid(1);
+			        	  complainList.add(tblClinicalReport);
+			           }
+			           for(String obj:clinicalbean.getMedicineList()){
+			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
+			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
+			        	   tblClinicalReport.setClnicalreportid(Integer.parseInt(obj));
+			        	   tblClinicalReport.setStatusid(2);
+			        	  complainList.add(tblClinicalReport);
+			           }
+			           for(String obj:clinicalbean.getReportList()){
+			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
+			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
+			        	   tblClinicalReport.setClnicalreportid(Integer.parseInt(obj));
+			        	   tblClinicalReport.setStatusid(3);
+			        	  complainList.add(tblClinicalReport);
+			           }
+			         
+			           doctorService.addComplaints(complainList);
+			           doctorService.addClinicalData(tblClinical);
+			           page = "redirect:/domestic/user/dashboard";
 	}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		return page;
 }
+	@RequestMapping(value="/domestic/doctor/ViewPrescription/{patientid}",  method= RequestMethod.GET)
+	public String ViewPrescription(@PathVariable("patientid") Integer patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) throws Exception{
+		String page;
+		 modelMap.addAttribute("patient",doctorService.getpatientinfo(patientid));
+		 modelMap.addAttribute("clinicalDetail", doctorService.getClinicalDetail(patientid));
+		 modelMap.addAttribute("clinicalCompliants", doctorService.getReportName(patientid,1));
+		 modelMap.addAttribute("clinicalMedical", doctorService.getReportName(patientid,2));
+		 modelMap.addAttribute("clinicalReport", doctorService.getReportName(patientid,3));
+		 
+		 page = "admin/viewPrescription";
+		return page;
+	}
 }

@@ -17770,3 +17770,6 @@ body.bounce .pace {
         overflow-y: scroll;
     width: 1140p
 }
+.scr{
+  width:100%;margin-right: 80%;height: 150px; overflow-y: scroll; 
+}

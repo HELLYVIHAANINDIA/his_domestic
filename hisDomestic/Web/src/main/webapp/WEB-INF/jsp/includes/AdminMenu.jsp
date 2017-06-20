@@ -30,12 +30,12 @@ Appointment
 </a>
 </li>
 
-<li>
+<!-- <li>
 <a href="clinical.html">
 <i class="fa fa-plus-square icon_tags_alt header-icon" aria-hidden="true"></i>
 Clinical
 </a>
-</li>
+</li> -->
 
 </ul>
 </nav>

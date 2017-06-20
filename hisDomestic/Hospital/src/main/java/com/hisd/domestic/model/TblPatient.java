@@ -27,7 +27,7 @@ public class TblPatient implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "patientid")
-	private int patientid;
+	private Integer patientid;
 	@Column(name = "patientcrno")
 	private String patientcrno;
 	@Column(name = "regdate")
@@ -62,10 +62,10 @@ public class TblPatient implements Serializable {
 	public TblPatient(){
 		super();
 	}
-	public TblPatient(int patientid){
+	public TblPatient(Integer patientid){
 		this.patientid=patientid;
 	}
-	public int getPatientid() {
+	public Integer getPatientid() {
 		return patientid;
 	}
 

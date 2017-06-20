@@ -4,7 +4,7 @@ import com.hisd.domestic.model.TblPatient;
 
 public class Clinicalbean {
 	private int clinical_id;
-	private int patientid;
+	private Integer patientid;
 	private int clinicaldetailid;
 	private int statusId;
 	private String txthistory;
@@ -25,10 +25,10 @@ public class Clinicalbean {
 	public void setClinical_id(int clinical_id) {
 		this.clinical_id = clinical_id;
 	}
-	public int getPatientid() {
+	public Integer getPatientid() {
 		return patientid;
 	}
-	public void setPatientid(int patientid) {
+	public void setPatientid(Integer patientid) {
 		this.patientid = patientid;
 	}
 	public int getClinicaldetailid() {

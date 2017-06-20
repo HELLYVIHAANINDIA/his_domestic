@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hisd.common.daogeneric.Operation_enum;
 import com.hisd.common.daointerface.HibernateQueryDao;
 import com.hisd.common.daointerface.TblAppointmentDao;
+import com.hisd.common.daointerface.TblClinicalDao;
+import com.hisd.common.daointerface.TblClinicalReportDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
 import com.hisd.common.daointerface.TblMedicineDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
@@ -32,6 +34,8 @@ import com.hisd.domestic.databean.Clinicalbean;
 import com.hisd.domestic.databean.PatientBean;
 import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAppointment;
+import com.hisd.domestic.model.TblClinical;
+import com.hisd.domestic.model.TblClinicalReport;
 import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblPatient;
@@ -70,7 +74,10 @@ public class DoctorService {
     TblMedicineDao tblMedicineDao;
     @Autowired
     TblReportDao tblReportDao;
-    
+    @Autowired
+    TblClinicalDao tblClinicalDao;
+    @Autowired
+    TblClinicalReportDao tblClinicalReportDao;
     
 	@Value("#{projectProperties['passwordkey']}")
 	private String passwordkey;
@@ -144,4 +151,69 @@ public class DoctorService {
 		return clinicalbean;
 		
 	}
+	
+	
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean addComplaints(List<TblClinicalReport> complainList){
+		boolean bSuccess;
+		tblClinicalReportDao.saveUpdateAllTblClinicalReport(complainList);
+		bSuccess = true;
+		return bSuccess;
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean addClinicalData(TblClinical tblClinical){
+		boolean bSuccess = false;
+		tblClinicalDao.addEntity(tblClinical);
+		return bSuccess;
+	}
+	
+	@Transactional
+	public List<TblClinical> getClinicalDetail(int patientid) throws Exception{
+		return tblClinicalDao.findTblClinical("tblPatient.patientid",Operation_enum.EQ,patientid);
+		
+	}
+	@Transactional
+	public List<TblClinicalReport> getClinicalReport(int patientid) throws Exception{
+		 tblClinicalReportDao.findTblClinicalReport("tblPatient.patientid",Operation_enum.EQ,patientid);
+		 
+		 return null;
+	}
+	@Transactional
+	public List<Object[]> getReportName(int patientid ,int status){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object>parameter = null;
+		parameter = new HashMap<String, Object>();
+		parameter.put("patientid", patientid);
+		parameter.put("status", status);
+		query.append("SELECT tblPatient.patientid");
+		if(status == 1){
+			query.append(" ,tblComplaints.complaintsname,tblComplaints.complaintsid ");
+		}
+		else if(status == 2){
+			query.append(" ,tblMedicine.medicine_name,tblMedicine.medicine_id");
+		}else{
+			query.append(" ,tblReports.report_name,tblReports.report_id");
+		}
+		query.append(" FROM TblClinicalReport tblClinicalReport");
+		query.append(" INNER JOIN tblClinicalReport.tblPatient tblPatient");
+		if(status == 1){
+			query.append(" ,TblComplaints tblComplaints");	
+		}else if(status == 2){
+			query.append(" ,TblMedicine tblMedicine");
+		}else{
+			query.append(" ,TblReports tblReports");	
+		}
+		query.append(" WHERE tblPatient.patientid=:patientid AND tblClinicalReport.statusid=:status");
+		if(status == 1){
+			query.append(" AND tblComplaints.complaintsid=tblClinicalReport.clnicalreportid");
+		}else if(status == 2){
+			query.append(" AND tblMedicine.medicine_id=tblClinicalReport.clnicalreportid");
+		}
+		else{
+			query.append(" AND tblReports.report_id=tblClinicalReport.clnicalreportid");
+		}
+		return hibernateQueryDao.createNewQuery(query.toString(), parameter);
+	}
+	
 }

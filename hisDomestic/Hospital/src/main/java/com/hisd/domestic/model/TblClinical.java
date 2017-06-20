@@ -1,27 +1,29 @@
 package com.hisd.domestic.model;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="tbl_clinical")
+@Table(name ="tbl_clinicaldetail")
 public class TblClinical implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="clinical_id")
 	private int clinical_id;
-	@Column(name="patientid")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="patientid")
 	private TblPatient tblPatient;
-	@Column(name="clinicaldetailid")
-	private int clinicaldetailid;
-	@Column(name="statusId")
-	private int statusId;
 	@Column(name="history")
 	private String history;
 	@Column(name="comments")
@@ -49,21 +51,6 @@ public class TblClinical implements Serializable {
 		this.tblPatient = tblPatient;
 	}
 
-	public int getClinicaldetailid() {
-		return clinicaldetailid;
-	}
-
-	public void setClinicaldetailid(int clinicaldetailid) {
-		this.clinicaldetailid = clinicaldetailid;
-	}
-
-	public int getStatusId() {
-		return statusId;
-	}
-
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
-	}
 
 	public String getHistory() {
 		return history;
