@@ -52,6 +52,7 @@ import com.hisd.domestic.model.TblUserLogin;
 import com.hisd.domestic.model.TblUserType;
 import com.hisd.domestic.services.AdminService;
 import com.hisd.domestic.services.DoctorService;
+import org.springframework.util.StringUtils;
 
 
 @Controller
@@ -261,7 +262,7 @@ public class DoctorController {
 	    Map<Integer,String> hashMapComplain = new LinkedHashMap<Integer, String>();
 	    for (TblComplaints tblComplaints : listAllComplaints) {
 			for (Object[] objects : listComplaints) {
-				if(tblComplaints.complaintsid == Integer.parseInt(objects[2].toString())){
+				if(tblComplaints.complaintsid == Integer.parseInt(objects[3].toString())){
 					hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_checked");
 					break;
 				}else{
@@ -274,7 +275,7 @@ public class DoctorController {
 	 List<Object[]>listMedicien = doctorService.getReportName(patientid,2);
 	  for (TblMedicine tblMedicine : listAllMedicine) {
 		  for (Object[] objects : listMedicien) {
-			if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[2].toString())){
+			if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[3].toString())){
 				hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_checked");
 				break;
 			}else{
@@ -288,11 +289,12 @@ public class DoctorController {
 	  List<Object[]>listReport = doctorService.getReportName(patientid,3);
 	  for (TblReports tblReports : listAllReport) {
 		for (Object[] objects : listReport) {
-			if(tblReports.getReport_id() == Integer.parseInt(objects[2].toString())){
+			if(tblReports.getReport_id() == Integer.parseInt(objects[3].toString())){
 				hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_checked");
 				break;
 			}else{
 				hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_notselected");
+				
 			}
 		}
 	}
@@ -300,13 +302,20 @@ public class DoctorController {
 	    modelMap.addAttribute("medicien", hashMapMedicien);
 	    modelMap.addAttribute("report", hashMapReport);
 	    modelMap.addAttribute("clinicalDetail", doctorService.getClinicalDetail(patientid));
+	    
+	    //Document
+	    
+	    modelMap.addAttribute("objectId", patientid);
+	    modelMap.addAttribute("childId", 0);
+	    modelMap.addAttribute("subChildId", 0);
+	    modelMap.addAttribute("otherSubChildId", 0);
+        
 	   // modelMap.addAttribute("clinicalCompliants", doctorService.getReportName(patientid,1));
 		// modelMap.addAttribute("clinicalMedical", doctorService.getReportName(patientid,2));
 		// modelMap.addAttribute("clinicalReport", doctorService.getReportName(patientid,3));
 		return page;
 		
 	}
-	@SuppressWarnings("null")
 	@RequestMapping(value="/domestic/doctor/saveClinical/{patientid}",  method= RequestMethod.POST)
 	public String saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
 		String page = REDIRECT_SESSION_EXPIRED;
@@ -317,6 +326,7 @@ public class DoctorController {
 					.getAttribute(CommonKeywords.SESSION_OBJ.toString());
 			Clinicalbean clinicalbean = doctorService.getClinicalDatabean(request);
 			TblClinical tblClinical = new TblClinical();
+		
 			tblClinical.setTblPatient(new TblPatient(patientid));
 			tblClinical.setHistory(clinicalbean.getTxthistory());
 			tblClinical.setComments(clinicalbean.getTxtcomments());
@@ -344,11 +354,21 @@ public class DoctorController {
 			        	   tblClinicalReport.setStatusid(3);
 			        	  complainList.add(tblClinicalReport);
 			           }
-			         
-			           doctorService.addComplaints(complainList);
-			           doctorService.addClinicalData(tblClinical);
-			           page = "redirect:/domestic/user/dashboard";
+			         if(clinicalbean.getClinical_id() == 0){
+			         success = doctorService.addComplaints(complainList);
+			         success=   doctorService.addClinicalData(tblClinical);
+			         }else{
+			        	  tblClinical.setClinical_id(clinicalbean.getClinical_id());
+			        	  success = doctorService.updateClinicalData(tblClinical);
+			        	  success = doctorService.deleteClinicalReport(patientid);
+			        	  success  = doctorService.addComplaints(complainList);
+			         }
+			        if(success){
+			        	page = "redirect:/domestic/user/dashboard";
+			        }
+			           
 	}
+		
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -366,4 +386,6 @@ public class DoctorController {
 		 page = "admin/viewPrescription";
 		return page;
 	}
+	
+	
 }

@@ -34,7 +34,6 @@
 	<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/hospital/css/switchery.min.css">
  
-	
 </head>
 <body>
 

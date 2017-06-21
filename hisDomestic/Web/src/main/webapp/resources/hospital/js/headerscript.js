@@ -252,3 +252,4 @@ function setClickFunctionToDataGrid(){
 		document.body.appendChild(createPdfForm);
 		createPdfForm.submit();
 	}
+	

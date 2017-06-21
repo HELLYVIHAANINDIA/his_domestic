@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jms.Session;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,6 +148,7 @@ public class DoctorService {
 		clinicalbean.setMedicineList(request.getParameterValues("chkmedicien"));
 		clinicalbean.setReportList(request.getParameterValues("ctkreport"));
 		clinicalbean.setTxtremark(request.getParameter("txtremark"));
+		clinicalbean.setClinical_id(Integer.parseInt(request.getParameter("hdclinicalDetailid")));
 		
 		return clinicalbean;
 		
@@ -186,7 +188,7 @@ public class DoctorService {
 		parameter = new HashMap<String, Object>();
 		parameter.put("patientid", patientid);
 		parameter.put("status", status);
-		query.append("SELECT tblPatient.patientid");
+		query.append("SELECT tblPatient.patientid,tblClinicalReport.clinicalreport_id");
 		if(status == 1){
 			query.append(" ,tblComplaints.complaintsname,tblComplaints.complaintsid ");
 		}
@@ -214,6 +216,28 @@ public class DoctorService {
 			query.append(" AND tblReports.report_id=tblClinicalReport.clnicalreportid");
 		}
 		return hibernateQueryDao.createNewQuery(query.toString(), parameter);
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean updateClinicalData(TblClinical tblClinical){
+		boolean bSuccess = false;
+		tblClinicalDao.saveOrUpdateEntity(tblClinical);
+		bSuccess = true;
+		return bSuccess;
+		
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean deleteClinicalReport(Integer patientid){
+		boolean bSuccess = false;
+		StringBuilder query = new StringBuilder();
+		Map<String,Object>parameter = null;
+		parameter = new HashMap<String, Object>();
+		parameter.put("patientid", patientid);
+		query.append("delete from TblClinicalReport tblClinicalReport WHERE tblPatient.patientid=:patientid ");
+		hibernateQueryDao.updateDeleteQuery(query.toString(), parameter);
+		bSuccess = true;
+		
+		return bSuccess ;
+		
 	}
 	
 }

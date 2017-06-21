@@ -47,6 +47,9 @@
 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/markdown_editor.js"></script> --%>
 <script
 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/simplemde.min.js"></script>
+	
+	<script
+	src="${pageContext.servletContext.contextPath}/resources/js/ajaxfileupload.js"></script>
 <!-- 		<script -->
 <%-- 		src="${pageContext.servletContext.contextPath}/resources/js/jquery-2.2.3.min.js"></script>   --%>
 

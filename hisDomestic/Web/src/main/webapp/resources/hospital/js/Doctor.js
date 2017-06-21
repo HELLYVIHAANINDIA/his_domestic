@@ -1,10 +1,10 @@
-function changeTab(tabId,hdPatientId,hdUserTypeId){
+function changeTabDoctor(tabId,hdPatientId,hdUserTypeId){
 	if(tabId != undefined){
 		var url ;
 		if(hdUserTypeId != 2){
 			url = contextPath+"/domestic/user/tabcontent/"+tabId+"/"+hdPatientId;	
 		}else{
-			url = contextPath+"/domestic/Doctor/tabcontent/"+tabId+"/"+hdPatientId+"/"+0	;
+			url = contextPath+"/domestic/doctor/tabcontent/"+tabId+"/"+hdPatientId+"/"+hdUserTypeId;
 		}
 		$.ajax({
 			type: "POST",
@@ -23,10 +23,10 @@ $(document).ready(function() {
 	var hdsuperAdmin = $("#hdsuperAdmin").val();
 	var hdPatientId = $("#hdPatientId").val();
 	if(hdTabId == 2){
-		changeTab(hdTabId,hdPatientId,hdUserTypeId);
+		changeTabDoctor(hdTabId,hdPatientId,hdUserTypeId);
 	}
 	else if(hdsuperAdmin){
-		changeTab(hdTabId,hdPatientId,hdUserTypeId);
+		changeTabDoctor(hdTabId,hdPatientId,hdUserTypeId);
 	}
 });
 
@@ -150,4 +150,3 @@ function getPayby(){
 		},
 	});
 }
-
