@@ -204,7 +204,7 @@ public class DocumentController {
 	                        	 /* if destination directory not exist then create it */
 	                        	 isDirExists(docUploadPath.split(":")[0]+":\\\\", docUploadPath.substring(3, docUploadPath.length()));
 	                        	 StringBuilder tmpDirPath=new StringBuilder();
-	                        	 tmpDirPath.append(docUploadPath+File.separator+"Bidder"+File.separator+objectId+File.separator+objectId+File.separator+childId+File.separator+subChildId+File.separator+otherSubChildId);
+	                        	 tmpDirPath.append(docUploadPath+File.separator+"patient"+File.separator+objectId+File.separator+objectId+File.separator+childId+File.separator+subChildId+File.separator+otherSubChildId);
 		                         tmpDir = new File(tmpDirPath.toString());
 		                         donloadDocPath=File.separator+"Patient"+File.separator+objectId+File.separator+objectId+File.separator+childId+File.separator+subChildId+File.separator+otherSubChildId;
 	                        	
@@ -310,21 +310,17 @@ public class DocumentController {
         objectId=StringUtils.hasLength(request.getParameter(OBJECTID)) ? Integer.parseInt(request.getParameter(OBJECTID)) : 0;
         boolean renameFlag = false;
         SessionBean sessionBean= (SessionBean) session.getAttribute("sessionObject")!=null?(SessionBean) session.getAttribute("sessionObject"):new SessionBean();
-        int userType = 0;
         try {
-        	if(sessionBean!=null){
-        		userType=sessionBean.getUserTypeId();
-        	}
         	//in case of tender authority and bidder registration userType would be 2
-        	List<Object[]> tblOfficerDocument = null;
-        	tblOfficerDocument=documentService.getDocument(Integer.parseInt(docId),userType);
+        	List<Object[]> tblDocument = null;
+        	tblDocument=documentService.getDocument(Integer.parseInt(docId));
 //        	if(session.getAttribute(CommonKeywords.SESSION_OBJ.toString()) != null) {
-	    		for(int i=0;i<tblOfficerDocument.size();i++){
-		    		String filePath=docUploadPath+tblOfficerDocument.get(i)[1].toString();
-		    		renameFlag = renameFile(filePath,tblOfficerDocument.get(i)[0].toString());
+	    		for(int i=0;i<tblDocument.size();i++){
+		    		String filePath=docUploadPath+tblDocument.get(i)[1].toString();
+		    		renameFlag = renameFile(filePath,tblDocument.get(i)[0].toString());
 	    		}
 	    		if (renameFlag) {
-	    			renameFlag = documentService.updateDocStatus(docId, cStatusDoc,userType);
+	    			renameFlag = documentService.updateDocStatus(docId, cStatusDoc);
 	            }
 	          response.getWriter().write(String.valueOf(renameFlag));
 //        	}else{
@@ -346,7 +342,7 @@ public class DocumentController {
         SessionBean sessionBean= (SessionBean) session.getAttribute("sessionObject");
         try {
         	if(session.getAttribute(CommonKeywords.SESSION_OBJ.toString()) != null) {
-	    		List<Object[]> tblOfficerDocument=documentService.getDocument(Integer.parseInt(docId),sessionBean.getUserTypeId());
+	    		List<Object[]> tblOfficerDocument=documentService.getDocument(Integer.parseInt(docId));
 	    		for(int i=0;i<tblOfficerDocument.size();i++){
 		    		String filePath=docUploadPath+tblOfficerDocument.get(i)[1].toString();
 		    		renameFlag = renameCancelFile(filePath,tblOfficerDocument.get(i)[0].toString());
@@ -374,11 +370,11 @@ public class DocumentController {
         	//this line of code added to suffies condition : if user has not logged in and want to download documents
         	String filePath=null;
         	String fileName=null;
-    		List<Object[]> tblOfficerDocument=documentService.getDocument(docId,sessionBean.getUserTypeId());
-    		if(!tblOfficerDocument.isEmpty()){
-	    		filePath=docUploadPath+tblOfficerDocument.get(0)[1].toString();
-	    		filePath += File.separator+tblOfficerDocument.get(0)[0].toString();
-	    		fileName=tblOfficerDocument.get(0)[0].toString();
+    		List<Object[]> tblDocument=documentService.getDocument(docId);
+    		if(!tblDocument.isEmpty()){
+	    		filePath=docUploadPath+tblDocument.get(0)[1].toString();
+	    		filePath += File.separator+tblDocument.get(0)[0].toString();
+	    		fileName=tblDocument.get(0)[0].toString();
     		}
             File file;
             file = new File(filePath);
@@ -427,9 +423,9 @@ public class DocumentController {
         	String fileName=null;
         	List<Object[]> tblOfficerDocument = null;
         	if(objectId==6 || objectId==7) {
-        		tblOfficerDocument=documentService.getDocument(docId,2);
+        		tblOfficerDocument=documentService.getDocument(docId);
         	}else {
-        		tblOfficerDocument=documentService.getDocument(docId,sessionBean.getUserTypeId());
+        		tblOfficerDocument=documentService.getDocument(docId);
         	}
     		
     		if(!tblOfficerDocument.isEmpty()){
@@ -482,7 +478,7 @@ public class DocumentController {
         	
         	String filePath=null;
         	String fileName=null;
-    		List<Object[]> tblOfficerDocument=documentService.getDocument(docId,usertype);
+    		List<Object[]> tblOfficerDocument=documentService.getDocument(docId);
     		if(!tblOfficerDocument.isEmpty()){
 	    		filePath=docUploadPath+tblOfficerDocument.get(0)[1].toString();
 	    		filePath += File.separator+tblOfficerDocument.get(0)[0].toString();

@@ -1,7 +1,7 @@
-	         function specialTrim(str) {
+function specialTrim(str) {
 	            return str.replace(/>\s+</g, '><');
 	        } 
-	         function fileValidate(){
+	         function fileValidate(objectid){
 		       	 $(".successMsg").hide();
 		            $('.err').remove();
 		            $('#docDescError').html('');
@@ -18,12 +18,16 @@
 		            jQuery.each(jQuery.browser, function(i, val) {
 		                browserName+=i;
 		            });
-		            
+		            if(objectid == -1){
+		            	$("#txtDocDesc").val("AdminUser");
+	                }
 		            $(":input[type='file']").each(function(){
 		                if(this.value == ''){
 		                    $('#fileError').parent().append("<div class='err validationMsg' style='color:red; '><span style='display:inline-block;'><spring:message code='msg_tender_filetoupload_empty' /></span></div>");
 		                    count++;
-		                }if($("#txtDocDesc").val()==''){
+		                }
+		               
+		                if($("#txtDocDesc").val()==''){
 		               	 $('.errtxtDocDesc').remove();
 		               	 $("#docDescError").html("<div class='errtxtDocDesc validationMsg' style='color:red;'><spring:message code='msg_tender_docbrief_empty' /></div>");
 		               	 count++;
@@ -45,8 +49,9 @@
 		            return valid;
 		        }
 	         function ajaxFileUpload(){
+	        	
 		            var fileName=$('input[type=file]').val().split('\\').pop();
-		            var fbool = fileValidate();
+		            var fbool = fileValidate($('#txtobjectId').val());
 		            if(fbool){
 		    	        $('#docDescError').html('');
 		    	        $('#fileError').html("");
@@ -54,6 +59,7 @@
 		    	        
 		    	        $.ajaxFileUpload({
 		    	            url:url,
+		    	            type:"POST",
 		    	            fileElementId:'fileToUpload',
 		    	            dataType: "text",
 		    	            secureuri:true,
@@ -67,6 +73,8 @@
 		    	                    $("#txtDocDesc").val('');
 		    	                    $("#fileCount").val(parseInt($("#fileCount").val(),10) + 1);
 		    	                    
+	 	 			   	            	jAlert("Document Uploaded successfully",function () {});
+	 	 		                	
 		    	                    getDocDetails();
 		    	                }else{
 		    	                	 if(data.toString().indexOf("sessionexpired") < 0){
@@ -126,7 +134,7 @@
 		                	    	}else{
 		                	    		status='Cancelled';
 		                	    	}
-		                	    	var strDownload="&nbsp;&nbsp;<a href="+contextPath+"'/ajax/downloadbriefcasefile/"+docId+"'>Download</a>";
+		                	    	var strDownload="&nbsp;&nbsp;<a href="+contextPath+"/ajax/downloadbriefcasefile/"+docId+">Download</a>";
 		                	    		
 		                	        var tr="<tr id='vwdocId' DocId='"+docId+"'>";
 		                	        var td0="<td>"+obj[i]["Sr.No"]+"</td>";
@@ -144,7 +152,7 @@
 		                	    		var td7="<td>"+strDownload+"</td></tr>";
 		                	    	}
 		                	        if(i==0){
-		                	        	$("#vwdoc").append("<table id='doctableId' class='table table-bordered'><tr><th>Sr No.</th><th>Title</th><th></th></tr>");
+		                	        	$("#vwdoc").append("<table id='doctableId' class='table table-bordered'><tr><th>Sr No.</th><th>File Name</th><th></th></tr>");
 		                	        }
 		                	       $("#doctableId").append(tr+td0+td2+td7);
 		                	    }
@@ -161,8 +169,11 @@
 	        
 	         
 		        function removeFile(obj,cStatusDoc){
-		        	var objectId='${objectId}';
-		        	 jConfirm('<spring:message code="msg_tender_cnfrm_deletedoc" />','<spring:message code="lbl_document" />',function (result) { 
+		        
+		        
+		        	var objectId=$('#txtobjectId').val();
+//		        	 jConfirm('<spring:message code="msg_tender_cnfrm_deletedoc"/>','<spring:message code="lbl_document" />',function (result) {
+		        	jConfirm("Are you sure you want delete Document?","Document",function (result) { 
 		  				if(result){
 		  					 $(".successMsg").hide();
 		  		   	          $.post(contextPath+"/ajax/deletebriefcasefile", {
@@ -177,9 +188,9 @@
 		 	 		                } else {
 		 	 			   	            if($.trim(j.toString()) == 'true')
 		 	 			   	            {
-		 	 			   	            	jAlert('<spring:message code="msg_tender_docrejectsuccessfully" />','<spring:message code="lbl_document" />',function () {});
+		 	 			   	            	jAlert("Document deleted successfully",function () {});
 		 	 		                	} 
-		 	 			   	         	/*getDocDetails();*/
+		 	 			   	         	getDocDetails();
 		 	 		                }
 		 	 		   	       
 		 	 		             });

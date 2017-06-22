@@ -516,7 +516,7 @@
 								type="text" class="form-control dateBox" name="txtdateofbirth"
 								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"
 								placeholder="dd-MMM-yyyy" title="Date of Birth"  tovalid="true" validarr="required"
-								onblur="validateEmptyDt(this)" value="${patient.birthdate}" validationmsg="Allows ">
+								onblur="validateEmptyDt(this);calculateAge(this.value)" value="${patient.birthdate}" validationmsg="Allows ">
 						</div>
 
 					</div>
@@ -966,7 +966,27 @@
 		</form>
 	</div>
 </section>
-
+<script>
+function calculateAge(birthDate){
+	var date = new Date ($("#txtregdate").val());
+	 var dob = new Date(birthDate);
+	var year = date.getFullYear() - dob.getFullYear(); 
+	var month = date.getMonth() - dob.getMonth(); 
+	var date =  date.getDate() - dob.getDate();
+	  if(month > 0 ){
+		  $("#txtage").val(year);
+	  }else if(month == 0){
+		  if(date >= 0){
+			  $("#txtage").val(year);
+		  }else{
+			  $("#txtage").val(year-1);
+		  }
+	  }
+	  else{
+		  $("#txtage").val(year-1);
+	  }
+}
+</script>
 <!-- </div>
 </section> -->
 <c:if test="${pageStatus eq 'Ackedit'}">

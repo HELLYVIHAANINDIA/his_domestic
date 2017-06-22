@@ -2,6 +2,7 @@
 <%@include file="../includes/header.jsp"%>
 <%@include file="../includes/DoctorMenu.jsp"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script
 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/Document.js"></script>
 <section id="content-wrapper">
@@ -145,7 +146,7 @@ Prescription
 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
 <div class="field-set-box">
 <a href="#" class="upld" data-toggle="modal" data-target="#upldp">Upload Document</a>
-<a href="#" class="view-upld" id="vw">View Document</a>
+<!-- <a href="#" class="view-upld" id="vw">View Document</a> -->
 <div id="upldp" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -173,10 +174,10 @@ Prescription
 </div>
 </div>
 </div>
-<input type="text" id="txtobjectId" value="${objectId}">
-<input type="text" id="txtChildId" value="${childId}">
-<input type="text" id="txtSubChildId" value="${subChildId}">
-<input type="text" id="txtOtherSubChildId" value="${otherSubChildId}">
+<input type="hidden" id="txtobjectId" value="${objectId}">
+<input type="hidden" id="txtChildId" value="${childId}">
+<input type="hidden" id="txtSubChildId" value="${subChildId}">
+<input type="hidden" id="txtOtherSubChildId" value="${otherSubChildId}">
 
 
         </div>

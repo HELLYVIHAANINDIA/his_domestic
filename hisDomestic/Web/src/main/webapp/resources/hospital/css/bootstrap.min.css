@@ -2352,9 +2352,11 @@ padding:.5rem .75rem;
 	border: 1px solid rgba(0,0,0,.15);
 border-radius:.25rem
 }
+
 .alert-link, .close, .tag {
-	font-weight: 700
+  font-weight: 300;
 }
+
 .input-group-addon.form-control-sm, .input-group-sm>.input-group-addon, .input-group-sm>.input-group-btn>.input-group-addon.btn {
 padding:.25rem .5rem;
 font-size:.875rem;
@@ -2599,8 +2601,6 @@ margin-left:.2rem
 	display: block;
 	padding: .5em 1em;
 	border: 1px solid transparent;
-border-top-right-radius:.25rem;
-border-top-left-radius:.25rem
 }
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
 	border-color: #eceeef #eceeef #ddd
@@ -3243,16 +3243,19 @@ border-top-left-radius:.2rem
 border-bottom-right-radius:.2rem;
 border-top-right-radius:.2rem
 }
+
 .tag {
-	display: inline-block;
-	padding: .25em .4em;
-	font-size: 75%;
-	line-height: 1;
-	color: #fff;
-	text-align: center;
-	vertical-align: baseline;
-border-radius:.25rem
+  border-radius: 0;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  padding: 5px;
+  text-align: center;
+  vertical-align: baseline;
+  cursor:pointer;
 }
+
 .tag:empty {
 	display: none
 }
@@ -3285,6 +3288,11 @@ a.tag:focus, a.tag:hover {
 .tag-success {
 	background-color: #5cb85c
 }
+
+.tag-success:hover {
+	background-color: #1a761a;
+}
+
 .tag-success[href]:focus, .tag-success[href]:hover {
 	background-color: #449d44
 }
@@ -3297,12 +3305,22 @@ a.tag:focus, a.tag:hover {
 .tag-warning {
 	background-color: #f0ad4e
 }
+
+.tag-warning:hover {
+	background-color: #ac690a;
+}
+
 .tag-warning[href]:focus, .tag-warning[href]:hover {
 	background-color: #ec971f
 }
 .tag-danger {
 	background-color: #d9534f
 }
+
+.tag-danger:hover {
+	background-color: #a41e1a;
+}
+
 .tag-danger[href]:focus, .tag-danger[href]:hover {
 	background-color: #c9302c
 }
@@ -3856,14 +3874,13 @@ border-radius:.3rem;
 	bottom: 0;
 	left: 0;
 	z-index: 1040;
-	background-color: #000
+	
 }
 .modal-backdrop.fade {
 	opacity: 0
 }
 .modal-backdrop.in {
-	opacity: .5;
-	display:none;
+	opacity: .5
 }
 .modal-header {
 	padding: 15px;
@@ -4782,5 +4799,4 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .hidden-print {
 	display: none!important
 }
-
 }

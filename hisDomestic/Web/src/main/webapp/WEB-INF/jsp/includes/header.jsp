@@ -9,30 +9,19 @@
 
 <title>Admin/Dashboard</title>
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/color-default.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/components.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/elegant.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/font-awesome.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/layout.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/perfect-scrollbar.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/layout.min.css">
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/simplemde.min.css">
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
-	<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/switchery.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/color-default.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/components.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/elegant.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/font-awesome.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/layout.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/layout.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/simplemde.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/switchery.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/jquery.alerts.css">
  
 </head>
 <body>

@@ -89,15 +89,12 @@ public class DocumentService {
      * @throws Exception 
      */
     @Transactional
-    public List<Object[]> getDocument(int docId,int userType) throws SQLException{
+    public List<Object[]> getDocument(int docId) throws SQLException{
         Map<String, Object> var = new HashMap<String, Object>();
         var.put("docId",docId);
-        if(userType==1) {
-        	return hibernateQueryDao.createNewQuery("select tblOfficerdocument.fileName, tblOfficerdocument.path from TblOfficerdocument tblOfficerdocument where tblOfficerdocument.officerDocId=:docId order by createdAt desc ",var);
-        }else if(userType==2 || userType==0) {
-        	return hibernateQueryDao.createNewQuery("select tblBidderdocument.fileName, tblBidderdocument.path from TblBidderdocument tblBidderdocument where tblBidderdocument.bidderDocId=:docId order by createdAt desc  ",var);
-        }
-        return new ArrayList<Object[]>();        
+      
+        return hibernateQueryDao.createNewQuery("select tblDocument.fileName, tblDocument.path from TblDocument tblDocument where tblDocument.documentid=:docId order by createdAt desc ",var);
+       
     }
     
 
@@ -126,15 +123,13 @@ public class DocumentService {
      * @throws Exception 
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public boolean updateDocStatus(String docId,int cStatusDoc,int userType) throws SQLException{
+    public boolean updateDocStatus(String docId,int cStatusDoc) throws SQLException{
         int cnt = 0;
         Map<String, Object> var = new HashMap<String, Object>();
         var.put("docId", docId);
-        if(userType==1) {
-        	cnt = hibernateQueryDao.updateDeleteNewQuery("delete from TblOfficerdocument where officerDocId in (:docId)",var);
-        }else if(userType==2) {
-        	cnt = hibernateQueryDao.updateDeleteNewQuery("delete from TblBidderdocument where bidderDocId in (:docId)",var);
-        }
+      
+        	cnt = hibernateQueryDao.updateDeleteNewQuery("delete from TblDocument where documentid in (:docId)",var);
+       
         return cnt!=0;
     }
     

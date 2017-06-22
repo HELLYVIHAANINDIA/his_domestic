@@ -1,65 +1,58 @@
 
 <script type="text/javascript">
-$(document).ready(function() {
-    	var obj;
-    
-    	if('' != '${countryJson}'){
-    		obj= '${countryJson}';
-    		$('#selCountry').html('');
-    		$.each(JSON.parse(obj), function (key, value) {
-	   	 		$('#selCountry').append($('<option>',
-	   	 		{
-	   	 		    value: value.value,
-	   	 		    text : value.label
-	   	 		})
-	   	 		);
+	$(document).ready(function() {
+		var obj;
 
-    		});
-    	}
-    	getState();
-    	
-    	if('' != '${designationJson}'){
-    		obj= '${designationJson}';
-    		$('#dtdesignationid').html('');
-    		$.each(JSON.parse(obj), function (key, value) {
-	   	 		$('#dtdesignationid').append($('<option>',
-	   	 		{
-	   	 		    value: value.value,
-	   	 		    text : value.label
-	   	 		})
-	   	 		);
+		if ('' != '${countryJson}') {
+			obj = '${countryJson}';
+			$('#selCountry').html('');
+			$.each(JSON.parse(obj), function(key, value) {
+				$('#selCountry').append($('<option>', {
+					value : value.value,
+					text : value.label
+				}));
 
-    		});
-    	}
-    	$(".dateBox").each(function(){
+			});
+		}
+		getState();
+
+		if ('' != '${designationJson}') {
+			obj = '${designationJson}';
+			$('#dtdesignationid').html('');
+			$.each(JSON.parse(obj), function(key, value) {
+				$('#dtdesignationid').append($('<option>', {
+					value : value.value,
+					text : value.label
+				}));
+
+			});
+		}
+		$(".dateBox").each(function() {
 			$(this).datetimepicker({
-				format:'d-M-Y',
-				maxDate: 0
+				format : 'd-M-Y',
+				maxDate : 0
 			});
 		});
-    });
-    
-function validate() {
-	
-	
-	var vbool = valOnSubmit();
-	
-   if(vbool){
-	   	   
-	 		if($("#txtconfpassword").val() == $("#txtpassword").val()){
-	 			
-	 			    
-	 			$(".alert-danger").html(lbl_pass_should_not_as_old);
-	 		}else{
-	 			$(".alert-danger").html("Wrong Password");
-	 			
-	 			return false;
-	 		}
-	 	}
-	 	return disableBtn(vbool);
-	
-	
-}
+	});
+
+	function validate() {
+
+		var vbool = valOnSubmit();
+
+		if (vbool) {
+
+			if ($("#txtconfpassword").val() == $("#txtpassword").val()) {
+
+				$(".alert-danger").html(lbl_pass_should_not_as_old);
+			} else {
+				$(".alert-danger").html("Wrong Password");
+
+				return false;
+			}
+		}
+		return disableBtn(vbool);
+
+	}
 </script>
 <section id="content-wrapper">
 	<div class="site-content-title">
@@ -402,9 +395,9 @@ function validate() {
 						<div class="form-group">
 							<select class="form-control" style="width: 95%; float: left;"
 								onblur="javascript:{if(validateTextComponent(this));}"
-								validarr="required"
-								tovalid="true" onblur="validateTextComponent(this)"
-								title="Designation" id="dtdesignationid" name="dtdesignationid"
+								validarr="required" tovalid="true"
+								onblur="validateTextComponent(this)" title="Designation"
+								id="dtdesignationid" name="dtdesignationid"
 								validationmsg="Allows min 3 and max. 200 characters and special character (',- , .,space)">
 								<option>Please select</option>
 							</select> <i class="fa fa-plus add" aria-hidden="true" data-toggle="modal"
@@ -438,8 +431,16 @@ function validate() {
 						<label>Upload Photo : (Single file upload (JPG, JPEG, PNG)
 							of size less than 2MB)</label>
 						<div class="form-group">
-							<input class="form-control" value="" type="file">
+							<input class="form-control" value="" id="fileToUpload" name="fileToUpload" type="file">
 						</div>
+						<input type="hidden" id="txtobjectId" value="${objectId}"> <input
+							type="hidden" id="txtChildId" value="${childId}"> <input
+							type="hidden" id="txtSubChildId" value="${subChildId}"> <input
+							type="hidden" id="txtOtherSubChildId" value="${otherSubChildId}">
+						<input class="form-control" id="txtDocDesc" value="AdminUser"
+							name="txtDocDesc" type="hidden">
+						<button type="button" class="btn btn-default" 
+							onclick="return ajaxFileUpload();">Upload</button>
 					</div>
 				</div>
 
@@ -462,3 +463,11 @@ function validate() {
 		</form>
 	</div>
 </section>
+<script>
+	$(document).ready(function() {
+		var objectId = $('#txtobjectId').val();
+		var childId = $('#txtChildId').val();
+		var subChildId = $('#txtSubChildId').val();
+		var otherSubChildId = $('#txtOtherSubChildId').val();
+	});
+</script>

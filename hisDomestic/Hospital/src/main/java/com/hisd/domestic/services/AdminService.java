@@ -2,6 +2,7 @@ package com.hisd.domestic.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,7 @@ import com.hisd.domestic.databean.PatientBean;
 import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblComplaints;
+import com.hisd.domestic.model.TblDocument;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
@@ -189,6 +191,7 @@ public class AdminService {
 		if (userId != 0) {
 			tblUser.setUserid(userId);
 			tblUserDao.saveOrUpdateEntity(tblUser);
+			saveDocument(userId);
 			isSuccess = true;
 		}
 		return isSuccess;
@@ -485,7 +488,7 @@ public class AdminService {
 	}
 	@Transactional
 	public List<TblComplaints> complaintsList() throws Exception{
-		return tblComplaintsDao.findTblComplaints("complaintsstatus",Operation_enum.EQ,1,"complaintsid",Operation_enum.ORDERBY,Operation_enum.DESC);
+		return tblComplaintsDao.findTblComplaints("complaintsstatus",Operation_enum.EQ,0,"complaintsid",Operation_enum.ORDERBY,Operation_enum.DESC);
 	}
 	@Transactional
 	public boolean deleteComplatints(int compid, int status) {
@@ -508,6 +511,61 @@ public class AdminService {
 		hibernateQueryDao.updateDeleteNewQuery(query.toString(), parameter);
 		
 	}
-	
+	@Transactional 
+	public boolean saveDocument(Long userId){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		parameter.put("objectId", userId);
+		query.append("UPDATE TblDocument set objectId =:objectId WHERE objectId =-1");
+		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(),
+				parameter);
+		return flag != 0 ? true : false;
+		
+		
+	}
+	@Transactional
+	public List<PatientBean> search(String name,String startdate,String enddate){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object> parameter = new HashMap<String, Object>();
+		query.append(" Select tblUser.firstname,tblUser.middlename,tblUser.lastname,tblUser.gender,tblUser.dob,tblUser.countrycodemobileno,tblUser.mobileno");
+		query.append(",tblPatient.patientid,tblPatient.patientcrno,tblPatient.regdate,tblPatient.age");
+		query.append(",tblConsult.consultingdoctorid,tblConsult.consultingdoctorname");
+		query.append(",tblAppoint.appdate");
+		query.append(" FROM TblPatient tblPatient");
+		query.append(" INNER JOIN TblConsultingDoctor tblConsult ON tblConsult.consultingdoctorid = tblPatient.consultingdoctorid");
+		query.append( "INNER JOIN TblUser tblUser ON tblUser.userdetailid = tblPatient.userdetailid");
+		query.append(" INNER JOIN TblAppointment tblAppoint ON tblAppoint.appid = tblPatient.appid");
+		if(name != null && !name.isEmpty()){
+			parameter.put("name", name);
+			query.append(" WHERE tblConsult.consultingdoctorname =:name");
+		}else{
+			parameter.put("startdate", startdate);
+			parameter.put("enddate", enddate);
+			query.append(" WHERE tblAppoint.appdate =:startdate BETWEEN tblAppoint.appdate =:enddate");		
+		}
+		List<Object[]> list = hibernateQueryDao.createSQLQuery(query.toString(), parameter);
+		PatientBean patientBean = new PatientBean();
+		List<PatientBean> patientbeanlist = new ArrayList<PatientBean>();
+		 for (Object[] objects : list) {
+		  patientBean.setTxtfirstname(objects[0].toString());
+		  patientBean.setTxtmiddlename(objects[1].toString());
+		  patientBean.setTxtlastname(objects[2].toString());
+		  patientBean.setDtgender(objects[3].toString());
+		  patientBean.setTxtbod((Date) objects[4]);
+		  patientBean.setTxtcountrycodemobileno(objects[5].toString());
+		  patientBean.setTxtmobileno(objects[6].toString());
+		  patientBean.setPatientId((Integer) objects[7]);
+		  patientBean.setTxtpatientcrno(objects[8].toString());
+		  patientBean.setTxtregdate(objects[9].toString());
+		  patientBean.setTxtage((Integer) objects[10]);
+		  patientBean.setConsltingDoctorId((Integer) objects[11]);
+		  patientBean.setConsltingDoctorName(objects[12].toString());
+		  patientBean.setAppDate((String) objects[13]);
+		   patientbeanlist.add(patientBean);
+		
+		}
+		return patientbeanlist;
+		
+	}
 
 }

@@ -41,7 +41,7 @@
 	background: #087380!important
 }
 .wrapper .btn-fill-horizontal.btn-primary-fill-horizontal:after, .wrapper .btn-fill-horizontal.btn-primary-fill-horizontal:before, .wrapper .btn-fill-vertical.btn-primary-fill-vertical:after, .wrapper .btn-fill-vertical.btn-primary-fill-vertical:before, .wrapper .btn-hover-animation, .wrapper .label, .wrapper .radio-button input[type=radio]:checked+label:after, .wrapper .search_ad, .wrapper .site-menu li.nav-menu-icon a, .wrapper .tag-primary, .wrapper .tag-primary:active.focus, .wrapper .tag-primary:active:focus {
-	background: #087380
+	background: #c02c40
 }
 .wrapper .content {
 	border-top: 3px solid #087380
@@ -118,11 +118,12 @@
 }
 .wrapper .nav-tab-vertical-icon-left ul li .nav-link.active, .wrapper .nav-tab-vertical-icon-left ul li .nav-link.active:focus, .wrapper .nav-tab-vertical-icon-left ul li .nav-link.active:hover, .wrapper .nav-tab-vertical-icon-left ul li .nav-link:focus, .wrapper .nav-tab-vertical-icon-left ul li .nav-link:hover {
 	border-color: transparent #087380 transparent transparent;
-	color: #087380
+	color: #284e8c;
 }
 .wrapper .nav-tab-pills-image ul li .nav-link.active, .wrapper .nav-tab-pills-image ul li .nav-link.active:focus, .wrapper .nav-tab-pills-image ul li .nav-link.active:hover, .wrapper .nav-tab-pills-image ul li .nav-link:focus, .wrapper .nav-tab-pills-image ul li .nav-link:hover {
-	border-color: transparent transparent #087380;
-	color: #087380
+  background: #85abe9 none repeat scroll 0 0;
+  border-color: #668cca;
+  color: #081a58;
 }
 .wrapper .nav-tab-inverse ul li .nav-link.active, .wrapper .nav-tab-inverse ul li .nav-link.active:focus, .wrapper .nav-tab-inverse ul li .nav-link.active:hover, .wrapper .nav-tab-inverse ul li .nav-link:focus, .wrapper .nav-tab-inverse ul li .nav-link:hover {
 	border-color: #087380 transparent transparent;
@@ -399,7 +400,7 @@ background-color:#087380
 	background: rgba(8,115,128,.2)
 }
 .wrapper .content-navbar .primary-navbar, .wrapper .content-navbar .second-style-navbar .dropdown-section .dropdown-menu a:active, .wrapper .content-navbar .second-style-navbar .dropdown-section .dropdown-menu a:focus, .wrapper .content-navbar .second-style-navbar .dropdown-section .dropdown-menu a:hover, .wrapper .content-navbar .simple-navbar ul .dropdown-menu a:hover, .wrapper .content-navbar .style-navbar, .wrapper .content-navbar .sucess-navbar .search_field .primary-navbar, .wrapper .content-wizard .basic-wizard .swMain .buttonFinish, .wrapper .content-wizard .basic-wizard .swMain .buttonNext, .wrapper .content-wizard .basic-wizard .swMain .buttonPrevious, .wrapper .content-wizard .basic-wizard .swMain ul.anchor li a.selected, .wrapper .external-pager .jsgrid-pager-current-page, .wrapper .jsgrid .jsgrid-header-row th, .wrapper .jsgrid-pager .jsgrid-pager-current-page, .wrapper table thead tr th {
-	background: #087380
+	background: #284e8c
 }
 .wrapper .content-blockquote .modern-blockquote:after {
 	border-top-color: rgba(8,115,128,.2)

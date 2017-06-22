@@ -92,6 +92,12 @@ public class AdminController {
 					modelMap.addAttribute("countryJson", countryJson);
 					designationJson = getDesignationJson();
 					modelMap.addAttribute("designationJson", designationJson);
+					modelMap.addAttribute("objectId", -1);
+				    modelMap.addAttribute("childId", 0);
+				    modelMap.addAttribute("subChildId", 0);
+				    modelMap.addAttribute("otherSubChildId", 0);
+			        
+					
 					break;
 				case 2:
 					page = "admin/PatientType";
@@ -108,7 +114,9 @@ public class AdminController {
 					  page ="admin/ComplaintsMaster";
 					  modelMap.addAttribute("complaints", adminService.complaintsList());
 					  break;
-					  
+				case 6:
+					  page ="admin/AdminSearch";
+					  break;
 				case 7:
 					getNewPatientRegistration(patientid, modelMap);
 					page = "admin/NewPatientRegistration";
@@ -909,6 +917,17 @@ public class AdminController {
 		 adminService.deleteComplatints(compaintsId, 2);
 		 modelMap.addAttribute("complaints", adminService.complaintsList());
 		 String page ="admin/ComplaintsMaster";	
+		return page;
+		
+	}
+	@RequestMapping(value = "/domestic/user/adminSearch", method = RequestMethod.POST)
+	public String adminSearch(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+		String page;
+	     String drName = request.getParameter("txtname");
+	     String startDate = request.getParameter("txtstartDate");
+	     String endDate = request.getParameter("txtEndDate");
+         modelMap.addAttribute("patient", adminService.search(drName, startDate, endDate));
+	      page="admin/searchPatient";
 		return page;
 		
 	}
