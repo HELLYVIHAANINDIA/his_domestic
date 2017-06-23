@@ -130,7 +130,7 @@ $(document).ready(function() {
 									<!-- Reschedule Appointment  -->
 										<a href="#" class="tag square-tag tag-warning"data-dismiss="modal" data-toggle="modal" data-target="#appointmentReschedule${appdata[12]}">Reschedule</a>
 										<!--Popup Menu  -->
-										<div class="modal fade" id="appointmentReschedule${appdata[12]}" role="dialog" >
+										<div class="modal fade" id="appointmentReschedule${appdata[12]}" role="dialog" style="z-index: 90">
 												<div class="modal-dialog modal-md">
 													<div class="modal-content">
 														<div class="modal-header">

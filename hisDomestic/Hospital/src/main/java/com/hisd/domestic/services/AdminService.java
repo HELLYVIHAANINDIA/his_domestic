@@ -27,6 +27,7 @@ import com.hisd.common.daointerface.TblReferenceDao;
 import com.hisd.common.daointerface.TblUserDao;
 import com.hisd.common.daointerface.TblUserLoginDao;
 import com.hisd.common.services.CommonDAO;
+import com.hisd.common.services.CommonService;
 import com.hisd.common.utility.EncryptDecryptUtils;
 import com.hisd.domestic.databean.PatientBean;
 import com.hisd.domestic.databean.UserDatabean;
@@ -64,7 +65,12 @@ public class AdminService {
 	TblPatientRefrenceDao tblPatientRefrenceDao;
     @Autowired
     TblComplaintsDao tblComplaintsDao;
+    @Autowired
+	private CommonService commonService;
     
+    
+    @Value("#{hospitalProperties['client_dateformate_hhmm']}")
+	private String clientdateformatehhmm;
 	@Value("#{projectProperties['passwordkey']}")
 	private String passwordkey;
 	@Value("#{hospitalProperties['client_dateformate']}")
@@ -169,6 +175,7 @@ public class AdminService {
 		patientBean.setAppid(pInt(request, "appointmentid"));
 		patientBean.setReferenceid(pInt(request, "refrenceid"));
 		patientBean.setAddictionother(request.getParameter("txtotheraddiction"));
+		patientBean.setRefothersname(request.getParameter("txtotherRef"));
 		return patientBean;
 
 	}
@@ -524,29 +531,30 @@ public class AdminService {
 		
 	}
 	@Transactional
-	public List<PatientBean> search(String name,String startdate,String enddate){
+	public List<PatientBean> search(int name,String startDate,String endDate) throws ParseException{
 		StringBuilder query = new StringBuilder();
 		Map<String, Object> parameter = new HashMap<String, Object>();
-		query.append(" Select tblUser.firstname,tblUser.middlename,tblUser.lastname,tblUser.gender,tblUser.dob,tblUser.countrycodemobileno,tblUser.mobileno");
+		query.append(" Select tblUser.firstname,tblUser.middlename,tblUser.lastname,tblUser.gender,tblUser.dob,tblUser.coutrycodemobile,tblUser.mobileno");
 		query.append(",tblPatient.patientid,tblPatient.patientcrno,tblPatient.regdate,tblPatient.age");
 		query.append(",tblConsult.consultingdoctorid,tblConsult.consultingdoctorname");
-		query.append(",tblAppoint.appdate");
-		query.append(" FROM TblPatient tblPatient");
-		query.append(" INNER JOIN TblConsultingDoctor tblConsult ON tblConsult.consultingdoctorid = tblPatient.consultingdoctorid");
-		query.append( "INNER JOIN TblUser tblUser ON tblUser.userdetailid = tblPatient.userdetailid");
-		query.append(" INNER JOIN TblAppointment tblAppoint ON tblAppoint.appid = tblPatient.appid");
-		if(name != null && !name.isEmpty()){
+		query.append(",tblAppoint.appdate,tblUser.city,tblAppoint.status");
+		query.append(" FROM `tbl_patient` tblPatient");
+		query.append(" INNER JOIN `tbl_consultingdoctor` tblConsult ON tblConsult.consultingdoctorid = tblPatient.consultingdoctorid");
+		query.append(" INNER JOIN  `tbl_user` tblUser ON tblUser.userdetailid = tblPatient.userdetailid");
+		query.append(" INNER JOIN  `tbl_appointment` tblAppoint ON tblAppoint.appid = tblPatient.appid");
+		if(name != 0){
 			parameter.put("name", name);
-			query.append(" WHERE tblConsult.consultingdoctorname =:name");
+			query.append(" WHERE  tblPatient.consultingdoctorid =:name");
 		}else{
-			parameter.put("startdate", startdate);
-			parameter.put("enddate", enddate);
-			query.append(" WHERE tblAppoint.appdate =:startdate BETWEEN tblAppoint.appdate =:enddate");		
+			parameter.put("startdate", startDate);
+			parameter.put("enddate", endDate);
+			query.append(" WHERE tblAppoint.appdate BETWEEN :startdate AND :enddate");		
 		}
 		List<Object[]> list = hibernateQueryDao.createSQLQuery(query.toString(), parameter);
-		PatientBean patientBean = new PatientBean();
+		
 		List<PatientBean> patientbeanlist = new ArrayList<PatientBean>();
 		 for (Object[] objects : list) {
+			 PatientBean patientBean = new PatientBean();
 		  patientBean.setTxtfirstname(objects[0].toString());
 		  patientBean.setTxtmiddlename(objects[1].toString());
 		  patientBean.setTxtlastname(objects[2].toString());
@@ -560,7 +568,11 @@ public class AdminService {
 		  patientBean.setTxtage((Integer) objects[10]);
 		  patientBean.setConsltingDoctorId((Integer) objects[11]);
 		  patientBean.setConsltingDoctorName(objects[12].toString());
-		  patientBean.setAppDate((String) objects[13]);
+		  patientBean.setAppdatestring(commonService.convertSqlToClientDate(
+					clientdateformatehhmm,
+					objects[13] != null ? objects[13].toString() : ""));
+		  patientBean.setTxtcity(objects[14].toString());
+		  patientBean.setAppStatus((Integer) objects[15]);
 		   patientbeanlist.add(patientBean);
 		
 		}

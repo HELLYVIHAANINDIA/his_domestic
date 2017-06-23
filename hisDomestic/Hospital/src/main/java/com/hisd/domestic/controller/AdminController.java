@@ -64,6 +64,9 @@ public class AdminController {
 	private String clientdateformatehhmm;
 	@Value("#{hospitalProperties['sql_dateformate_without_timestamp']}")
 	private String sqldateformatewithouttimestamp;
+	@Value("#{hospitalProperties['sql_dateformate']}")
+	private String sqldateformate;
+	
 
 	private static final String REDIRECT_SESSION_EXPIRED = "redirect:/notloggedin";
 
@@ -115,12 +118,15 @@ public class AdminController {
 					  modelMap.addAttribute("complaints", adminService.complaintsList());
 					  break;
 				case 6:
-					  page ="admin/AdminSearch";
+					  page ="admin/PatientReport";
 					  break;
 				case 7:
 					getNewPatientRegistration(patientid, modelMap);
 					page = "admin/NewPatientRegistration";
 					break;
+				case 8:
+					 page = "admin/AppointmentReport";
+					 break;
 					default:page = "admin/Userdashboad";
 					break;
 				}
@@ -477,6 +483,8 @@ public class AdminController {
 						tblPatientRefrence
 								.setReferencebytypeid(tblReferenceType);
 						tblPatient.setReferenceid(patientBean.getReferenceid());
+						tblPatient.setRefothersname(patientBean
+								.getTxtOtherRefrencename());
 						adminService.editPatientReference(tblPatientRefrence);
 
 					}
@@ -544,9 +552,10 @@ public class AdminController {
 
 					// Table Addiction
 					
-					if (patientId != 0) { 
+					if (patientId != 0 && patientBean.getAddictionList() != null) { 
 						List<TblPatientAddiction> patientAddictionList = new ArrayList<TblPatientAddiction>(); 
 						TblPatientAddiction tblPatientAddiction ;
+						
 						for (String obj : patientBean.getAddictionList()) { 
 							tblPatientAddiction = new TblPatientAddiction(patientId); 
 							tblPatientAddiction.setTblAddiction(new TblAddiction(Integer.parseInt(obj)));
@@ -557,6 +566,8 @@ public class AdminController {
 						}
 						
 						adminService.addpatientAddiction(patientAddictionList); 
+					}else{
+						adminService.deleteAddiction(patientId);
 					}
 					 
 				} else if (caseid.equals("2")) {
@@ -887,7 +898,7 @@ public class AdminController {
 		List<Object[]> list = commonService.getAddiction();
 		List<TblPatientAddiction> selAddictionList = adminService.getAddiction(patientId);
 		Map<Integer,String> addictionMap = new LinkedHashMap<Integer,String>();
-		int c = 0;
+		int c = -1;
 		for (Object[] objects : list) {
 			for (TblPatientAddiction tblPatientAddiction : selAddictionList) {
 				if(!addictionMap.containsKey(Integer.parseInt( objects[0].toString()))){
@@ -904,7 +915,9 @@ public class AdminController {
 			}else{
 				addictionMap.put(Integer.parseInt(objects[0].toString()),objects[1].toString()+"@@@notchecked");
 			}
-			c=0;
+			if(!selAddictionList.isEmpty()){
+				c=0;
+			}
 		}
 		modelMap.addAttribute("addictionMap",addictionMap);
 		modelMap.addAttribute("pageStatus", "edit");
@@ -920,14 +933,23 @@ public class AdminController {
 		return page;
 		
 	}
-	@RequestMapping(value = "/domestic/user/adminSearch", method = RequestMethod.POST)
-	public String adminSearch(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+	@RequestMapping(value = "/domestic/user/patientReport/{drid}", method = RequestMethod.POST)
+	public String patientReport(@PathVariable("drid") Integer drid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) throws ParseException{
 		String page;
-	     String drName = request.getParameter("txtname");
-	     String startDate = request.getParameter("txtstartDate");
-	     String endDate = request.getParameter("txtEndDate");
-         modelMap.addAttribute("patient", adminService.search(drName, startDate, endDate));
+	     String startDate = null;
+	     String endDate = null; 
+         modelMap.addAttribute("patient", adminService.search(drid, startDate, endDate));
 	      page="admin/searchPatient";
+		return page;
+		
+	}
+	@RequestMapping(value = "/domestic/user/appointmentReport/{startdate}/{enddate}", method = RequestMethod.POST)
+	public String appointmentReport(@PathVariable("startdate") String startdate,@PathVariable("enddate") String enddate,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) throws ParseException{
+		String page;
+	 String startDate = commonService.convertToDBDate(clientdateformatehhmm, sqldateformate,startdate);
+	 String endDate = commonService.convertToDBDate(clientdateformatehhmm, sqldateformate,enddate);
+        modelMap.addAttribute("appointment", adminService.search(0, startDate, endDate));
+	      page="admin/SearchAppointment";
 		return page;
 		
 	}

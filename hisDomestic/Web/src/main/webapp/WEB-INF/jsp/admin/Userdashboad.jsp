@@ -4,8 +4,6 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
-<script
-		src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.min.js"></script>
 		<script
 		src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
 <script>
@@ -122,7 +120,7 @@ $(document).ready(function() {
 										
 									
 										<a href="#" class="tag square-tag tag-warning"data-dismiss="modal" data-toggle="modal" data-target="#appointmentReschedule${appdata[12]}">Reschedule</a>
-										<div class="modal fade" id="appointmentReschedule${appdata[12]}" role="dialog" >
+										<div class="modal fade" id="appointmentReschedule${appdata[12]}" role="dialog"  style="z-index: 90">
 												<div class="modal-dialog modal-md">
 													<div class="modal-content">
 														<div class="modal-header">

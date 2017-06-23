@@ -59,6 +59,7 @@ public class PatientBean {
 	private String resune;
 	private int referenceid;
 	private String addictionother;
+	private int appStatus;
 	
 	
 	
@@ -490,6 +491,14 @@ public class PatientBean {
 
 	public void setAddictionother(String addictionother) {
 		this.addictionother = addictionother;
+	}
+
+	public int getAppStatus() {
+		return appStatus;
+	}
+
+	public void setAppStatus(int appStatus) {
+		this.appStatus = appStatus;
 	}
 
 	

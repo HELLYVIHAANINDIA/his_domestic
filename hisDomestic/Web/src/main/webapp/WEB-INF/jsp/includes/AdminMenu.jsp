@@ -66,5 +66,3 @@ Clinical
  
 <section id="main" class="container-fluid">
 <div class="row" id="divCallPage">
-</div>
-</section>

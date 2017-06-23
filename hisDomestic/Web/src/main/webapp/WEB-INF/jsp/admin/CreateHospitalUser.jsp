@@ -334,11 +334,11 @@
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>Country</label>
+						<label>Country <span class="cm-field">*</span></label>
 						<div class="form-group">
 							<select class="form-control" id="selCountry" name="selCountry"
 								isrequired="true" onchange="if(validateCombo(this)){getState()}"
-								title="Country">
+								title="Country" validationmsg="Select Country">
 							</select>
 						</div>
 					</div>
@@ -346,11 +346,11 @@
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>State</label>
+						<label>State <span class="cm-field red">*</span></label>
 						<div class="form-group">
 							<select class="form-control" id="selState" name="selState"
-								placeholder="State" onchange="if(validateCombo(this)){}"
-								title="State">
+								placeholder="State" onchange="if(validateCombo(this)){}" isrequired="true"
+								title="State" validationmsg="Select State">>
 								<option value="">Select</option>
 							</select>
 						</div>
@@ -463,6 +463,12 @@
 		</form>
 	</div>
 </section>
+
+</div>
+</section>
+<%@include file="../includes/footer.jsp"%> 
+
+
 <script>
 	$(document).ready(function() {
 		var objectId = $('#txtobjectId').val();

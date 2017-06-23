@@ -3,8 +3,9 @@
 <%@include file="../includes/DoctorMenu.jsp"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<script
-	src="${pageContext.servletContext.contextPath}/resources/hospital/js/Document.js"></script>
+
+<script src="${pageContext.servletContext.contextPath}/resources/hospital/js/Document.js"></script>
+
 <section id="content-wrapper">
  
 <div class="site-content-title">
@@ -108,7 +109,7 @@ Prescription
 
 <!-- Modal -->
 <div id="pr-pop" class="modal fade" role="dialog">
-  <div class="modal-dialog mdl-dialog">
+  <div class="modal-dialog mdl-dialog" style="max-width: 1000px;">
     <div class="modal-content">
       <div class="modal-header">
       	<a class="prt-button" onclick="exportContent('prescrition', 'prescrition_${patient[0][8]}', 5)"	value="Print">
@@ -337,7 +338,7 @@ Prescription
 </div>
   
 </div>
-<input type="text" name="hdclinicalDetailid" value="${clinicalDetail[0].clinical_id}">
+<input type="hidden" name="hdclinicalDetailid" value="${clinicalDetail[0].clinical_id}">
 <div class="clear"></div>
 </div>
 
@@ -423,6 +424,10 @@ Prescription
 </div>
 </form>
 </section>
+
+</div>		
+</section>
+
 <script
 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.min.js"></script>
 <script type="text/javascript">

@@ -148,8 +148,9 @@ public class DoctorService {
 		clinicalbean.setMedicineList(request.getParameterValues("chkmedicien"));
 		clinicalbean.setReportList(request.getParameterValues("ctkreport"));
 		clinicalbean.setTxtremark(request.getParameter("txtremark"));
+		if(request.getParameter("hdclinicalDetailid") != "" ){
 		clinicalbean.setClinical_id(Integer.parseInt(request.getParameter("hdclinicalDetailid")));
-		
+		}
 		return clinicalbean;
 		
 	}

@@ -78,3 +78,5 @@ function deleteComplaints(complaintsId) {
 
 	</section>
 </div>
+<%@include file="../includes/footer.jsp"%> 
+

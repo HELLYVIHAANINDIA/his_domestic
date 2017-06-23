@@ -253,7 +253,7 @@ public class DoctorController {
 		}
 		return jsonStr;
 	}
-	@RequestMapping(value = "/domestic/doctor/getacknowlege/{patientid}", method = {RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/domestic/doctor/getacknowlege/{patientid}", method = RequestMethod.GET)
 	public String getacknowlege(@PathVariable("patientid") Integer patientid,HttpServletRequest request,HttpServletResponse response, ModelMap modelMap) throws Exception{
 	    String page = "admin/Patientpriscription";
 	    modelMap.addAttribute("patient",doctorService.getpatientinfo(patientid));
@@ -261,42 +261,59 @@ public class DoctorController {
 	    List<Object[]>listComplaints = doctorService.getReportName(patientid,1);
 	    Map<Integer,String> hashMapComplain = new LinkedHashMap<Integer, String>();
 	    for (TblComplaints tblComplaints : listAllComplaints) {
-			for (Object[] objects : listComplaints) {
-				if(tblComplaints.complaintsid == Integer.parseInt(objects[3].toString())){
-					hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_checked");
-					break;
-				}else{
-					hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_notselected");
+	    	if(listComplaints.isEmpty()){
+	    		hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_notselected");
+	    	}else{
+	    		for (Object[] objects : listComplaints) {
+					if(tblComplaints.complaintsid == Integer.parseInt(objects[3].toString())){
+						hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_checked");
+						break;
+					}else{
+						hashMapComplain.put(tblComplaints.complaintsid, tblComplaints.complaintsname + "_notselected");
+					}
 				}
-			}
+	    		
+	    	}
+			
 		}
 	    Map<Integer,String> hashMapMedicien = new LinkedHashMap<Integer, String>();
 	   List<TblMedicine>listAllMedicine = doctorService.getAllMedicins();
 	 List<Object[]>listMedicien = doctorService.getReportName(patientid,2);
 	  for (TblMedicine tblMedicine : listAllMedicine) {
-		  for (Object[] objects : listMedicien) {
-			if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[3].toString())){
-				hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_checked");
-				break;
-			}else{
-				hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_notselected");
-			}
-		}
+		  if(listMedicien.isEmpty()){
+			  hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_notselected");
+		  }else{
+			  for (Object[] objects : listMedicien) {
+					if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[3].toString())){
+						hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_checked");
+						break;
+					}else{
+						hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_notselected");
+					}
+				}
+			  
+		  }
+		
 		
 	}
 	  Map<Integer,String> hashMapReport = new LinkedHashMap<Integer, String>();
 	  List<TblReports>listAllReport = doctorService.getAllReports();
 	  List<Object[]>listReport = doctorService.getReportName(patientid,3);
 	  for (TblReports tblReports : listAllReport) {
-		for (Object[] objects : listReport) {
-			if(tblReports.getReport_id() == Integer.parseInt(objects[3].toString())){
-				hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_checked");
-				break;
-			}else{
-				hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_notselected");
-				
-			}
-		}
+		  if(listReport.isEmpty()){
+			  hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_notselected");
+		  }else{
+			  for (Object[] objects : listReport) {
+					if(tblReports.getReport_id() == Integer.parseInt(objects[3].toString())){
+						hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_checked");
+						break;
+					}else{
+						hashMapReport.put(tblReports.getReport_id(), tblReports.getReport_name() +"_notselected");
+						
+					}
+				}
+		  }
+		
 	}
 	    modelMap.addAttribute("complaints", hashMapComplain);
 	    modelMap.addAttribute("medicien", hashMapMedicien);
@@ -363,9 +380,9 @@ public class DoctorController {
 			        	  success = doctorService.deleteClinicalReport(patientid);
 			        	  success  = doctorService.addComplaints(complainList);
 			         }
-			        if(success){
+			     
 			        	page = "redirect:/domestic/user/dashboard";
-			        }
+			      
 			           
 	}
 		

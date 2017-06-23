@@ -966,6 +966,9 @@
 		</form>
 	</div>
 </section>
+</div>
+</section>
+
 <script>
 function calculateAge(birthDate){
 	var date = new Date ($("#txtregdate").val());

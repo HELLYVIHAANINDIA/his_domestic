@@ -27,8 +27,8 @@ CREATE TABLE `hibernate_sequence` (
 /*Data for the table `hibernate_sequence` */
 
 insert  into `hibernate_sequence`(`next_val`) values 
-(4733),
-(4733);
+(4855),
+(4855);
 
 /*Table structure for table `tbl_addiction` */
 
@@ -38,7 +38,7 @@ CREATE TABLE `tbl_addiction` (
   `addictionid` int(11) NOT NULL AUTO_INCREMENT,
   `addictionname` tinytext,
   PRIMARY KEY (`addictionid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_addiction` */
 
@@ -62,12 +62,15 @@ CREATE TABLE `tbl_appointment` (
   PRIMARY KEY (`appid`),
   KEY `tblcasetype` (`casetypeid`),
   CONSTRAINT `tblcasetype` FOREIGN KEY (`casetypeid`) REFERENCES `tbl_casetype` (`casetypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4732 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4819 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_appointment` */
 
 insert  into `tbl_appointment`(`appid`,`casetypeid`,`status`,`appdate`,`createddate`,`reseaon`) values 
-(4731,1,0,'2017-06-13 12:30:00','2017-06-13 12:05:02',NULL);
+(4731,1,1,'2017-06-22 20:30:00','2017-06-20 15:13:26',NULL),
+(4740,1,1,'2017-06-22 18:06:00','2017-06-20 10:28:24',NULL),
+(4761,1,1,'2017-06-22 19:00:00','2017-06-20 14:12:33',NULL),
+(4818,1,1,'2017-06-23 18:58:00','2017-06-23 15:08:08',NULL);
 
 /*Table structure for table `tbl_auditlog` */
 
@@ -83,7 +86,7 @@ CREATE TABLE `tbl_auditlog` (
   `EMAIL_ID` varchar(765) DEFAULT NULL,
   `PAGE_URL` varchar(765) DEFAULT NULL,
   PRIMARY KEY (`AUDIT_LOG_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=572 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=751 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_auditlog` */
 
@@ -658,7 +661,186 @@ insert  into `tbl_auditlog`(`AUDIT_LOG_ID`,`ACTION`,`DETAIL`,`CREATED_DATE`,`ENT
 (568,'GET','User has access ','2017-06-13 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
 (569,'GET','User has access ','2017-06-13 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
 (570,'GET','User has access ','2017-06-13 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
-(571,'GET','User has access ','2017-06-13 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus');
+(571,'GET','User has access ','2017-06-13 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(572,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(573,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(574,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(575,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(576,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(577,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(578,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(579,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(580,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(581,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(582,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(583,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(584,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(585,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(586,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(587,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(588,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(589,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(590,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/2'),
+(591,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(592,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(593,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(594,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(595,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(596,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(597,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(598,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(599,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(600,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(601,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(602,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(603,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(604,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(605,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(606,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(607,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(608,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(609,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(610,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(611,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(612,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(613,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(614,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(615,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(616,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(617,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(618,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(619,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(620,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(621,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(622,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(623,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(624,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(625,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(626,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(627,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(628,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(629,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(630,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(631,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(632,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(633,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(634,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(635,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(636,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(637,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(638,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(639,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(640,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/2/0'),
+(641,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/1/1'),
+(642,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(643,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(644,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(645,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(646,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(647,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(648,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(649,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(650,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(651,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(652,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(653,'GET','User has access ','2017-06-14 00:00:00',0,'superadmin@webstrikers.com','','/hisd/domestic/user/dashboard'),
+(654,'POST','User has access ','2017-06-14 00:00:00',0,'superadmin@webstrikers.com','','/hisd/domestic/user/tabcontent/1/0'),
+(655,'GET','User has access ','2017-06-14 00:00:00',1,'superadmin@webstrikers.com','','/hisd/domestic/user/getstatebycountry/1'),
+(656,'POST','User has access ','2017-06-14 00:00:00',0,'superadmin@webstrikers.com','','/hisd/domestic/user/isemailidexists/doctor@gmail.com/'),
+(657,'POST','User has access ','2017-06-14 00:00:00',0,'superadmin@webstrikers.com','','/hisd/domestic/user/SaveCreateUser'),
+(658,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(659,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(660,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(661,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(662,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(663,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(664,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(665,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(666,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(667,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(668,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(669,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(670,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(671,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(672,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(673,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(674,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(675,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(676,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(677,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(678,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(679,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(680,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(681,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(682,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0'),
+(683,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(684,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0'),
+(685,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(686,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0'),
+(687,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(688,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(689,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(690,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(691,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(692,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(693,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(694,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(695,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(696,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(697,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(698,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(699,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(700,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(701,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(702,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/3/0'),
+(703,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/2/1'),
+(704,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/3/0'),
+(705,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/2/1'),
+(706,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(707,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(708,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(709,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(710,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(711,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getCaseType/2/2'),
+(712,'GET','User has access ','2017-06-14 00:00:00',1,'admin@123.com','','/hisd/domestic/user/getstatebycountry/1'),
+(713,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getreferencetype'),
+(714,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getPayBy'),
+(715,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getConsltingDoctor'),
+(716,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/getSocialEconomicStatus'),
+(717,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/patient/searchAppointment/A-001'),
+(718,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(719,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/cancleAppointment'),
+(720,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(721,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/7/4732/1'),
+(722,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/7/4732'),
+(723,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(724,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(725,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(726,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(727,'GET','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/user/dashboard'),
+(728,'POST','User has access ','2017-06-14 00:00:00',0,'doctor@gmail.com','','/hisd/domestic/doctor/tabcontent/0/0/2'),
+(729,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(730,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(731,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(732,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(733,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(734,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(735,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(736,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(737,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(738,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(739,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(740,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(741,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(742,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(743,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(744,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(745,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/0/0'),
+(746,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/0/0/1'),
+(747,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/cancleAppointment'),
+(748,'GET','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/dashboard'),
+(749,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/doctor/tabcontent/7/4732/1'),
+(750,'POST','User has access ','2017-06-14 00:00:00',0,'admin@123.com','','/hisd/domestic/user/tabcontent/7/4732');
 
 /*Table structure for table `tbl_casetype` */
 
@@ -675,6 +857,100 @@ CREATE TABLE `tbl_casetype` (
 insert  into `tbl_casetype`(`casetypeid`,`casetypename`) values 
 (1,'New'),
 (2,'FollowUp');
+
+/*Table structure for table `tbl_clinicaldetail` */
+
+DROP TABLE IF EXISTS `tbl_clinicaldetail`;
+
+CREATE TABLE `tbl_clinicaldetail` (
+  `clinical_id` int(11) DEFAULT NULL,
+  `patientid` int(20) DEFAULT NULL,
+  `history` text,
+  `comments` text,
+  `remark` text,
+  KEY `Patient table` (`patientid`),
+  CONSTRAINT `Patient table` FOREIGN KEY (`patientid`) REFERENCES `tbl_patient` (`patientid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `tbl_clinicaldetail` */
+
+insert  into `tbl_clinicaldetail`(`clinical_id`,`patientid`,`history`,`comments`,`remark`) values 
+(4783,1,'test 11',' test','test'),
+(4786,1,'test','test','test'),
+(4793,1,'test','test','test'),
+(4799,1,'test','test','test'),
+(4828,4817,' test  ','   test','test');
+
+/*Table structure for table `tbl_clinicalreports` */
+
+DROP TABLE IF EXISTS `tbl_clinicalreports`;
+
+CREATE TABLE `tbl_clinicalreports` (
+  `clinicalreport_id` int(11) NOT NULL AUTO_INCREMENT,
+  `patientid` int(20) DEFAULT NULL,
+  `clnicalreportid` int(11) DEFAULT NULL,
+  `statusid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`clinicalreport_id`),
+  KEY `patientidclinical` (`patientid`),
+  CONSTRAINT `patientidclinical` FOREIGN KEY (`patientid`) REFERENCES `tbl_patient` (`patientid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4839 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tbl_clinicalreports` */
+
+insert  into `tbl_clinicalreports`(`clinicalreport_id`,`patientid`,`clnicalreportid`,`statusid`) values 
+(4804,1,3,1),
+(4805,1,6,1),
+(4806,1,2,2),
+(4807,1,7,2),
+(4808,1,3,3),
+(4834,4817,2,1),
+(4835,4817,5,1),
+(4836,4817,2,2),
+(4837,4817,5,2),
+(4838,4817,3,3);
+
+/*Table structure for table `tbl_complaints` */
+
+DROP TABLE IF EXISTS `tbl_complaints`;
+
+CREATE TABLE `tbl_complaints` (
+  `complaintsid` int(11) NOT NULL AUTO_INCREMENT,
+  `complaintsname` text,
+  `complaintsstatus` int(11) DEFAULT '0',
+  PRIMARY KEY (`complaintsid`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tbl_complaints` */
+
+insert  into `tbl_complaints`(`complaintsid`,`complaintsname`,`complaintsstatus`) values 
+(1,'Abdominal pain',0),
+(2,'Blood in stool',0),
+(3,'Chest pain',0),
+(4,'Constipation',0),
+(5,'Cough',0),
+(6,'Diarrhea',0),
+(7,'Difficulty swallowing\r\n',0),
+(8,'Dizziness',0),
+(9,'Eye discomfort and redness',0),
+(10,'Foot pain or ankle pain',0),
+(11,'Foot swelling or leg swelling',0),
+(12,'Heardaches',0),
+(13,'Heart palpitations',0),
+(14,'Hip pain',0),
+(15,'Knee pain',0),
+(16,'Low back pain',0),
+(17,'Nasal congestion',0),
+(18,'Nausea or vomiting',0),
+(19,'Neck pain',0),
+(20,'Numbness or tingline in hands',0),
+(21,'Pelvic pain:Female',0),
+(22,'Pelvic pain:Male',0),
+(23,'Shortness of breath',0),
+(24,'Shoulder pain',0),
+(25,'Sore throat',0),
+(26,'Urinary problems',0),
+(27,'Vision problems',0),
+(28,'Wheezing',0);
 
 /*Table structure for table `tbl_consultingdoctor` */
 
@@ -971,12 +1247,103 @@ insert  into `tbl_designation`(`designationid`,`designationname`) values
 (3,'MD'),
 (4,'MPH');
 
+/*Table structure for table `tbl_document` */
+
+DROP TABLE IF EXISTS `tbl_document`;
+
+CREATE TABLE `tbl_document` (
+  `documentid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fileName` varchar(750) NOT NULL,
+  `description` varchar(750) DEFAULT NULL,
+  `path` varchar(300) NOT NULL,
+  `fileType` varchar(750) NOT NULL,
+  `fileSize` int(200) DEFAULT NULL,
+  `objectId` int(100) NOT NULL,
+  `childId` int(100) DEFAULT NULL,
+  `subChildId` int(100) DEFAULT NULL,
+  `otherSubChildId` int(100) DEFAULT NULL,
+  `officerId` int(100) NOT NULL,
+  `cstatus` int(11) NOT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `updaterId` int(11) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `creatorId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`documentid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_document` */
+
+insert  into `tbl_document`(`documentid`,`fileName`,`description`,`path`,`fileType`,`fileSize`,`objectId`,`childId`,`subChildId`,`otherSubChildId`,`officerId`,`cstatus`,`updatedAt`,`updaterId`,`createdAt`,`creatorId`) values 
+(5,'Koala.jpg','AdminUser','\\Patient\\-1\\-1\\0\\0\\0','jpg',780831,4809,0,0,0,4064,0,NULL,NULL,NULL,NULL),
+(6,'Hydrangeas.jpg','AdminUser','\\Patient\\-1\\-1\\0\\0\\0','jpg',595284,4813,0,0,0,4064,0,NULL,NULL,NULL,NULL),
+(7,'Hydrangeas20170622144839.jpg','AdminUser','\\Patient\\-1\\-1\\0\\0\\0','jpg',595284,4813,0,0,0,4064,0,NULL,NULL,NULL,NULL),
+(8,'Desert.jpg','AdminUser','\\Patient\\-1\\-1\\0\\0\\0','jpg',845941,4813,0,0,0,4064,0,NULL,NULL,NULL,NULL),
+(9,'Desert.jpg','test','\\Patient\\4817\\4817\\0\\0\\0','jpg',845941,4817,0,0,0,4733,0,NULL,NULL,NULL,NULL);
+
+/*Table structure for table `tbl_medicine` */
+
+DROP TABLE IF EXISTS `tbl_medicine`;
+
+CREATE TABLE `tbl_medicine` (
+  `medicine_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medicine_name` tinytext,
+  PRIMARY KEY (`medicine_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tbl_medicine` */
+
+insert  into `tbl_medicine`(`medicine_id`,`medicine_name`) values 
+(1,'Amryl(1mg)'),
+(2,'Amryl(2mg)'),
+(3,'Amryl M1(1/500)'),
+(4,'Amryl M1(2/500)'),
+(5,'Januyia(50mg)'),
+(6,'Januyia(100 mg)'),
+(7,'Januyia(50/500)'),
+(8,'Januyia XRLP(100/1000)'),
+(9,'Amryl M1 Force(1/1000)'),
+(10,'Amryl M2 Force(2/1000)\r\n'),
+(11,'Eurepa(0.5 mg)'),
+(12,'Eurepa(1 mg)'),
+(13,'Eurepa(2 mg)'),
+(14,'Zemiglo(50 mg)'),
+(15,'Zemiglo(25 mg)'),
+(16,'Azior(10 mg)'),
+(17,'Azior(20 mg)'),
+(18,'Azior Asp(10/25)'),
+(19,'Azior gold(10 mg)'),
+(20,'Telsite(40 mg)'),
+(21,'Telsite-H(40/12.5)'),
+(22,'Telsite(40/5)'),
+(23,'Telsite(80 mg)'),
+(24,'Telsite-AMH(40/5/12.5)'),
+(25,'Volibo(0.2 mg)'),
+(26,'Volibo(0.23mg)'),
+(27,'Betaloc(25 mg)'),
+(28,'Betaloc(50 mg)'),
+(29,'Monit GTN(2.6 mg)'),
+(30,'Giyniy(2.6 mg)'),
+(31,'Caroace(1.25 mg)'),
+(32,'Caroace(2.25 mg)'),
+(33,'Caroace(5 mg)'),
+(34,'Tryptomer(10 mg)'),
+(35,'Tryptomer(25 mg)'),
+(36,'Esciess(5 mg)'),
+(37,'Esciess(5/0.5)'),
+(38,'Laraceb NT(400/10)'),
+(39,'Keprra(500 mg)'),
+(40,'Valgress(500 mg)'),
+(41,'Larageb at ls(100/10)'),
+(42,'Colihenz-p'),
+(43,'Zinepra(5/40)'),
+(44,'Zinepra(10/40)');
+
 /*Table structure for table `tbl_patient` */
 
 DROP TABLE IF EXISTS `tbl_patient`;
 
 CREATE TABLE `tbl_patient` (
-  `patientid` int(11) NOT NULL AUTO_INCREMENT,
+  `patientid` int(20) NOT NULL AUTO_INCREMENT,
   `patientcrno` varchar(50) DEFAULT NULL,
   `regdate` datetime DEFAULT NULL,
   `age` int(10) DEFAULT NULL,
@@ -997,13 +1364,15 @@ CREATE TABLE `tbl_patient` (
   KEY `tbluser` (`userdetailid`),
   CONSTRAINT `tblconsltingDoctor` FOREIGN KEY (`consultingdoctorid`) REFERENCES `tbl_consultingdoctor` (`consultingdoctorid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `tbluser` FOREIGN KEY (`userdetailid`) REFERENCES `tbl_user` (`userdetailid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4733 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4843 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_patient` */
 
 insert  into `tbl_patient`(`patientid`,`patientcrno`,`regdate`,`age`,`referenceid`,`socialeconomicstatusid`,`paybyid`,`consultingdoctorid`,`isdiabetic`,`ishignbp`,`userdetailid`,`refothersname`,`patbyname`,`appid`,`addictionother`) values 
-(4727,'P-001','2017-06-13 00:00:00',0,0,0,0,1,0,0,4726,NULL,NULL,0,''),
-(4732,'A-001',NULL,0,0,0,0,1,0,0,4730,NULL,NULL,4731,NULL);
+(1,'TEST','2017-06-20 00:00:00',0,4760,1,4,1,0,0,4758,NULL,NULL,4761,''),
+(4817,'001','2017-06-23 00:00:00',26,4815,2,4,2,0,0,4816,NULL,NULL,4818,''),
+(4840,'Test','2017-06-23 00:00:00',0,4843,3,1,1,1,1,4839,'test','test',0,'test'),
+(4842,'Test','2017-06-23 00:00:00',2,0,0,0,1,0,0,4841,NULL,NULL,0,'');
 
 /*Table structure for table `tbl_patientaddiction` */
 
@@ -1011,13 +1380,13 @@ DROP TABLE IF EXISTS `tbl_patientaddiction`;
 
 CREATE TABLE `tbl_patientaddiction` (
   `patientaddictionid` int(11) NOT NULL AUTO_INCREMENT,
-  `patientid` int(11) NOT NULL,
+  `patientid` int(20) NOT NULL,
   `addictionid` int(11) NOT NULL,
   PRIMARY KEY (`patientaddictionid`),
   KEY `tblpatient` (`patientid`),
   KEY `tbladdiction` (`addictionid`),
   CONSTRAINT `tbladdiction` FOREIGN KEY (`addictionid`) REFERENCES `tbl_addiction` (`addictionid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4730 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4855 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_patientaddiction` */
 
@@ -1031,8 +1400,21 @@ insert  into `tbl_patientaddiction`(`patientaddictionid`,`patientid`,`addictioni
 (4721,4720,1),
 (4724,4723,3),
 (4725,4723,1),
-(4728,4727,3),
-(4729,4727,1);
+(4736,4732,4),
+(4737,4732,3),
+(4738,4732,2),
+(4743,4727,3),
+(4744,4727,1),
+(4800,1,4),
+(4801,1,3),
+(4802,1,2),
+(4803,1,1),
+(4819,4817,4),
+(4820,4817,3),
+(4821,4817,2),
+(4822,4817,1),
+(4853,4840,2),
+(4854,4840,1);
 
 /*Table structure for table `tbl_patientreference` */
 
@@ -1045,7 +1427,7 @@ CREATE TABLE `tbl_patientreference` (
   PRIMARY KEY (`referenceid`),
   KEY `tblreferencetype` (`referencebytypeid`),
   CONSTRAINT `tblreferencetype` FOREIGN KEY (`referencebytypeid`) REFERENCES `tbl_referencebytype` (`referencebytypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4717 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4844 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_patientreference` */
 
@@ -1058,7 +1440,12 @@ insert  into `tbl_patientreference`(`referenceid`,`referencebytypeid`,`reference
 (4694,3,'test'),
 (4702,1,'test'),
 (4707,3,''),
-(4716,3,'test');
+(4716,3,'test'),
+(4735,1,'rtert'),
+(4739,3,''),
+(4760,3,''),
+(4815,3,'test'),
+(4843,1,'');
 
 /*Table structure for table `tbl_payby` */
 
@@ -1094,6 +1481,26 @@ insert  into `tbl_referencebytype`(`referencebytypeid`,`referencebytypename`) va
 (1,'Other'),
 (2,'Patient'),
 (3,'Doctor');
+
+/*Table structure for table `tbl_report` */
+
+DROP TABLE IF EXISTS `tbl_report`;
+
+CREATE TABLE `tbl_report` (
+  `report_id` int(11) NOT NULL AUTO_INCREMENT,
+  `report_name` tinytext,
+  PRIMARY KEY (`report_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tbl_report` */
+
+insert  into `tbl_report`(`report_id`,`report_name`) values 
+(1,'Blood Test'),
+(2,'CT Scans'),
+(3,'MRI Scans'),
+(4,'Sonography'),
+(5,'Unirity test'),
+(6,'X-Ray');
 
 /*Table structure for table `tbl_socialeconomicstatus` */
 
@@ -3942,7 +4349,7 @@ CREATE TABLE `tbl_user` (
   PRIMARY KEY (`userdetailid`),
   KEY `FK_tbl_userCountry` (`countryId`),
   KEY `FK_tbl_userstate` (`stateId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4731 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4842 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tbl_user` */
 
@@ -3960,8 +4367,16 @@ insert  into `tbl_user`(`userdetailid`,`usercode`,`firstname`,`middlename`,`last
 (4717,'hosregno1','Bhumika','','Patel','Female','2017-04-05','9898989898','091','091','091','S.g Highway','','',1,12,'Ahmedabad','',0,'989898',1),
 (4719,'hosregno1','Bhumika','','Patel','Female','2017-04-05','9898989898','091','','','S.g Highway','','',1,12,'Ahmedabad','',0,'',1),
 (4722,'hosregno1','Bhumika','','Patel','Female','2017-04-05','9898989898','091','','','S.g Highway','','',1,12,'Ahmedabad','',0,'',1),
-(4726,'hosregno1','Bhumika','','Patel','Female','2017-04-05','9898989898','091','','','S.g Highway','','',1,12,'Ahmedabad','',0,'',1),
-(4730,NULL,'Bhumika','','Patel','Female','2005-06-13','9898989898','091',NULL,NULL,NULL,NULL,NULL,0,0,NULL,NULL,0,NULL,0);
+(4726,'hosregno1','Bhumika','','Patel','Male','2017-04-05','9898989898','091','','','S.g Highway','','',1,12,'Ahmedabad','',0,'',1),
+(4730,'hosregno1','Bhumika','','Patel','Male','2005-06-13','9898989898','091','','','S.g Highway','','',1,1,'Ahmedabad','',0,'',1),
+(4734,'hosregno1','Bhumika','','Patel','Female','1996-06-11','9898989898','091','','','S.g Highway','','',1,12,'Ahmedabad','',4733,'',1),
+(4758,'hosregno1','Lipi','','Shah','Male','2017-05-31','1231231234','321','','','Abad','','',1,12,'Abad','',0,'',1),
+(4810,'hosregno1','test','','test','Male','2017-06-22','1212121212','111','','','S.g Highway','','',1,0,'Ahmedabad','',4809,'',1),
+(4812,'hosregno1','test','','test','Male','2017-06-22','1212121212','111','','','S.g Highway','','',1,0,'Ahmedabad','',4811,'',1),
+(4814,'hosregno1','Bhumika','Patel','Patel','Female','1990-10-25','7878787878','091','','','S.g.Highway','','',1,12,'Ahmedabad','',4813,'',1),
+(4816,'hosregno1','Bhumika','Patel','Patel','Male','1990-10-25','8748787878','091','','','S.g.Highway','','S.g Highway',1,12,'Ahmedabad','',0,'',1),
+(4839,'hosregno1','asas','','asas','Male','2016-07-01','9595959595','091','','','asas','','',1,12,'ahmedabad','',0,'',1),
+(4841,'hosregno1','asas','','asas','Male','2015-02-05','9595959595','091','','','asas','','',1,12,'ahmedabad','',0,'',1);
 
 /*Table structure for table `tbl_userlogin` */
 
@@ -3987,13 +4402,17 @@ CREATE TABLE `tbl_userlogin` (
   KEY `FK_tbl_userlogindesign` (`designationId`),
   CONSTRAINT `FK_tbl_userlogindesign` FOREIGN KEY (`designationId`) REFERENCES `tbl_designation` (`designationid`),
   CONSTRAINT `FK_tbl_userloginusertype` FOREIGN KEY (`usertypeid`) REFERENCES `tbl_usertype` (`usertypeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4131 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4814 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_userlogin` */
 
 insert  into `tbl_userlogin`(`userId`,`isCTPLUser`,`failedattempt`,`loginid`,`password`,`cstatus`,`designationId`,`forgotpwdHash`,`forgotpwdExpiryDate`,`lastLogin`,`isFirstLogin`,`usertypeid`,`casetypeid`) values 
-(4064,1,0,'superadmin@webstrikers.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,'2017-06-13 06:47:26',0,1,1),
-(4130,0,0,'admin@123.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,'2017-06-13 07:14:23',0,1,NULL);
+(4064,1,0,'superadmin@webstrikers.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,'2017-06-23 11:12:29',0,1,1),
+(4130,0,0,'admin@123.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,'2017-06-22 10:18:29',0,1,NULL),
+(4733,0,0,'doctor@gmail.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,'2017-06-23 10:56:48',0,2,NULL),
+(4809,0,0,'doctor1@gmail.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,NULL,0,1,NULL),
+(4811,0,0,'doctor1@gmail.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,NULL,0,1,NULL),
+(4813,0,0,'bhumika@webstrikers.com','i3KIfuzbumRZYld9mcvu/g==',1,1,NULL,NULL,'2017-06-23 12:02:21',0,1,NULL);
 
 /*Table structure for table `tbl_usertype` */
 
