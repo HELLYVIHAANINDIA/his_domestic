@@ -22,6 +22,7 @@ $(document).ready(function() {
 	var hdUserTypeId = $("#hdUserTypeId").val();
 	var hdsuperAdmin = $("#hdsuperAdmin").val();
 	var hdPatientId = $("#hdPatientId").val();
+
 	if(hdTabId == 2){
 		changeTab(hdTabId,hdPatientId,hdUserTypeId);
 	}

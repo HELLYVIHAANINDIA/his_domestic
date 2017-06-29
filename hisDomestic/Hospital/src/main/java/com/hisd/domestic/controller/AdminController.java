@@ -71,7 +71,7 @@ public class AdminController {
 	private static final String REDIRECT_SESSION_EXPIRED = "redirect:/notloggedin";
 
 	// CreateUser
-	@RequestMapping(value = "/domestic/user/tabcontent/{tabid}/{patientid}", method = {RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/domestic/user/tabcontent/{tabid}/{patientid}", method = {RequestMethod.POST})
 	public String createUser(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable("tabid") Integer tabid,
 			@PathVariable("patientid") Integer patientid, ModelMap modelMap) {

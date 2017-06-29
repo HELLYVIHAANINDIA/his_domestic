@@ -1,6 +1,12 @@
 
 <script type="text/javascript">
+var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_old"/>';
 	$(document).ready(function() {
+		
+		var objectId = $('#txtobjectId').val();
+		var childId = $('#txtChildId').val();
+		var subChildId = $('#txtSubChildId').val();
+		var otherSubChildId = $('#txtOtherSubChildId').val();
 		var obj;
 
 		if ('' != '${countryJson}') {
@@ -41,13 +47,10 @@
 
 		if (vbool) {
 
-			if ($("#txtconfpassword").val() == $("#txtpassword").val()) {
+			if ($("#txtconfpassword").val() != $("#txtpassword").val()) {
+			   $("#error").html("Confirm password does not match with password.");
+	 			vbool = false;
 
-				$(".alert-danger").html(lbl_pass_should_not_as_old);
-			} else {
-				$(".alert-danger").html("Wrong Password");
-
-				return false;
 			}
 		}
 		return disableBtn(vbool);
@@ -150,7 +153,7 @@
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>Date Of Birth</label>
+						<label>Date Of Birth<span class="cm-field">*</span></label>
 						<div class="form-group">
 							<input type="hidden" name="clientDateFormate"
 								id="clientDateFormate" value='dd-MMM-yyyy'> <input
@@ -212,6 +215,7 @@
 							style="display: block; color: red"></span>
 					</div>
 				</div>
+				<div id="error"></div>
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
@@ -466,14 +470,3 @@
 
 </div>
 </section>
-<%@include file="../includes/footer.jsp"%> 
-
-
-<script>
-	$(document).ready(function() {
-		var objectId = $('#txtobjectId').val();
-		var childId = $('#txtChildId').val();
-		var subChildId = $('#txtSubChildId').val();
-		var otherSubChildId = $('#txtOtherSubChildId').val();
-	});
-</script>
