@@ -191,7 +191,7 @@
 							} else {
 								$("#radio-button6").attr('checked', 'checked');
 							}
-
+							 addictionother();
 						} else {
 							getState();
 							getReferenceType();
@@ -267,7 +267,9 @@
 		vbool = valOnSubmit();
 		if (vbool && pageStatus == "edit") {
 			removeattribute();
+			
 		}
+		
 		return vbool;
 
 	}
