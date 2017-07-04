@@ -8,8 +8,7 @@
 					<div class="field-set-box"><label>Patient Report</label></div>
 					<table class="table table-bordered">
 						<thead>
-							<tr>
-							   
+							<tr>							   
 								<th>CR No.</th>
 								<th>Name</th>
 								<th>DOB</th>

@@ -22,7 +22,7 @@ body {
   max-width: 500px;
   position: absolute;
   right: 0;
-  top: 80px;
+  top: 300px;
 }
 	
 .login-header {
@@ -61,7 +61,7 @@ body {
 	}
 	
 .login-button {
-  background: #FF6666 none repeat scroll 0 0;
+  background: #005e9c none repeat scroll 0 0;
   color: #ffffff;
   font-size: 18px;
   font-weight: 500;
@@ -73,6 +73,7 @@ body {
   width: auto;
   margin-top: 6px;
   float: left;
+  border:none;
 }
 
 .login-button:hover {
@@ -80,7 +81,7 @@ body {
 	color:#000000;}
 	
 .forgot-password {
-  color: #3fa2cc;
+  color: #005e9c;
   float: right;
   font-size: 16px;
   font-weight: 500;

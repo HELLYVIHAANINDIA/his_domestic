@@ -2,10 +2,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
-		<script
-		src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
+<script src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
+
 <script>
 function cancleAppointment(hdAppointmentId){
 	$("#hdAppointmentId").val(hdAppointmentId);
@@ -43,27 +42,26 @@ $(document).ready(function() {
 		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
 	</div>
 	
+	<div class="content">
 		<div class="row">
-       
 			<div class="col-xs-12">
 				<div class="basic_table table-responsive">
-				<form id="frmcancleAppointment" action="${pageContext.servletContext.contextPath}/domestic/user/cancleAppointment" method="post">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-							   
-								<th></th>
-								<th>Case Type</th>
-								<th>CR No.</th>
-								<th>Date&Time</th>
-								<th>Name</th>
-								<th>DOB</th>
-								<th>Age</th>
-								<th>Mobile No.</th>
-								<th>Consulting Doctor</th>
-								<th>Appointment Date & Time</th>
-							</tr>
-						</thead>
+					<form id="frmcancleAppointment" action="${pageContext.servletContext.contextPath}/domestic/user/cancleAppointment" method="post">
+						<table class="table table-bordered">
+							<thead>
+								<tr>							   
+									<th></th>
+									<th>Case Type</th>
+									<th>CR No.</th>
+									<th>Date&Time</th>
+									<th>Name</th>
+									<th>DOB</th>
+									<th>Age</th>
+									<th>Mobile No.</th>
+									<th>Consulting Doctor</th>
+									<th>Appointment Date & Time</th>
+								</tr>
+							</thead>
 						<tbody>
 							<c:if test="${empty appointmentList}">
 							<tr>
@@ -182,10 +180,10 @@ $(document).ready(function() {
 					</table>
 					</form>	
 				</div>
-			</div>
-			
+			</div>			
 		</div>
-	      
+	</div>
+		      
 </section>
 
 

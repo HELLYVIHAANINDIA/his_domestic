@@ -22,19 +22,8 @@ function newAppointment(patientid) {
 } 
 </script>
 
-<section id="content-wrapper">
-	<div class="site-content-title">
-		<h2 class="float-xs-left content-title-main">Patient Registration
-			- View</h2>
-	</div>
-	<div class="content">
-		<h4 class="page-content-title b-bottom">
-			<span class="small pull-right cm-field">All (*) marked Fields
-				are mandatory</span>
-			<div class="clear"></div>
-		</h4>
-		<div class="row">
-			<div class="col-xs-12">
+<div class="row">
+	<div class="col-xs-12">
 				<div class="basic_table table-responsive">
 				<form id="frmPatientView" action="${pageContext.servletContext.contextPath}/domestic/user/dashboard" method="post">
 					<table class="table table-bordered" id="tblpatient">
@@ -114,6 +103,5 @@ function newAppointment(patientid) {
 					</form>
 				</div>
 			</div>
-		</div>
-	</div>
-</section>
+</div>
+			

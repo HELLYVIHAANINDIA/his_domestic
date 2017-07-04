@@ -17,6 +17,13 @@
   
   <div id="login-main-wrapper">
   	<div class="container">
+  		
+  		<div class="row">
+        	<div class="col-sm-12">
+            	<center><img src="${pageContext.request.contextPath}/resources/hospital/images/logo.png" alt="V-Cure" style="margin-top:50px;"/></center>
+            </div>
+        </div>
+  	
     	<div class="row">
         	<div id="login-wrapper">
             	<div class="col-sm-12">
@@ -81,7 +88,7 @@
 <!--                                 	<a href="#" class="login-button">Login</a> -->
                                 	 <input class="login-button" name="submit" value="Login" type="submit" onclick="return loginValidate()"/>
                                 </div>
-                                <div class="col-sm-6 col-xs-12"><a href="${pageContext.servletContext.contextPath}/getforgotpassword" class="forgot-password" data-toggle="modal" data-target="#forgot">Forgot Password?</a></div>
+<%--                                 <div class="col-sm-6 col-xs-12"><a href="${pageContext.servletContext.contextPath}/getforgotpassword" class="forgot-password" data-toggle="modal" data-target="#forgot">Forgot Password?</a></div> --%>
                                 
                                 <!-- Modal -->
 							  <div class="modal fade" id="forgot" role="dialog">

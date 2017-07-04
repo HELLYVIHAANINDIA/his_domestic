@@ -95,20 +95,8 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 							</select>
 						</div>
 					</div>
-				</div> -->
-                     	<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-					<div class="field-set-box">
-						<label>User Role <span class="cm-field">*</span></label>
-						<div class="form-group">
-							<select class="form-control" id="selUserRole" name="selUserRole"
-								isrequired="true" onchange=validateCombo(this)"
-								title="UserRole" validationmsg="Select UserRole">
-							</select>
-						</div>
-					</div>
 				</div>
-				</div>
+                     	
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>First Name <span class="cm-field">*</span></label>

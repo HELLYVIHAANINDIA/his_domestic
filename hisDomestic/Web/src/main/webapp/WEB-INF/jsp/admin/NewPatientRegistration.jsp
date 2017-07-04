@@ -6,13 +6,9 @@
  	<%@include file="../includes/AdminMenu.jsp"%>
 </c:if> 
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
-<script
-	src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.min.js"></script>
-<script
-	src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/jquery.datetimepicker.css">
+<script src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.datetimepicker.js"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -369,78 +365,66 @@
 		
 	}
 </script>
-
-<section id="content-wrapper">
-
-	<div class="content">
-		<!-- <div class="site-content-title">
-				<h2 class="float-xs-left content-title-main"><label id="AppointmentTitle"></label></h2>
-			</div> -->
-		<h4 class="page-content-title b-bottom">
-			<!-- 		<b><label class="pull-left" id="AppointmentTitle"></label></b> -->
-			<span class="small pull-right cm-field">All (*) marked Fields
-				are mandatory</span>
-			<div class="clear"></div>
-		</h4>
-		<form action="${pageContext.servletContext.contextPath}/domestic/user/SavePatient"
-			method="post" onsubmit="return validatePatient()">
-			<input type="hidden" value="" id="appoinmentPatientTabId"
-				name="appoinmentPatientTabId"> <input type="hidden" value=""
-				id="newAppointmenttabid" name="newAppointmenttabid">
-
-			<div class="row">
-
-
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-					<div class="field-set-box">
-						<label>Patient CR No. <span class="cm-field">*</span></label>
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i
-									class="fa fa-plus-square"></i></span> <input class="form-control"
-									value="${patient.txtpatientcrno}" type="text"
-									id="txtpatientcrno" name="txtpatientcrno">
+	
+		<form action="${pageContext.servletContext.contextPath}/domestic/user/SavePatient" method="post" onsubmit="return validatePatient()">
+			<input type="hidden" value="" id="appoinmentPatientTabId" name="appoinmentPatientTabId">
+			<input type="hidden" value="" id="newAppointmenttabid" name="newAppointmenttabid">
+			
+				<div class="row">
+					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						<div class="field-set-box">
+							<label>Patient CR No. <span class="cm-field">*</span></label>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon"><i
+										class="fa fa-plus-square"></i></span> <input class="form-control"
+										value="${patient.txtpatientcrno}" type="text"
+										id="txtpatientcrno" name="txtpatientcrno">
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-					<div class="field-set-box">
-						<label>First Name <span class="cm-field">*</span></label>
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input class="form-control" value="${patient.txtfirstname}"
-									type="text" id="txtfirstname" placeholder="Enter First Name"
-									name="txtfirstname"
-									onblur="javascript:{if(validateTextComponent(this));}"
-									validarr="required@@alphabet@@length:3,100" tovalid="true"
-									onblur="validateTextComponent(this)" title="First Name"
-									validationmsg="Allows min 3 and max. 200 characters (',- , .,space)">
+				<div class="row">
+					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						<div class="field-set-box">
+							<label>First Name <span class="cm-field">*</span></label>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user"></i></span>
+									<input class="form-control" value="${patient.txtfirstname}"
+										type="text" id="txtfirstname" placeholder="Enter First Name"
+										name="txtfirstname"
+										onblur="javascript:{if(validateTextComponent(this));}"
+										validarr="required@@alphabet@@length:3,100" tovalid="true"
+										onblur="validateTextComponent(this)" title="First Name"
+										validationmsg="Allows min 3 and max. 200 characters (',- , .,space)">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+						<div class="field-set-box">
+							<label>Middle Name</label>
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user"></i></span>
+									<input class="form-control" value="${patient.txtmiddlename}"
+										type="text" placeholder="Enter Middle Name" id="txtmiddlename"
+										name="txtmiddlename"
+										onblur="javascript:{if(validateTextComponent(this));}"
+										validarr="alphabet@@length:3,100"
+										onblur="validateTextComponent(this)" title="Middle Name"
+										validationmsg="Allows min 3 and max. 200 characters ">
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-					<div class="field-set-box">
-						<label>Middle Name</label>
-						<div class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								<input class="form-control" value="${patient.txtmiddlename}"
-									type="text" placeholder="Enter Middle Name" id="txtmiddlename"
-									name="txtmiddlename"
-									onblur="javascript:{if(validateTextComponent(this));}"
-									validarr="alphabet@@length:3,100"
-									onblur="validateTextComponent(this)" title="Middle Name"
-									validationmsg="Allows min 3 and max. 200 characters ">
-							</div>
-						</div>
-					</div>
-				</div>
-
+							
+				<div class="row">
+																
 				<div class="clearfix"></div>
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -718,10 +702,8 @@
 
 				<div class="clearfix"></div>
 
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divReferred">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divReferred">
 					<div class="row">
-
 						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 							<div class="field-set-box">
 								<label>Referred By</label>
@@ -746,8 +728,7 @@
 
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divreferredDetail">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divreferredDetail">
 					<div class="field-set-box">
 						<label>Referred Details</label>
 						<div class="form-group">
@@ -761,8 +742,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divStatus">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divStatus">
 					<div class="field-set-box">
 						<label>Social Economic Status</label>
 						<div class="form-group">
@@ -774,10 +754,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divPayby">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divPayby">
 					<div class="row">
-
 						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 							<div class="field-set-box">
 								<label>Pay By</label>
@@ -820,10 +798,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divDiabetic">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divDiabetic">
 					<div class="row">
-
 						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
 							<div class="field-set-box">
 								<label>Diabetic Patient</label>
@@ -861,10 +837,8 @@
 					</div>
 				</div>
 				<div class="clear"></div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divAddiction">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"id="divAddiction">
 					<div class="row">
-
 						<div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
 							<div class="field-set-box">
 								<label>Addiction</label>
@@ -924,11 +898,9 @@
 					</div>
 
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divappointment" style="display: none;">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divappointment" style="display: none;">
 					<div class="field-set-box">
 						<label>Appointment Date & Time</label>
-
 						<div class="form-group">
 							<input type="hidden" name="txtappdate1" id="txtappdate1"
 								value='dd-MMM-yyyy'> <input type="text"
@@ -959,16 +931,14 @@
 				</div>
 
 				<input type="hidden" value="${patient.patientId}" name="hdPatientId">
-				<input type="hidden" value="${patient.userdetailid}"
-					name="userDetailId"> <input type="hidden"
-					value="${patient.appid }" name="appointmentid"
-					style="display: none;"> <input type="hidden"
-					value="${patient.referenceid}" name="refrenceid">
+				<input type="hidden" value="${patient.userdetailid}" name="userDetailId"> 
+				<input type="hidden" value="${patient.appid }" name="appointmentid" style="display: none;"> 
+				<input type="hidden" value="${patient.referenceid}" name="refrenceid">
 					</div>
 		</form>
-	</div>
-</section>
+
 </div>
+	
 </section>
 
 <script>
@@ -992,8 +962,7 @@ function calculateAge(birthDate){
 	  }
 }
 </script>
-<!-- </div>
-</section> -->
+
 <c:if test="${pageStatus eq 'Ackedit'}">
 	<%@include file="../includes/footer.jsp"%>
 </c:if>
