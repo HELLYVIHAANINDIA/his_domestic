@@ -2,15 +2,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<section id="content-wrapper">
-	<div class="site-content-title">
-		<h2 class="float-xs-left content-title-main">Patient Report</h2>
-	</div>
-		<div class="row">
-       
-			<div class="col-xs-12">
 				<div class="basic_table table-responsive">
 				<form id="frmcancleAppointment" action="${pageContext.servletContext.contextPath}/domestic/user/cancleAppointment" method="post">
+					<div class="patient-box">
+					<div class="field-set-box"><label>Patient Report</label></div>
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -52,13 +47,9 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					</div>
 					</form>	
 				</div>
-			</div>
-			
-		</div>
-	      
-</section>
 
 
 

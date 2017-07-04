@@ -72,26 +72,27 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 	
 
 </script>
-<section id="content-wrapper">
-	<div class="site-content-title">
-		<h2 class="float-xs-left content-title-main">Create User</h2>
-	</div>
-	<div class="content">
-		<h4 class="page-content-title b-bottom">
-			<span class="small pull-right cm-field">All (*) marked Fields
-				are mandatory</span>
-			<div class="clear"></div>
-		</h4>
-		<form
-			action="${pageContext.servletContext.contextPath}/domestic/user/SaveCreateUser"
-			method="post" onsubmit="return validate()">
-			<div class="row">
 
-				<!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+<section id="content-wrapper">
+
+	<div class="site-content-title">
+		<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Create User</h2></div>
+		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
+	</div>
+	
+	<div class="content">
+	
+		<form action="${pageContext.servletContext.contextPath}/domestic/user/SaveCreateUser" method="post" onsubmit="return validate()">
+			<div class="row">
+			
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>User Code</label>
+						<label>User Role <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="usercode">
+							<select class="form-control" id="selUserRole" name="selUserRole"
+								isrequired="true" onchange=validateCombo(this)"
+								title="UserRole" validationmsg="Select UserRole">
+							</select>
 						</div>
 					</div>
 				</div> -->
@@ -460,7 +461,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						<label>Upload Photo : (Single file upload (JPG, JPEG, PNG)
 							of size less than 2MB)</label>
 						<div class="form-group">
-							<input class="form-control" value="" id="fileToUpload" name="fileToUpload" type="file">
+							<input class="form-control" value="" id="fileToUpload" name="fileToUpload" type="file" style="width: 83%; float: left;">
 						</div>
 						<input type="hidden" id="txtobjectId" value="${objectId}"> <input
 							type="hidden" id="txtChildId" value="${childId}"> <input
@@ -468,8 +469,10 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 							type="hidden" id="txtOtherSubChildId" value="${otherSubChildId}">
 						<input class="form-control" id="txtDocDesc" value="AdminUser"
 							name="txtDocDesc" type="hidden">
-						<button type="button" class="btn btn-default" 
-							onclick="return ajaxFileUpload();">Upload</button>
+						<button type="button" class="btn btn-default" onclick="return ajaxFileUpload();" style="float: right; height: 47px; margin-top: -16px; padding: 10px 20px;">
+							<i class="fa fa-upload" aria-hidden="true"></i>					
+							Upload
+						</button>
 					</div>
 				</div>
 

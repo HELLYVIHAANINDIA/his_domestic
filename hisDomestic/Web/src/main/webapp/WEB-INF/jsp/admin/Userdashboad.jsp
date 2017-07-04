@@ -35,10 +35,14 @@ $(document).ready(function() {
 	});
 })
 </script>
+
 <section id="content-wrapper">
+
 	<div class="site-content-title">
-		<h2 class="float-xs-left content-title-main">User DashBoad</h2>
+		<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">User Dashboard</h2></div>
+		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
 	</div>
+	
 		<div class="row">
        
 			<div class="col-xs-12">

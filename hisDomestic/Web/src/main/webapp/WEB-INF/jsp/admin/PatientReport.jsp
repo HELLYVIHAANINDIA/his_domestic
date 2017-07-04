@@ -9,11 +9,10 @@
 <div class="content">
 
 <div class="row">
-<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-<div class="row">
 
 
-		<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+		<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Consulting Doctor <span class="cm-field">*</span></label>
 						<div class="form-group">
@@ -28,22 +27,19 @@
 				</div>
 
 
-</div>
-</div>
-
 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
     <input type="submit" class="srcs" value="Search" onclick="getReport()">
+</div>
+
+<div class="col-sm-12 col-xl-12">
+	<div id="patientReport"></div>
 </div>
 
 <div class="clear"></div>
 </div>
 </div>
-<div id="patientReport"></div>
-</section>
-</div>
-</section>
 
-
+</section>
 
  <script>
 

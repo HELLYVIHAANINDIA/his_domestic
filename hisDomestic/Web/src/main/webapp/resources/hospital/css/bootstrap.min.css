@@ -3783,12 +3783,13 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 	padding-bottom: 100%
 }
 .close {
-	float: right;
-	font-size: 1.5rem;
-	line-height: 1;
-	color: #000;
-	text-shadow: 0 1px 0 #fff;
-	opacity: .2
+  background: #000000 none repeat scroll 0 0;
+  color: #fff;
+  float: right;
+  font-size: 22px;
+  line-height: 1;
+  opacity: 1;
+  font-weight: 600;
 }
 .popover, .tooltip {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -3807,17 +3808,17 @@ font-size:.875rem;
 	font-weight: 400
 }
 .close:focus, .close:hover {
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 	cursor: pointer;
-	opacity: .5
+	opacity:1;
+	background: #c02c40;
 }
 button.close {
-	padding: 0;
-	cursor: pointer;
-	background: 0 0;
-	border: 0;
-	-webkit-appearance: none
+  background: #284e8c none repeat scroll 0 0;
+  border: 0 none;
+  cursor: pointer;
+  padding: 2px 5px;
 }
 .modal {
 	position: fixed;
@@ -3860,12 +3861,12 @@ button.close {
 	margin: 10px
 }
 .modal-content {
-	position: relative;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1px solid rgba(0,0,0,.2);
-border-radius:.3rem;
-	outline: 0
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 10px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0 none;
+  position: relative;
 }
 .modal-backdrop {
 	position: fixed;
@@ -3883,8 +3884,7 @@ border-radius:.3rem;
 	opacity: .5
 }
 .modal-header {
-	padding: 15px;
-	border-bottom: 1px solid #e5e5e5
+  border-bottom: 1px solid #e5e5e5;
 }
 .modal-header .close {
 	margin-top: -2px

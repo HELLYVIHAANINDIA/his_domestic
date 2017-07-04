@@ -15,14 +15,18 @@ function deleteComplaints(complaintsId) {
 </script>
 
 <div id="masterCompaintsdiv">
-	<section id="content-wrapper">
-		<div class="site-content-title">
-			<h2 class="float-xs-left content-title-main">Complaints</h2>
-		</div>
-		<div class="row">
 
-			<div class="col-xs-12">
-				<div class="basic_table table-responsive">
+	<section id="content-wrapper">
+	
+		<div class="site-content-title">
+			<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Complaints</h2></div>
+			<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
+		</div>
+		
+		<div class="content">
+			<div class="row">
+				<div class="col-sm-12">
+									<div class="basic_table table-responsive">
 
 					<table class="table table-bordered">
 						<thead>
@@ -41,8 +45,7 @@ function deleteComplaints(complaintsId) {
 								<tr>
 									<td>${cnt.count}</td>
 									<td>${comp.complaintsname}</td>
-									<td><button type="button" data-toggle="modal"
-											data-target="#bordermodal${comp.complaintsid}">Delete</button>
+									<td><button type="button" class="dlt" data-toggle="modal" data-target="#bordermodal${comp.complaintsid}"><i class="fa fa-trash" aria-hidden="true"></i></button>
 										<div class="modal fade border-modal"
 											id="bordermodal${comp.complaintsid}" tabindex="-1"
 											role="dialog" aria-labelledby="bordermodal"
@@ -65,17 +68,17 @@ function deleteComplaints(complaintsId) {
 													</div>
 												</div>
 											</div>
-										</div></td>
+										</div>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 
 				</div>
+				</div>
 			</div>
-
 		</div>
-
 	</section>
 </div>
 <%@include file="../includes/footer.jsp"%> 

@@ -258,7 +258,7 @@ button:focus {
 .content-title-main {
 	line-height: 38px;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 18px;
 	color: #284e8c;
 }
 .breadcrumb {
@@ -12017,7 +12017,7 @@ min-height:38px
 	border-radius: 0
 }
 .modal-header .close {
-	margin-top: 2px
+	margin-top: 0px;
 }
 .wrapper .basic_bootstrap_tbl table thead th {
 	font-weight: 700;
@@ -17741,6 +17741,7 @@ body.bounce .pace {
 .cm-field-up {
   color: #dd0000;
   font-size: 12px;
+  font-weight:400;
   margin-top: 10px;
 }
 	
@@ -17793,11 +17794,12 @@ body.bounce .pace {
   float: left;
   font-size: 22px !important;
   margin-left: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .srcs {
   background: #c02c40 none repeat scroll 0 0;
+  border:none;
   color: #ffffff;
   float: left;
   height: auto;
@@ -17906,4 +17908,30 @@ body.bounce .pace {
 	text-align:left;
 	width:180px;
 	}
+	
+.validationMsg.clearfix {
+  	color: red;
+  	font-weight: 400;
+}
+
+.dlt {
+	width: 30px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 18px;
+	border:none;
+	background: red;
+	color:#ffffff;
+	border-radius:5px;
+}
+
+.patient-box {
+	width: 100%;
+	height: auto;
+	padding: 10px;
+	box-sizing:border-box;
+	border:1px solid rgba(0, 0, 0, 0.15);
+	margin-top: 20px;
+}
     
