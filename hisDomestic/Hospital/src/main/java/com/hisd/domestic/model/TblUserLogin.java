@@ -42,6 +42,7 @@ public class TblUserLogin implements Serializable {
     private int isFirstLogin;
     private TblUserType tblUserType;
     private TblCaseType tblCaseType;
+    private String otherdesignation;
 
 
     @Column(name="isFirstLogin")
@@ -169,12 +170,24 @@ public class TblUserLogin implements Serializable {
 	public Date getForgotpwdExpiryDate() {
 		return forgotpwdExpiryDate;
 	}
+	
+	@Column(name="otherdesignation")
+	 public String getOtherdesignation() {
+		return otherdesignation;
+	}
+
+	public void setOtherdesignation(String otherdesignation) {
+		this.otherdesignation = otherdesignation;
+	}
+	
 
 	public void setForgotpwdExpiryDate(Date forgotpwdExpiryDate) {
 		this.forgotpwdExpiryDate = forgotpwdExpiryDate;
 	}
 
-    public String toString() { 
+   
+
+	public String toString() { 
         StringBuffer sb = new StringBuffer(); 
         sb.append("["); 
         sb.append(userId);

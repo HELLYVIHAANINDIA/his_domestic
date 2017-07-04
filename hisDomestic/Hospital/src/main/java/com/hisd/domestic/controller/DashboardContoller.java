@@ -50,7 +50,7 @@ public class DashboardContoller {
 				    		tabid = 7;
 				    		hdPatientId = Integer.parseInt(model.asMap().get("redirectPatientId").toString());
 				    	}
-		    		}else if(sessionBean.getUserTypeId() == 2){
+		    		}else if(sessionBean.getUserTypeId() == 2 || sessionBean.getUserTypeId() == 3 ){
 		    			tabid = 0;
 		    		}
 		    		else {

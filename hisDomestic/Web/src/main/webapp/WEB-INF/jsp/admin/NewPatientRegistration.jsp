@@ -516,9 +516,9 @@
 							<input type="hidden" name="clientDateFormate"
 								id="clientDateFormate" value='dd-MMM-yyyy'> <input
 								type="text" class="form-control dateBox" name="txtdateofbirth"
-								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"
-								placeholder="dd-MMM-yyyy" title="Date of Birth"  tovalid="true" validarr="required"
-								onblur="validateEmptyDt(this);calculateAge(this.value)" value="${patient.birthdate}" validationmsg="Allows ">
+								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"  dtrequired="true"
+								placeholder="dd-MMM-yyyy" title="Date of Birth"  
+								onblur="validateEmptyDt(this);calculateAge(this.value)" value="${patient.birthdate}">
 						</div>
 
 					</div>

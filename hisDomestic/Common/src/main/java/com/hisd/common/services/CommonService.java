@@ -361,6 +361,12 @@ public class CommonService {
     	return list;
 	}
 	
+	public List<Object[]> getUserType() throws Exception{
+		String query ="select usertypeid,usertypename from TblUserType";
+		List<Object[]> list = commonDAO.executeSelect(query, null);
+		return list;
+	}
+	
 	public List<Object[]> getDesignation() throws Exception{
 		String query = "select designationId,designationName from TblDesignation order by designationId ";
 		List<Object[]> list = commonDAO.executeSelect(query, null);

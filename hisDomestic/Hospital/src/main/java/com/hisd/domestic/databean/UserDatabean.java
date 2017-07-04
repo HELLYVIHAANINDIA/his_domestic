@@ -34,6 +34,7 @@ public class UserDatabean {
 	private int usertypeid;
 	private int casetypeid;
 	private int userid;
+	private String otherDesignation;
 	public String getTxtusercode() {
 		return txtusercode;
 	}
@@ -186,6 +187,12 @@ public class UserDatabean {
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	public String getOtherDesignation() {
+		return otherDesignation;
+	}
+	public void setOtherDesignation(String otherDesignation) {
+		this.otherDesignation = otherDesignation;
 	}
 	
 	

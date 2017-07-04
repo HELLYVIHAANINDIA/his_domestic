@@ -82,6 +82,7 @@ public class AdminController {
 					.getAttribute(CommonKeywords.SESSION_OBJ.toString());
 			String countryJson;
 			String designationJson;
+			String userTypeJson;
 
 			if (sessionBean != null) {
 				switch (tabid) {
@@ -92,9 +93,10 @@ public class AdminController {
 				case 1:
 					page = "admin/CreateHospitalUser";
 					countryJson = getContryJson();
+					userTypeJson = getUserTypeJson();
 					modelMap.addAttribute("countryJson", countryJson);
-					designationJson = getDesignationJson();
-					modelMap.addAttribute("designationJson", designationJson);
+//					modelMap.addAttribute("designationJson", designationJson);
+					modelMap.addAttribute("userType", userTypeJson);
 					modelMap.addAttribute("objectId", -1);
 				    modelMap.addAttribute("childId", 0);
 				    modelMap.addAttribute("subChildId", 0);
@@ -274,6 +276,21 @@ public class AdminController {
 		}
 		return economicJson;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/domestic/user/getDesignation",method = RequestMethod.GET)
+	public String getDesignation(ModelMap modelMap, HttpServletRequest request){
+		String designationJson ="[]";
+		try{
+			List<Object[]> designationList = commonService.getDesignation();
+			if(designationList != null && !designationList.isEmpty()){
+				designationJson = commonService.convertToGsonStr(designationList);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return designationJson;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/domestic/user/getPayBy", method = RequestMethod.GET)
@@ -342,6 +359,7 @@ public class AdminController {
 						.getDtdesignation()));
 				tblUserLogin.setTblUserType(new TblUserType(userDatabean
 						.getUsertypeid()));
+				tblUserLogin.setOtherdesignation(userDatabean.getOtherDesignation());
 
 				TblUser tblUser = new TblUser();
 				tblUser.setUsercode("hosregno" + 1);// hardcode
@@ -724,6 +742,29 @@ public class AdminController {
 		}
 		return jsonStr;
 	}
+	
+	private String getUserTypeJson(){
+		String jsonStr ="";
+		StringBuilder json = new StringBuilder("[");
+		try{
+			List<Object[]> tblusertype = commonService.getUserType();
+			if(tblusertype !=null && !tblusertype.isEmpty()){
+				for(Object[] object :tblusertype){
+					json.append(
+							"{\"value\":\"" + object[0] + "\",\"label\":\""
+									+ object[1] + "\"}").append(",");
+					
+				}
+			}
+			jsonStr = json.toString().replaceAll(",$", "");
+			jsonStr = jsonStr + "]";
+			
+		}catch(Exception e){
+			exceptionHandlerService.writeLog(e);
+			
+		}
+		return jsonStr;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/domestic/user/getstatebycountry/{countryId}", method = RequestMethod.GET)
@@ -742,7 +783,7 @@ public class AdminController {
 		return countryJson;
 	}
 
-	private String getDesignationJson() {
+/*	private String getDesignationJson() {
 		String jsonStr = "";
 		StringBuilder json = new StringBuilder("[");
 		try {
@@ -761,7 +802,7 @@ public class AdminController {
 		} finally {
 		}
 		return jsonStr;
-	}
+	}*/
 
 	@RequestMapping(value = "/domestic/user/getCaseType/{selectTabId}/{caseType}", method = {
 			RequestMethod.POST, RequestMethod.GET })
@@ -774,6 +815,7 @@ public class AdminController {
 			SessionBean sessionBean = (SessionBean) session
 					.getAttribute(CommonKeywords.SESSION_OBJ.toString());
 			String countryJson;
+		
 
 			if (sessionBean != null) {
 				switch (tabid) {

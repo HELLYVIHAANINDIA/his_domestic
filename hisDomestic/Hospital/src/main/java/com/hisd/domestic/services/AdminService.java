@@ -79,9 +79,7 @@ public class AdminService {
 	private String sqlDateFormate;
 	
 	private static final String PatientId = "patientid";
-	
-
-	public UserDatabean getUserDataBean(HttpServletRequest request)throws Exception {
+		public UserDatabean getUserDataBean(HttpServletRequest request)throws Exception {
 		UserDatabean userdtbean = new UserDatabean();
 			userdtbean.setTxtfirstname(request.getParameter("txtfirstname"));
 			userdtbean.setTxtmiddlename(request.getParameter("txtmiddlename"));
@@ -111,8 +109,14 @@ public class AdminService {
 			userdtbean.setDtstateId(pInt(request, "selState"));
 			userdtbean.setTxtcity(request.getParameter("txtcity"));
 			userdtbean.setTxtpincode(request.getParameter("txtpincode"));
-			userdtbean.setDtdesignation(pInt(request, "dtdesignationid"));
-			userdtbean.setUsertypeid(1);
+			if(request.getParameter("dtdesignationid") != ""){
+				userdtbean.setDtdesignation(pInt(request, "dtdesignationid"));
+			}else{
+				userdtbean.setDtdesignation(5);
+				userdtbean.setOtherDesignation(request.getParameter("hidOtherDesig"));
+			}
+			
+			userdtbean.setUsertypeid(pInt(request, "selUserRole"));
 			userdtbean.setCasetypeid(1);
 			userdtbean.setUserid(1);
 		return userdtbean;

@@ -11,7 +11,7 @@
 	</c:when>
 	<c:otherwise>
 		<c:choose>
-			<c:when test="${userType eq 1}">
+			<c:when test="${userType eq 3}">
 		 		<%@include file="../includes/AdminMenu.jsp"%> 
 			</c:when>
 			<c:when test="${userType eq 2}">

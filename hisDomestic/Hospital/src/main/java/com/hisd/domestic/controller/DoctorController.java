@@ -93,6 +93,7 @@ public class DoctorController {
 			if (sessionBean != null) {
 				switch (tabid) {
 				case 0:
+					System.out.println(sessionBean.getUserId());
 					page = "admin/Userdashboad";
 					modelMap.addAttribute("appointmentList",doctorService.appointmentList(commonService.convertStirngToUTCDateWithoutTimeStamp(new Date())));
 					break;
@@ -334,7 +335,7 @@ public class DoctorController {
 		
 	}
 	@RequestMapping(value="/domestic/doctor/saveClinical/{patientid}",  method= RequestMethod.POST)
-	public String saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+	public String saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap,RedirectAttributes attributes){
 		String page = REDIRECT_SESSION_EXPIRED;
 		boolean success = false;
 		try {
@@ -350,6 +351,7 @@ public class DoctorController {
 			tblClinical.setRemark(clinicalbean.getTxtremark());
 			List<TblClinicalReport>complainList = new ArrayList<TblClinicalReport>();
 			         
+			       if(clinicalbean.getComlaintsList() != null){
 			           for(String obj:clinicalbean.getComlaintsList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
 			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
@@ -357,6 +359,8 @@ public class DoctorController {
 			        	   tblClinicalReport.setStatusid(1);
 			        	  complainList.add(tblClinicalReport);
 			           }
+			       }
+			       if(clinicalbean.getMedicineList() != null){
 			           for(String obj:clinicalbean.getMedicineList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
 			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
@@ -364,6 +368,8 @@ public class DoctorController {
 			        	   tblClinicalReport.setStatusid(2);
 			        	  complainList.add(tblClinicalReport);
 			           }
+			       }
+			       if(clinicalbean.getReportList() != null){
 			           for(String obj:clinicalbean.getReportList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
 			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
@@ -371,6 +377,7 @@ public class DoctorController {
 			        	   tblClinicalReport.setStatusid(3);
 			        	  complainList.add(tblClinicalReport);
 			           }
+			       }
 			         if(clinicalbean.getClinical_id() == 0){
 			         success = doctorService.addComplaints(complainList);
 			         success=   doctorService.addClinicalData(tblClinical);
@@ -380,8 +387,10 @@ public class DoctorController {
 			        	  success = doctorService.deleteClinicalReport(patientid);
 			        	  success  = doctorService.addComplaints(complainList);
 			         }
+			         
+			         attributes.addFlashAttribute(success ? CommonKeywords.SUCCESS_MSG.toString() : CommonKeywords.ERROR_MSG.toString(),"Information Submitted Successfully" );
 			     
-			        	page = "redirect:/domestic/user/dashboard";
+			        	page = "redirect:/domestic/doctor/getacknowlege/"+patientid;
 			      
 			           
 	}

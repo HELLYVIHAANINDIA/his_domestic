@@ -134,6 +134,29 @@ function getSocialEconomicStatus(){
 		},
 	});
 }
+
+function getDesignation(){
+	$.ajax({
+		contentType : "application/json",
+		url : contextPath+"/domestic/user/getDesignation",
+		dataType: "json",
+		async:false,
+		success : function(data) {
+			$("#dtdesignationid option").not(":first").remove();
+			for(var i = 0; i <data.length;i++){
+				if(data[i][0] != 5){
+					$("#dtdesignationid").append("<option value='"+data[i][0]+"'>"+data[i][1]+"</option>");
+				}
+			}
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		},
+	});
+}
+
+
+
 function getPayby(){
 	$.ajax({
 		contentType : "application/json",

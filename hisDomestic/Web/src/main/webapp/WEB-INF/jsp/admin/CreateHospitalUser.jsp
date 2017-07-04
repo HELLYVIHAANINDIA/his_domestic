@@ -21,8 +21,9 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 			});
 		}
 		getState();
+		getDesignation();
 
-		if ('' != '${designationJson}') {
+		/* if ('' != '${designationJson}') {
 			obj = '${designationJson}';
 			$('#dtdesignationid').html('');
 			$.each(JSON.parse(obj), function(key, value) {
@@ -31,6 +32,17 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					text : value.label
 				}));
 
+			});
+		} */
+		
+		if(''!='${userType}'){
+			obj = '${userType}';
+			$("#selUserRole").html('');
+			$.each(JSON.parse(obj),function(key,value){
+				$('#selUserRole').append($('<option>', {
+					value : value.value,
+					text : value.label
+				}));
 			});
 		}
 		$(".dateBox").each(function() {
@@ -56,6 +68,9 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 		return disableBtn(vbool);
 
 	}
+	
+	
+
 </script>
 <section id="content-wrapper">
 	<div class="site-content-title">
@@ -80,7 +95,19 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						</div>
 					</div>
 				</div> -->
-
+                     	<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+					<div class="field-set-box">
+						<label>User Role <span class="cm-field">*</span></label>
+						<div class="form-group">
+							<select class="form-control" id="selUserRole" name="selUserRole"
+								isrequired="true" onchange=validateCombo(this)"
+								title="UserRole" validationmsg="Select UserRole">
+							</select>
+						</div>
+					</div>
+				</div>
+				</div>
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>First Name <span class="cm-field">*</span></label>
@@ -162,10 +189,8 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 								placeholder="dd-MMM-yyyy" dtrequired="true"
 								title="Date of Birth" onblur="validateEmptyDt(this)" value="">
 						</div>
-
 					</div>
 				</div>
-
 				<div class="clearfix"></div>
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -354,7 +379,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						<div class="form-group">
 							<select class="form-control" id="selState" name="selState"
 								placeholder="State" onchange="if(validateCombo(this)){}" isrequired="true"
-								title="State" validationmsg="Select State">>
+								title="State" validationmsg="Select State">
 								<option value="">Select</option>
 							</select>
 						</div>
@@ -402,10 +427,10 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 								validarr="required" tovalid="true"
 								onblur="validateTextComponent(this)" title="Designation"
 								id="dtdesignationid" name="dtdesignationid"
-								validationmsg="Allows min 3 and max. 200 characters and special character (',- , .,space)">
-								<option>Please select</option>
+								validationmsg="Allows min 3 and max. 200 characters and special character (',- , .,space)" on>
+								<option value="" >Select</option>
 							</select> <i class="fa fa-plus add" aria-hidden="true" data-toggle="modal"
-								data-target="#designation"></i>
+								data-target="#designation" id="toggledesignation"></i>
 							<div class="modal fade" id="designation" role="dialog">
 								<div class="modal-dialog modal-md">
 									<div class="modal-content">
@@ -416,12 +441,12 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 											<div class="row">
 												<div class="col-xs-12">
 													<label class="lbl-1">Enter Designation</label> <input
-														type="email" class="form-control">
+														type="text" class="form-control" id="otherDedignation">
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default">Submit</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveDesignation()">Submit</button>
 										</div>
 									</div>
 								</div>
@@ -429,7 +454,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						</div>
 					</div>
 				</div>
-
+                    <input type ="hidden" id="hidOtherDesig" name="hidOtherDesig" value="">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Upload Photo : (Single file upload (JPG, JPEG, PNG)
@@ -459,7 +484,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 				</div>
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
-					<button class="btn btn-primary cn btn-icon-hover fa fa-ban">
+					<button type="button" class="btn btn-primary cn btn-icon-hover fa fa-ban" onclick="cancelDetails()">
 						<span>Cancel</span>
 					</button>
 				</div>
@@ -470,3 +495,34 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 
 </div>
 </section>
+<script>
+function cancelDetails(){
+	
+	$(":input[type='text']").each(function(){
+		if(!$(this).is('[disabled=disabled]') && !$(this).is('[readonly=readonly]')){
+			$(this).val('');
+		} 
+	});
+	
+	$(":selected").each(function(){
+		if($(this).is('[disabled=disabled]')){
+			$('select').prop('selectedIndex', 0); 
+		}
+
+	});
+	/* $(":input[type='radio']").each(function(){
+		$("input[type='radio']").prop('checked', true);
+	});
+	
+	$(":input[type='checkbox']").each(function(){
+		$('input:checkbox').removeAttr('checked');
+	}); */
+	
+}
+function saveDesignation() {
+
+	var designation = $("#otherDedignation").val();
+	$("#hidOtherDesig").val(designation);
+	
+}
+</script>

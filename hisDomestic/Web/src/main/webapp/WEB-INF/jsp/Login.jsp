@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -17,6 +20,39 @@
     	<div class="row">
         	<div id="login-wrapper">
             	<div class="col-sm-12">
+            <c:if test="${not empty message}">
+			<script>
+				$(".alert-danger").html("");
+				$(".alert-danger").hide();
+			</script>
+				<c:choose>
+					<c:when test="${fn:contains(message, '_')}">
+						<div class="alert alert-success">
+							<spring:message code="${message}" />
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="alert alert-success">${message}</div>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+
+			<c:if test="${not empty errorMsg}">
+			<script>
+				$(".alert-success").html("");
+				$(".alert-success").hide();
+			</script>
+				<c:choose>
+					<c:when test="${fn:contains(errorMsg, '_')}">
+						<div class="alert alert-danger">
+							<spring:message code="${errorMsg}" />
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="alert alert-danger">${errorMsg}</div>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
                 	<div class="login-header">
                     	<h1>LOGIN</h1>
                     </div>             

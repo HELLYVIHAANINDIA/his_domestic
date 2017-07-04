@@ -47,7 +47,7 @@
 		</div>
 		<div class="sr-no"></div>
 		<div class="prescription">
-			<lable> History:</lable>
+			<lable> Consulting Note:</lable>
 			${clinicalDetail[0].history}<br>
 		</div>
 		<div class="sr-no"></div>
