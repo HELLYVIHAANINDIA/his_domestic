@@ -7,6 +7,7 @@
 	<!--main-print-header-->
 
 	<div class="main-line">
+		<div class="rx-rx">Rx :</div>
 		<div class="p-date">06/06/2017</div>
 	</div>
 

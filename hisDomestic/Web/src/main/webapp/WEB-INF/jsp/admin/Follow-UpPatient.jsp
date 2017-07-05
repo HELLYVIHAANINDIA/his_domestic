@@ -27,7 +27,8 @@ function searchPatient() {
 			</div>
 		</div>
 		<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			<button class="btn btn-primary sv btn-icon-hover fa fa-floppy-o" onclick="return searchPatient()" style="float:left;">
+			<button class="srch-bttn" onclick="return searchPatient()">
+				<i class="fa fa-search" aria-hidden="true"></i>
 				<span>Search</span>
 			</button>
 		</div>									

@@ -43,73 +43,100 @@
 			</c:if>
  
 <div class="site-content-title">
-<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Clinical</h2></div>
-<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
+	<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Clinical</h2></div>
+	<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
 </div>
+
 <form id="patientPriscriptionForm" action="${pageContext.servletContext.contextPath}/domestic/doctor/saveClinical/${patient[0][8]}" method="post">
-<div class="content">
-<div class="row">
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div style="background: #f9e7f9; border: 1px dashed #c02c40; padding: 10px; box-sizing: border-box; margin-bottom: 25px;">
-<div class="row">
-<div class="col-xl-2 col-xs-12">
-<div class="field-set-box2">
-<label>Patient CR No. <span class="cm-field">*</span> :</label>
-<label class="disbl">${patient[0][0]}</label>
-</div>
-</div>
-<div class="col-xl-2 col-xs-12">
-<div class="field-set-box2">
-<label>First Name <span class="cm-field">*</span> :</label>
-<label class="disbl">${patient[0][1]}</span></label>
-</div>
-</div>
-
-<div class="col-xl-2 col-xs-12">
-<div class="field-set-box2">
-<label>Last Name <span class="cm-field">*</span> :</label>
-<label class="disbl">${patient[0][2]}</label>
-</div>
-</div>
-
-<div class="col-xl-2 col-xs-12">
-<div class="field-set-box2">
-<label>Age <span class="cm-field"></span> :</label>
-<label class="disbl">${patient[0][3]}</label>
-</div>
-</div>
-
-<div class="col-xl-2 col-xs-12">
-<div class="field-set-box2">
-<label>Gender <span class="cm-field"></span> :</label>
-<label class="disbl">${patient[0][4]}</label>
-</div>
-</div>
-
-<div class="col-xl-2 col-xs-12">
-<div class="field-set-box2">
-<label>Mob.No. <span class="cm-field"></span> :</label>
-<label class="disbl">${patient[0][5]}-${patient[0][6]}</label>
-</div>
-</div>
-
-<div class="col-xl-3 col-xs-12">
-<div class="field-set-box2">
-<label>Consulting Docor <span class="cm-field">*</span> :</label>
-<label class="disbl">${patient[0][7]}</label>
-</div>
-</div>
-     
-      
-</div>
-</div>
-
-<div class="clear"></div>
-
-</div>
-
-
-
+	<div class="content">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="patient-search-box">
+					<div class="patient-search-line">			
+						<div class="row">
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>Patient CR No. <span class="cm-field">*</span> :</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][0]}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="patient-search-line">
+						<div class="row">
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>First Name <span class="cm-field">*</span> :</label>			
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][1]}</span></label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>Last Name <span class="cm-field">*</span> :</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][2]}</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>Age <span class="cm-field"></span> :</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][3]}</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="patient-search-line2">
+						<div class="row">
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>Gender <span class="cm-field"></span> :</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][4]}</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>Mob.No. <span class="cm-field"></span> :</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][5]}-${patient[0][6]}</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label>Consulting Docor <span class="cm-field">*</span> :</label>
+								</div>
+							</div>
+							<div class="col-xl-2 col-xs-12">
+								<div class="field-set-box2">
+									<label class="disbl">${patient[0][7]}</label>
+								</div>
+							</div>  
+						</div>				
+				</div>
+				</div>
+				<div class="clear"></div>
+			</div>
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="tab-content">
@@ -147,7 +174,7 @@ Prescription
     <div class="modal-content">
       <div class="modal-header">
       	<a class="prt-button" onclick="exportContent('prescrition', 'prescrition_${patient[0][8]}', 5)"	value="Print">
-        <span>
+        <span class="pop-print-bttn">
                                     <i class="fa fa-print" aria-hidden="true"></i>
                                     Print
                                 </span>

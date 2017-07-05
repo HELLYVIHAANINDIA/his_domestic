@@ -425,8 +425,6 @@
 							
 				<div class="row">
 																
-				<div class="clearfix"></div>
-
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Last Name <span class="cm-field">*</span></label>
@@ -443,9 +441,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divregdate">
+				</div>			
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divregdate">
 					<div class="field-set-box">
 						<label>Registration Date</label>
 						<div class="form-group">
@@ -469,8 +467,6 @@
 					</div>
 				</div>
 
-				<div class="clearfix"></div>
-
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Gender <span class="cm-field">*</span></label>
@@ -492,6 +488,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Date Of Birth</label>
@@ -508,8 +505,6 @@
 					</div>
 				</div>
 
-				<div class="clearfix"></div>
-
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Age</label>
@@ -519,8 +514,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divAddress">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divAddress">
 					<div class="field-set-box">
 						<label>Address <span class="cm-field">*</span></label>
 						<div class="form-group">
@@ -535,8 +529,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divLandmark">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divLandmark">
 					<div class="field-set-box">
 						<label>Landmark</label>
 						<div class="form-group">
@@ -549,8 +543,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divArea">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divArea">
 					<div class="field-set-box">
 						<label>Area</label>
 						<div class="form-group">
@@ -564,8 +558,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divCountry">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divCountry">
 					<div class="field-set-box">
 						<label>Country <span class="cm-field">*</span></label>
 						<div class="form-group">
@@ -578,8 +572,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divState">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divState">
 					<div class="field-set-box">
 						<label>State<span class="cm-field">*</span></label>
 						<div class="form-group">
@@ -593,8 +587,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divCity">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divCity">
 					<div class="field-set-box">
 						<label>City <span class="cm-field">*</span></label>
 						<div class="form-group">
@@ -608,8 +602,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="divPincode">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divPincode">
 					<div class="field-set-box">
 						<label>Pincode</label>
 						<div class="form-group">
@@ -622,8 +616,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="clearfix"></div>
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
@@ -655,8 +647,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"
-					id="idLandlineNO">
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="idLandlineNO">
 					<div class="field-set-box">
 						<label>Landline No.</label>
 						<div class="row">
@@ -700,8 +692,6 @@
 					</div>
 				</div>
 
-				<div class="clearfix"></div>
-
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divReferred">
 					<div class="row">
 						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -728,6 +718,7 @@
 
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divreferredDetail">
 					<div class="field-set-box">
 						<label>Referred Details</label>
@@ -742,6 +733,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divStatus">
 					<div class="field-set-box">
 						<label>Social Economic Status</label>
@@ -754,6 +746,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divPayby">
 					<div class="row">
 						<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -785,6 +778,7 @@
 
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>Consulting Doctor <span class="cm-field">*</span></label>
@@ -798,6 +792,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divDiabetic">
 					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -836,7 +831,7 @@
 
 					</div>
 				</div>
-				<div class="clear"></div>
+				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12"id="divAddiction">
 					<div class="row">
 						<div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-xs-12">
@@ -882,9 +877,7 @@
 						<div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12">
 							<div class="field-set-box">
 								<label></label>
-								<div class="form-group" id="divOtherAddictiob"
-									style="display: none;">
-
+								<div class="form-group" id="divOtherAddictiob" style="display: none;">
 									<input id="txtotheraddiction"
 										onblur="javascript:{if(validateTextComponent(this));}"
 										class="form-control" name="txtotheraddiction"
@@ -896,8 +889,9 @@
 							</div>
 						</div>
 					</div>
-
-				</div>
+			</div>
+			
+			<div class="row">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divappointment" style="display: none;">
 					<div class="field-set-box">
 						<label>Appointment Date & Time</label>
@@ -909,12 +903,9 @@
 								placeholder="dd-MMM-yyyy HH:mm" title="Date of Birth"
 								onblur="validateEmptyDt(this)" value="${patient.appdatestring}">
 						</div>
-
 					</div>
 				</div>
-
-
-			
+			</div>
 
 			<div class="row">
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">

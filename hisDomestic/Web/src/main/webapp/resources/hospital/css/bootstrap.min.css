@@ -3890,8 +3890,9 @@ button.close {
 	margin-top: -2px
 }
 .modal-title {
-	margin: 0;
-	line-height: 1.5
+  line-height: 1.5;
+  margin: 0;
+  padding: 10px 15px;
 }
 .modal-body {
 	position: relative;

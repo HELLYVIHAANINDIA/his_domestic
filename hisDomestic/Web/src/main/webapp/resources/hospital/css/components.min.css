@@ -131,7 +131,7 @@ h4 {
 	line-height: 36px
 }
 h5 {
-	font-size: 20px;
+	font-size: 17px;
 	line-height: 30px
 }
 h6 {
@@ -1516,7 +1516,7 @@ transform:rotate(-360deg)
 	margin-bottom: -2px
 }
 .nav-tab-pills-image ul li .nav-link {
-	font-size: 15px;
+	font-size: 16px;
 	text-align: center;
     background:#cecece;
     color:#1f1f1f;
@@ -17860,11 +17860,14 @@ body.bounce .pace {
 .view-document {
   display: block;
 }
+
 .scr {
-	border:2px solid #ccc;
-	 height: 100px;
-        overflow-y: scroll;
-    width: 1140p}
+  border: 2px solid #ccc;
+  height: 155px;
+  line-height: 30px;
+  overflow-y: scroll;
+  padding: 10px;
+}
     
     @charset "utf-8";
 /* CSS Document */
@@ -17873,7 +17876,8 @@ body.bounce .pace {
 	width:950px;
 	height:1360px;
 	margin:0 auto;
-	background:url(../images/main-bg.jpg) no-repeat;
+/* 	background:url(../images/main-bg.jpg) no-repeat; */
+	background: none;
 	}
 	
 .main-print-header {
@@ -17900,7 +17904,7 @@ body.bounce .pace {
 	line-height:30px;
 	text-align:left;
 	display:inline-block;
-	padding-left:70px;
+	padding-left:40px;
 	}
 	
 .p-date {
@@ -17908,6 +17912,15 @@ body.bounce .pace {
 	text-align:left;
 	width:180px;
 	}
+	
+.rx-rx {
+  float: left;
+  text-align: left;
+  width: 180px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 168px;
+}
 	
 .validationMsg.clearfix {
   	color: red;
@@ -17934,4 +17947,56 @@ body.bounce .pace {
 	border:1px solid rgba(0, 0, 0, 0.15);
 	margin-top: 20px;
 }
-    
+
+.srch-bttn {
+  background: #271e71 none repeat scroll 0 0;
+  color: #95cafe;
+  font-size: 18px;
+  font-weight: 400;
+  height: auto;
+  padding: 10px 25px;
+  width: auto;
+  border: none;
+  margin-top: 30px;
+}
+
+.lg-out-bttn {
+	background: #c02c40 none repeat scroll 0 0;
+    color: #ffffff;
+    display: inline-block;
+    float: right;
+    font-size: 16px !important;
+    margin-left: 15px;
+    margin-top: 7px;
+    padding: 5px;
+}
+
+.patient-search-box {
+	background: #f9e7f9; 
+	border: 1px dashed #c02c40;  
+	box-sizing: border-box; 
+	margin-bottom: 25px;
+}
+
+.patient-search-line {
+	width: 100%;
+	height: auto;
+	border-bottom: 1px dashed #c02c40;
+	padding:10px 20px;
+}
+
+.patient-search-line2 {
+	width: 100%;
+	height: auto;
+	padding:10px 20px;
+}
+   
+.pop-print-bttn {
+	background: #c02c40;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 0;
+    padding: 15px;
+    cursor: pointer;
+} 

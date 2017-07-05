@@ -47,12 +47,7 @@
     margin-top: 7px;"><p>${sessionObject.userName}</p></a>
 <a href="${pageContext.servletContext.contextPath}/submitlogout">
 <%--  <img src="${pageContext.request.contextPath}/resources/hospital/images/user.jpg" alt="Profile image"/>  --%>
-<i class="fa fa-power-off" aria-hidden="true" style="color: #ffffff;
-    display: inline-block;
-    float: right;
-    font-size: 18px;
-    margin-left: 15px;
-    margin-top: 10px;"></i>
+<i class="fa fa-power-off lg-out-bttn" aria-hidden="true"></i>
 </a>
 <div class="dropdown-menu drop-profile">
 <div class="userProfile">
