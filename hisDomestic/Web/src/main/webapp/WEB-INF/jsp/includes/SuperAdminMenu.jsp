@@ -12,16 +12,17 @@
 								class="fa fa-desktop icon_desktop header-icon"
 								aria-hidden="true"></i> Dashboard
 						</a>
-							<ul class="dropNav">
+							<!-- <ul class="dropNav">
 								<li><a href="#">DropDown-1</a></li>
 								<li><a href="#">DropDown-2</a></li>
 								<li><a href="#">DropDown-3</a></li>
-							</ul></li>
+							</ul> --></li>
 
 						<li class="active"><a href="#" onclick="changeTab(1,0,1)"> <i
 								class="fa fa-user icon_tags_alt header-icon" aria-hidden="true"
 								id="1"></i> Create User
-						</a>  <ul class="dropNav">
+								
+						</a>  <!-- <ul class="dropNav">
 <li><a href="javascript:void(0)">DropDown-1 <i class="fa fa-angle-right arrow_carrot-right submenu-arrow-right" aria-hidden="true"></i>
 </a>
 <ul class="submenu-sub">
@@ -43,7 +44,7 @@
 </li>
 </ul>
 </li>
-</ul> 
+</ul>  -->
 </li>
 	<li><a href="javascript:void(0)"> <i
 								class="fa fa-tags icon_tags_alt header-icon" aria-hidden="true"></i>
@@ -57,13 +58,13 @@
 										<li><a href="#">Sub-DropDown-2</a></li>
 									</ul> -->
 									</li>
-								<li><a href="javascript:void(0)">DropDown-2<i
+							<!-- 	<li><a href="javascript:void(0)">DropDown-2<i
 										class="fa fa-angle-right arrow_carrot-right submenu-arrow-right"
 										aria-hidden="true"></i></a>
 									<ul class="submenu-sub">
 										<li><a href="#">Sub-DropDown-1</a></li>
 										<li><a href="#">Sub-DropDown-2</a></li>
-									</ul></li>
+									</ul></li> -->
 							</ul></li>
 					<li><a href="#" onclick="changeTab(6,0,1)"> <i
 								class="fa fa-tags icon_tags_alt header-icon" aria-hidden="true"></i>
@@ -77,7 +78,7 @@
 						</a>
 							</li>
 
-						<li><a href="javascript:void(0)"> <i
+					<!-- 	<li><a href="javascript:void(0)"> <i
 								class="fa fa-tags icon_tags_alt header-icon" aria-hidden="true"></i>
 								Link-5
 						</a>
@@ -97,7 +98,7 @@
 										<li><a href="#">Sub-DropDown-1</a></li>
 										<li><a href="#">Sub-DropDown-2</a></li>
 									</ul></li>
-							</ul></li>
+							</ul></li> -->
 
 					</ul>
 				</nav>
@@ -105,6 +106,7 @@
 		</div>
 	</div>
 </div>
+
 </header>
 
 <div class="search-overlay">

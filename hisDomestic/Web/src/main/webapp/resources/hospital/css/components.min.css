@@ -17925,6 +17925,15 @@ body.bounce .pace {
 .validationMsg.clearfix {
   	color: red;
   	font-weight: 400;
+  	float: left;
+  	display: block;
+}
+
+.dg {
+  	color: red;
+  	font-weight: 400;
+  	float: left;
+  	display: block;
 }
 
 .dlt {

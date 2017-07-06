@@ -70,7 +70,7 @@
                         	<div class="row">
                             	<div class="col-xs-12">                               	
                 					<span class="input input--chisato">
-										<input class="input__field input__field--chisato" type='text' name='j_username' id="j_username" validarr="required@@email" tovalid="true" onblur="validateTextComponent(this)">
+										<input class="input__field input__field--chisato" type='text' name='j_username' title="User Name"id="j_username" validarr="required@@email" tovalid="true" onblur="validateTextComponent(this)">
 										<label class="input__label input__label--chisato" for="j_username">
 											<span class="input__label-content input__label-content--chisato" data-content="Enter Username">Enter Username</span>
 										</label>

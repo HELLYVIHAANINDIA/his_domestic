@@ -339,7 +339,7 @@ public class AdminController {
 	// Save Create User
 	@RequestMapping(value = "/domestic/user/SaveCreateUser", method = RequestMethod.POST)
 	public String saveCreateUser(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response,RedirectAttributes redirectAttributes) {
 		String page = REDIRECT_SESSION_EXPIRED;
 		boolean success;
 		try {
@@ -386,7 +386,8 @@ public class AdminController {
 				tblUser.setStatus(1);
 				success = adminService.addUser(tblUserLogin, tblUser);
 				if (success) {
-					page = "admin/SuperAdminDashboad";
+					redirectAttributes.addFlashAttribute("message", "User Created Successfully");
+					page = "redirect:/domestic/user/dashboard";
 				}
 			}
 		} catch (Exception e) {
@@ -610,6 +611,7 @@ public class AdminController {
 							tblPatient, tblUser);
 
 					if (success) {
+						
 						redirectAttributes
 								.addFlashAttribute("redirectTabId", 3);
 						page = "redirect:/domestic/user/dashboard";

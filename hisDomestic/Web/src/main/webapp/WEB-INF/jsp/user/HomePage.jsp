@@ -3,6 +3,7 @@
 <input type="hidden" value="${issuperadmin}" name="hdsuperAdmin" id="hdsuperAdmin">
 <input type="hidden" value="${hdPatientId}" name="hdPatientId" id="hdPatientId">
 <input type="hidden" value="${userType}" name="hdUserTypeId" id="hdUserTypeId">
+<input type="hidden" value="${message}" name="hdmessage" id="hdmessage">
 
 
 <c:choose>
@@ -24,6 +25,7 @@
 <section id="main" class="container-fluid">
 	<div class="row">
 		<section id="content-wrapper">
+		   
 		</section>
 	</div>
 </section>

@@ -100,6 +100,7 @@ function newAppointment(patientid) {
 							</c:forEach>
 						</tbody>
 					</table>
+					<input type="hidden" id="hdRecpPatFollowTabId" name="hdRecpPatFollowTabId" value="4">
 					</form>
 				</div>
 			</div>

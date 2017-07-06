@@ -36,6 +36,7 @@ public class DashboardContoller {
 		    	modelMap.addAttribute("userType",sessionBean.getUserTypeId());
 		    	modelMap.addAttribute("issuperadmin",sessionBean.getIsCTPLUser()==1?true:false);
 		    	int hdPatientId = request.getParameter("hdPatientId") != null ? Integer.parseInt(request.getParameter("hdPatientId").toString()) : 0;
+		    	int hdRecpPatFollowTabId = request.getParameter("hdRecpPatFollowTabId") != null ? Integer.parseInt(request.getParameter("hdRecpPatFollowTabId").toString()) : 0;
 		    	
 		    	if(sessionBean.getIsCTPLUser()==1){
 		    		tabid = 1 ;
@@ -51,7 +52,12 @@ public class DashboardContoller {
 				    		hdPatientId = Integer.parseInt(model.asMap().get("redirectPatientId").toString());
 				    	}
 		    		}else if(sessionBean.getUserTypeId() == 2 || sessionBean.getUserTypeId() == 3 ){
-		    			tabid = 0;
+		    			if(hdRecpPatFollowTabId==4){
+		    				tabid = hdRecpPatFollowTabId;
+		    			}else{
+		    				tabid = 0;
+		    			}
+		    			
 		    		}
 		    		else {
 		    			tabid = 3;

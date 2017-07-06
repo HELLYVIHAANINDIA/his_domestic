@@ -14,11 +14,8 @@ function searchAppointment() {
 		        alert(thrownError);
 		      }
 		}); 
-	    
-	
 }
 </script>   
-
 <div class="row">
 	<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div class="field-set-box">
@@ -39,4 +36,3 @@ function searchAppointment() {
 <div id="viewAppointment">			
 	<%-- 	<%@include file="../admin/ViewPatientRegistrationDtl.jsp"%>  --%>
 </div>
-

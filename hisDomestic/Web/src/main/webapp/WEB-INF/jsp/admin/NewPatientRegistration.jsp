@@ -105,6 +105,7 @@
 							$("#txtage").attr("disabled", "disabled");
 							$("#selconsltingDoctor").attr("disabled","disabled");
 							$("#divCancel").hide();
+							$("#divappointment").show();
 							
 
 							$("#txtrefrenceDetail")
@@ -365,7 +366,16 @@
 		
 	}
 </script>
-	
+	<c:if test="${pageStatus eq  'edit'}">
+	<section id="content-wrapper">
+
+			
+	<div class="site-content-title">
+		<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Patient Registration</h2></div>
+		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
+	</div>
+	<div class="content">
+	</c:if>
 		<form action="${pageContext.servletContext.contextPath}/domestic/user/SavePatient" method="post" onsubmit="return validatePatient()">
 			<input type="hidden" value="" id="appoinmentPatientTabId" name="appoinmentPatientTabId">
 			<input type="hidden" value="" id="newAppointmenttabid" name="newAppointmenttabid">
@@ -377,9 +387,9 @@
 							<div class="form-group">
 								<div class="input-group">
 									<span class="input-group-addon"><i
-										class="fa fa-plus-square"></i></span> <input class="form-control"
-										value="${patient.txtpatientcrno}" type="text"
-										id="txtpatientcrno" name="txtpatientcrno">
+										class="fa fa-plus-square"></i></span> <input class="form-control" validarr="required"
+										value="${patient.txtpatientcrno}" type="text" title ="Patient CR NO" onblur="validateTextComponent(this)"
+										id="txtpatientcrno" name="txtpatientcrno" validationmsg="Allows min 3 and max. 200 characters (',- , .,space)">
 								</div>
 							</div>
 						</div>
@@ -491,7 +501,7 @@
 				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>Date Of Birth</label>
+						<label>Date Of Birth</label><span class="cm-field">*</span>
 
 						<div class="form-group">
 							<input type="hidden" name="clientDateFormate"

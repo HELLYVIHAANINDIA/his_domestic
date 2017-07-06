@@ -236,7 +236,6 @@ public class DoctorService {
 		query.append("delete from TblClinicalReport tblClinicalReport WHERE tblPatient.patientid=:patientid ");
 		hibernateQueryDao.updateDeleteQuery(query.toString(), parameter);
 		bSuccess = true;
-		
 		return bSuccess ;
 		
 	}

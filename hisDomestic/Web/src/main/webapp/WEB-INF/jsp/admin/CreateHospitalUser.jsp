@@ -1,8 +1,9 @@
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_old"/>';
 	$(document).ready(function() {
-		
+		$("#successMsg").html($("#hdmessage").val());	
 		var objectId = $('#txtobjectId').val();
 		var childId = $('#txtChildId').val();
 		var subChildId = $('#txtSubChildId').val();
@@ -54,9 +55,14 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 	});
 
 	function validate() {
+		if($("#dtdesignationid").val() == -1 && $("#hidOtherDesig").val() != " " ){
+			$("#errorDesignation").html("Please Select Designation");
+			
+		}
 
 		var vbool = valOnSubmit();
-
+		
+		
 		if (vbool) {
 
 			if ($("#txtconfpassword").val() != $("#txtpassword").val()) {
@@ -74,7 +80,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 </script>
 
 <section id="content-wrapper">
-
+          <div id="successMsg"></div>
 	<div class="site-content-title">
 		<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Create User</h2></div>
 		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
@@ -154,8 +160,8 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 							<select class="form-control" id="dtgender" name="dtgender"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="required@@alphanumspecial@@length:3,200"
-								tovalid="true" onblur="validateTextComponent(this)"
-								title="Gender"
+								onblur="validateTextComponent(this)"
+								title="Gender"  isrequired="true"
 								validationmsg="Allows min 3 and max. 200 characters and special character (',- , .,space)">
 								<option disabled="disabled" selected="selected">Please
 									select gender</option>
@@ -221,7 +227,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 								id="txtconfpassword" name="txtconfpassword"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="required@@alphanumspecial@@length:8,15" tovalid="true"
-								onblur="validateTextComponent(this)"
+								onblur="validateTextComponent(this)" title="Confirm Password"
 								validationmsg="Allows min 8 and max. 200 characters and special character (',- , .,space)"
 								maxlength="15">
 						</div>
@@ -409,17 +415,17 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>Designation</label>
+						<label>Designation</label><span class="cm-field">*</span>
 						<div class="form-group">
 							<select class="form-control" style="width: 95%; float: left;"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="required" tovalid="true"
 								onblur="validateTextComponent(this)" title="Designation"
-								id="dtdesignationid" name="dtdesignationid"
+								id="dtdesignationid" name="dtdesignationid" 
 								validationmsg="Allows min 3 and max. 200 characters and special character (',- , .,space)" on>
-								<option value="" >Select</option>
+								<option value="-1" >Select</option>
 							</select> <i class="fa fa-plus add" aria-hidden="true" data-toggle="modal"
-								data-target="#designation" id="toggledesignation"></i>
+								data-target="#designation" id="toggledesignation" ></i>
 							<div class="modal fade" id="designation" role="dialog">
 								<div class="modal-dialog modal-md">
 									<div class="modal-content">
@@ -441,6 +447,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 								</div>
 							</div>
 						</div>
+						<div class="dg" id="errorDesignation"></div>
 					</div>
 				</div>
                     <input type ="hidden" id="hidOtherDesig" name="hidOtherDesig" value="">
@@ -515,5 +522,8 @@ function saveDesignation() {
 	var designation = $("#otherDedignation").val();
 	$("#hidOtherDesig").val(designation);
 	
+	
+	
 }
+
 </script>
