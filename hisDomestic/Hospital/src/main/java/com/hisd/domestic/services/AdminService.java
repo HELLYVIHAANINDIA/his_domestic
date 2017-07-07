@@ -20,10 +20,12 @@ import com.hisd.common.daogeneric.Operation_enum;
 import com.hisd.common.daointerface.HibernateQueryDao;
 import com.hisd.common.daointerface.TblAppointmentDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
+import com.hisd.common.daointerface.TblMedicineDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
 import com.hisd.common.daointerface.TblPatientDao;
 import com.hisd.common.daointerface.TblPatientRefrenceDao;
 import com.hisd.common.daointerface.TblReferenceDao;
+import com.hisd.common.daointerface.TblReportDao;
 import com.hisd.common.daointerface.TblUserDao;
 import com.hisd.common.daointerface.TblUserLoginDao;
 import com.hisd.common.services.CommonDAO;
@@ -34,9 +36,11 @@ import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblDocument;
+import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
+import com.hisd.domestic.model.TblReports;
 import com.hisd.domestic.model.TblUser;
 import com.hisd.domestic.model.TblUserLogin;
 
@@ -67,7 +71,11 @@ public class AdminService {
     TblComplaintsDao tblComplaintsDao;
     @Autowired
 	private CommonService commonService;
-    
+    @Autowired
+    TblMedicineDao tblMedicineDao;
+    @Autowired
+    TblReportDao tblReportDao;
+   
     
     @Value("#{hospitalProperties['client_dateformate_hhmm']}")
 	private String clientdateformatehhmm;
@@ -109,7 +117,7 @@ public class AdminService {
 			userdtbean.setDtstateId(pInt(request, "selState"));
 			userdtbean.setTxtcity(request.getParameter("txtcity"));
 			userdtbean.setTxtpincode(request.getParameter("txtpincode"));
-			if(request.getParameter("dtdesignationid") != ""){
+			if(request.getParameter("dtdesignationid") != "-1"){
 				userdtbean.setDtdesignation(pInt(request, "dtdesignationid"));
 			}else{
 				userdtbean.setDtdesignation(5);
@@ -502,6 +510,16 @@ public class AdminService {
 		return tblComplaintsDao.findTblComplaints("complaintsstatus",Operation_enum.EQ,0,"complaintsid",Operation_enum.ORDERBY,Operation_enum.DESC);
 	}
 	@Transactional
+	public List<TblMedicine> medicineList() throws Exception{
+		return tblMedicineDao.findTblMedicine("medicineStatus",Operation_enum.EQ,0,"medicine_id",Operation_enum.ORDERBY,Operation_enum.DESC);
+	}
+	@Transactional
+	public List<TblReports> reportList() throws Exception{
+		return tblReportDao.findTblReports("reportstatus",Operation_enum.EQ,0,"report_id",Operation_enum.ORDERBY,Operation_enum.DESC);
+	}
+	
+	
+	@Transactional
 	public boolean deleteComplatints(int compid, int status) {
 		StringBuilder query = new StringBuilder();
 		Map<String, Object> parameter = new HashMap<String, Object>();
@@ -513,6 +531,30 @@ public class AdminService {
 		return flag != 0 ? true : false;
 		
 	}
+	@Transactional
+	public boolean deleteMedicine(int medicineId,int status){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object>parameter = new HashMap<String, Object>();
+		parameter.put("medicineId",medicineId);
+		parameter.put("status", status);
+		query.append("UPDATE TblMedicine set medicineStatus=:status WHERE medicine_id=:medicineId");
+		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(),parameter);
+		return flag != 0 ? true : false;
+		
+	}
+	@Transactional
+	public boolean deleteReport(int reportId,int status){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object>parameter = new HashMap<String, Object>();
+		parameter.put("reportId",reportId);
+		parameter.put("status", status);
+		query.append("UPDATE TblReports set reportstatus=:status WHERE report_id=:reportId");
+		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(),parameter);
+		return flag != 0 ? true : false;
+		
+	}
+	
+	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteAddiction(int patientId){
 		StringBuilder query = new StringBuilder();
@@ -582,6 +624,28 @@ public class AdminService {
 		}
 		return patientbeanlist;
 		
+	}
+	@Transactional
+	public boolean addComplaints(TblComplaints tblComplaints){
+		boolean bSuccess = false;
+		tblComplaintsDao.addEntity(tblComplaints);
+		bSuccess = true;
+		return bSuccess;
+		
+	}
+	@Transactional
+	public boolean addMedicine(TblMedicine tblMedicine){
+		boolean bSuccess = false;
+		tblMedicineDao.addEntity(tblMedicine);
+		bSuccess = true;
+		return bSuccess;
+	}
+	@Transactional
+	public boolean addReport(TblReports tblReports){
+		boolean bSuccess = false;
+		tblReportDao.addEntity(tblReports);
+		bSuccess = true;
+		return bSuccess;
 	}
 
 }

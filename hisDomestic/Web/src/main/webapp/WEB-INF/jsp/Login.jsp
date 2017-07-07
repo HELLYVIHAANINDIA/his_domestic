@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>:: LOGIN ::</title>
+    <title>:: Vcure Medical Clinic ::</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/name.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/hospital/css/login.css">
@@ -61,7 +61,7 @@
 				</c:choose>
 			</c:if>
                 	<div class="login-header">
-                    	<h1>LOGIN</h1>
+                    	<h1>Vcure Medical Clinic</h1>
                     </div>             
                 </div>
                 <div class="col-sm-12 col-xs-12">

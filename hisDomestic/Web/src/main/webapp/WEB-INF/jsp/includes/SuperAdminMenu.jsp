@@ -51,13 +51,10 @@
 								Masters
 						</a>
 							<ul class="dropNav">
-								<li><a href="#" onclick="changeTab(5,0,1)">Complaints Master <i aria-hidden="true"></i>
-								</a>
-									<!-- <ul class="submenu-sub">
-										<li><a href="#">Sub-DropDown-1</a></li>
-										<li><a href="#">Sub-DropDown-2</a></li>
-									</ul> -->
-									</li>
+								<li><a href="#" onclick="changeTab(5,0,1)">Complaints Master <i aria-hidden="true"></i></a></li>
+								<li><a href="#" onclick="changeTab(9,0,1)">Medicine Master <i aria-hidden="true"></i></a></li>
+								<li><a href="#" onclick="changeTab(10,0,1)">Report Master <i aria-hidden="true"></i></a></li>
+								
 							<!-- 	<li><a href="javascript:void(0)">DropDown-2<i
 										class="fa fa-angle-right arrow_carrot-right submenu-arrow-right"
 										aria-hidden="true"></i></a>

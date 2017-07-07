@@ -44,7 +44,7 @@
     display: inline-block;
     float: left;
     font-size: 16px;
-    margin-top: 7px;"><p>${sessionObject.userName}</p></a>
+    margin-top: 4px;"><p>${sessionObject.userName}</p></a>
 <a href="${pageContext.servletContext.contextPath}/submitlogout">
 <%--  <img src="${pageContext.request.contextPath}/resources/hospital/images/user.jpg" alt="Profile image"/>  --%>
 <i class="fa fa-power-off lg-out-bttn" aria-hidden="true"></i>

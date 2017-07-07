@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,12 +36,15 @@ import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAddiction;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblCaseType;
+import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDesignation;
+import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
 import com.hisd.domestic.model.TblReferenceType;
+import com.hisd.domestic.model.TblReports;
 import com.hisd.domestic.model.TblUser;
 import com.hisd.domestic.model.TblUserLogin;
 import com.hisd.domestic.model.TblUserType;
@@ -129,8 +133,20 @@ public class AdminController {
 				case 8:
 					 page = "admin/AppointmentReport";
 					 break;
+					 
+				case 9:
+					page="admin/Medicine";
+					modelMap.addAttribute("medicine", adminService.medicineList());
+					break;
+				case 10:
+					page="admin/Report";
+					modelMap.addAttribute("report", adminService.reportList());
+					break;
+				
+					
 					default:page = "admin/Userdashboad";
 					break;
+					
 				}
 			}
 		} catch (Exception e) {
@@ -877,9 +893,9 @@ public class AdminController {
 				.getAttribute(CommonKeywords.SESSION_OBJ.toString());
 		if (sessionBean != null) {
 			int patientid = 0;
-			
+			String tabid;
 				 patientid = request.getParameter("hdPatientid") != null && !"".equals(request.getParameter("hdPatientid")) ? Integer.parseInt(request.getParameter("hdPatientid")) :0 ;
-		
+		          tabid = request.getParameter("hdRecpPatFollowTabId");
 			
 			int appid = request.getParameter("hdAppointmentId") != null ? Integer.parseInt(request.getParameter("hdAppointmentId")) : 0 ;
 			if(patientid== 0){
@@ -905,6 +921,7 @@ public class AdminController {
 				String countryJson;
 				adminService.chageStatus(appid, 1);
 				redirectAttributes.addFlashAttribute("redirectPatientId", patientid);
+				redirectAttributes.addFlashAttribute("tabid", tabid);
 				modelMap.addAttribute("pageStatus", "Ackedit");
 				countryJson = getContryJson();
 				modelMap.addAttribute("countryJson", countryJson);
@@ -977,6 +994,29 @@ public class AdminController {
 		return page;
 		
 	}
+	@RequestMapping(value = "/domestic/complaints/deleteMedicine/{medicinId}", method = RequestMethod.POST)
+	
+	public String deleteMedicine(HttpServletRequest request,HttpServletResponse response, ModelMap modelMap,@PathVariable("medicinId")int medicinId) throws Exception{
+		 adminService.deleteMedicine(medicinId, 2);
+		 modelMap.addAttribute("medicine", adminService.medicineList());
+		 String page ="admin/Medicine";	
+		return page;
+		
+	}
+@RequestMapping(value = "/domestic/complaints/deleteReport/{reportId}", method = RequestMethod.POST)
+	
+	public String deleteReport(HttpServletRequest request,HttpServletResponse response, ModelMap modelMap,@PathVariable("reportId")int reportId) throws Exception{
+		 adminService.deleteReport(reportId, 2);
+		 modelMap.addAttribute("report", adminService.reportList());
+		 String page ="admin/Report";	
+		return page;
+		
+	}
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/domestic/user/patientReport/{drid}", method = RequestMethod.POST)
 	public String patientReport(@PathVariable("drid") Integer drid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) throws ParseException{
 		String page;
@@ -997,5 +1037,61 @@ public class AdminController {
 		return page;
 		
 	}
+	
+	@RequestMapping(value = "/domestic/user/addComplaints/{complain}", method = RequestMethod.POST)
+	
+	public String addComplaints(HttpServletRequest request,ModelMap modelmap,@PathVariable("complain") String complain) throws Exception{
+		boolean success;
+		String page = null;
+		System.out.println(complain);
+		TblComplaints tblComplaints = new TblComplaints();
+		tblComplaints.setComplaintsname(complain);
+	success =	adminService.addComplaints(tblComplaints);
+	if(success){
+		modelmap.addAttribute("complaints", adminService.complaintsList());
+		page = "admin/ComplaintsTable";
+	}
+		return page;
+		
+	}
+	
+	
+	
+@RequestMapping(value = "/domestic/user/addMedicine/{medicine}", method = RequestMethod.POST)
+	
+	public String addMedicine(HttpServletRequest request,ModelMap modelmap,@PathVariable("medicine") String medicine) throws Exception{
+		boolean success;
+		String page = null;
+		
+		TblMedicine tblMedicine = new TblMedicine();
+		tblMedicine.setMedicine_name(medicine);
+	success =	adminService.addMedicine(tblMedicine);
+	if(success){
+		modelmap.addAttribute("medicine", adminService.medicineList());
+		page="admin/MedicineTable";
+	}
+		return page;
+		
+	}
+@RequestMapping(value = "/domestic/user/addReport/{report}", method = RequestMethod.POST)
+
+public String addReport(HttpServletRequest request,ModelMap modelmap,@PathVariable("report") String report) throws Exception{
+	boolean success;
+	String page = null;
+	
+	TblReports tblReports = new TblReports();
+	tblReports.setReport_name(report);
+success =	adminService.addReport(tblReports);
+if(success){
+	modelmap.addAttribute("report", adminService.reportList());
+	page="admin/ReportTable";
+}
+	return page;
+	
+}
+
+
+
+	
 	
 }

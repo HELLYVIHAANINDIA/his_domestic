@@ -17,6 +17,9 @@ public class TblReports implements Serializable {
 	private int report_id;
 	@Column(name="report_name")
 	private String report_name;
+	@Column(name="reportstatus")
+	private int reportstatus;
+
 	
 	public TblReports(){
 		super();
@@ -36,6 +39,14 @@ public class TblReports implements Serializable {
 
 	public void setReport_name(String report_name) {
 		this.report_name = report_name;
+	}
+
+	public int getReportstatus() {
+		return reportstatus;
+	}
+
+	public void setReportstatus(int reportstatus) {
+		this.reportstatus = reportstatus;
 	}
 	
 

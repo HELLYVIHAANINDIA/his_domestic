@@ -408,6 +408,8 @@ public class DoctorController {
 		 modelMap.addAttribute("clinicalCompliants", doctorService.getReportName(patientid,1));
 		 modelMap.addAttribute("clinicalMedical", doctorService.getReportName(patientid,2));
 		 modelMap.addAttribute("clinicalReport", doctorService.getReportName(patientid,3));
+		 SimpleDateFormat newSimpleDateFormat = new SimpleDateFormat(clientDateFormate);
+		 modelMap.addAttribute("currentDate",newSimpleDateFormat.format(commonService.getServerDateTime()));
 		 
 		 page = "admin/viewPrescription";
 		return page;

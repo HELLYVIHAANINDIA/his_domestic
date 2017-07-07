@@ -51,14 +51,13 @@ $(document).ready(function() {
 							<thead>
 								<tr>							   
 									<th></th>
-									<th>Case Type</th>
+									
 									<th>CR No.</th>
-									<th>Date&Time</th>
-									<th>Name</th>
-									<th>DOB</th>
+									<th>Patient Name</th>
+									<th>Consulting Doctor</th>
+									<th>Case Type</th>
 									<th>Age</th>
 									<th>Mobile No.</th>
-									<th>Consulting Doctor</th>
 									<th>Appointment Date & Time</th>
 								</tr>
 							</thead>
@@ -163,27 +162,29 @@ $(document).ready(function() {
 									   
 									   </c:if>
 									</td>
-									<td>${appdata[0]}</td>
+									
 									<td>${appdata[1]}</td>
-									<td></td>
 									<td>${appdata[2]} ${appdata[3]}</td>
-									<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy"
-											value="${appdata[4]}"></fmt:formatDate></td>
+									<td>${appdata[8]}</td>
+									<td>${appdata[0]}</td>
 									<td>${appdata[5]}</td>
 									<td>${appdata[6]}  ${appdata[7]}</td>
-									<td>${appdata[8]}</td>
+									
 									<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy HH:mm"
 											value="${appdata[9]}"></fmt:formatDate></td>
+											<input type="hidden" id="hdPatientId1" name="hdPatientId" value="${appdata[10]}">
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					 <input type="hidden" id="hdRecpPatFollowTabId" name="hdRecpPatFollowTabId" value="7">  
 					</form>	
 				</div>
 			</div>			
 		</div>
 	</div>
-		      
+	        	
+		   
 </section>
 
 

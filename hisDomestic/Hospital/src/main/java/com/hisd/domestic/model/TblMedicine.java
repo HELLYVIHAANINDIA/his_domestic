@@ -18,7 +18,8 @@ public class TblMedicine implements Serializable {
 	private int medicine_id;
 	@Column(name="medicine_name")
 	private String medicine_name;
-	
+	@Column(name="medicineStatus")
+	private int medicineStatus;
 	public TblMedicine(){
 		super();
 	}
@@ -37,6 +38,14 @@ public class TblMedicine implements Serializable {
 
 	public void setMedicine_name(String medicine_name) {
 		this.medicine_name = medicine_name;
+	}
+
+	public int getMedicineStatus() {
+		return medicineStatus;
+	}
+
+	public void setMedicineStatus(int medicineStatus) {
+		this.medicineStatus = medicineStatus;
 	}
 	
 

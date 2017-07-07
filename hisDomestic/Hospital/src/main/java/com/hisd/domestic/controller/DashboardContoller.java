@@ -52,9 +52,18 @@ public class DashboardContoller {
 				    		hdPatientId = Integer.parseInt(model.asMap().get("redirectPatientId").toString());
 				    	}
 		    		}else if(sessionBean.getUserTypeId() == 2 || sessionBean.getUserTypeId() == 3 ){
-		    			if(hdRecpPatFollowTabId==4){
+		    			if(hdRecpPatFollowTabId==4  ){
 		    				tabid = hdRecpPatFollowTabId;
-		    			}else{
+		    			}
+		    				else if(model.asMap().get("tabid")!=null){
+		    					if(model.asMap().get("redirectPatientId")!=null){
+			    					hdPatientId = Integer.parseInt(model.asMap().get("redirectPatientId").toString());
+			    					tabid = 7;
+			    				}
+		    				}
+		    				
+		    		
+		    			else{
 		    				tabid = 0;
 		    			}
 		    			
