@@ -20,6 +20,7 @@ import com.hisd.common.daogeneric.Operation_enum;
 import com.hisd.common.daointerface.HibernateQueryDao;
 import com.hisd.common.daointerface.TblAppointmentDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
+import com.hisd.common.daointerface.TblConsultingDoctorDao;
 import com.hisd.common.daointerface.TblMedicineDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
 import com.hisd.common.daointerface.TblPatientDao;
@@ -35,6 +36,7 @@ import com.hisd.domestic.databean.PatientBean;
 import com.hisd.domestic.databean.UserDatabean;
 import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblComplaints;
+import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDocument;
 import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblPatient;
@@ -75,6 +77,8 @@ public class AdminService {
     TblMedicineDao tblMedicineDao;
     @Autowired
     TblReportDao tblReportDao;
+    @Autowired
+    TblConsultingDoctorDao tblConsultingDoctorDao;
    
     
     @Value("#{hospitalProperties['client_dateformate_hhmm']}")
@@ -95,8 +99,11 @@ public class AdminService {
 			userdtbean.setDtgender(request.getParameter("dtgender"));
 			userdtbean
 					.setTxtdateofbirth(request.getParameter("txtdateofbirth"));
-			Date birthdate = dateofBirth(userdtbean.getTxtdateofbirth());
-			userdtbean.setTxtbod(birthdate);
+			if(userdtbean.getTxtdateofbirth() != ""){
+				Date birthdate = dateofBirth(userdtbean.getTxtdateofbirth());
+				userdtbean.setTxtbod(birthdate);	
+			}
+			
 			userdtbean.setTxtloginid(request.getParameter("txtloginid"));
 
 			userdtbean.setTxtpassword(EncryptDecryptUtils.encrypt(
@@ -203,7 +210,7 @@ public class AdminService {
 
 	// Add User in database
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public boolean addUser(TblUserLogin tblUserLogin, TblUser tblUser) {
+	public boolean addUser(TblUserLogin tblUserLogin, TblUser tblUser,TblConsultingDoctor tblConsultingDoctor) {
 
 		boolean isSuccess = false;
 		Long userId = (Long) commonDao.save(tblUserLogin);
@@ -211,6 +218,11 @@ public class AdminService {
 			tblUser.setUserid(userId);
 			tblUserDao.saveOrUpdateEntity(tblUser);
 			saveDocument(userId);
+			if(tblConsultingDoctor != null){
+				tblConsultingDoctor.setUserid(userId);
+				tblConsultingDoctorDao.addEntity(tblConsultingDoctor);
+				
+			}
 			isSuccess = true;
 		}
 		return isSuccess;

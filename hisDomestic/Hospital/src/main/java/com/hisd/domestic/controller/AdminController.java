@@ -400,8 +400,14 @@ public class AdminController {
 
 				tblUser.setExtlandline(userDatabean.getTxtextentionlandline());
 				tblUser.setStatus(1);
-				success = adminService.addUser(tblUserLogin, tblUser);
+				TblConsultingDoctor tblConsultingDoctor = null;
+				if(userDatabean.getUsertypeid() == 2){
+					tblConsultingDoctor= new TblConsultingDoctor();
+					tblConsultingDoctor.setConsultingdoctorname(userDatabean.getTxtfirstname() +" "+userDatabean.getTxtlastname());
+				}
+				success = adminService.addUser(tblUserLogin, tblUser,tblConsultingDoctor);
 				if (success) {
+					
 					redirectAttributes.addFlashAttribute("message", "User Created Successfully");
 					page = "redirect:/domestic/user/dashboard";
 				}

@@ -177,14 +177,14 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>Date Of Birth<span class="cm-field">*</span></label>
+						<label>Date Of Birth</label>
 						<div class="form-group">
 							<input type="hidden" name="clientDateFormate"
 								id="clientDateFormate" value='dd-MMM-yyyy'> <input
 								type="text" class="form-control dateBox" name="txtdateofbirth"
 								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"
-								placeholder="dd-MMM-yyyy" dtrequired="true"
-								title="Date of Birth" onblur="validateEmptyDt(this)" value="">
+								placeholder="dd-MMM-yyyy"
+								title="Date of Birth"  value="">
 						</div>
 					</div>
 				</div>
@@ -249,9 +249,9 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 										placeholder="Country Code :" id="txtcountrycodemobile"
 										name="txtcountrycodemobile"
 										onblur="javascript:{if(validateTextComponent(this));}"
-										validarr="required@@numeric@@length:3,3" tovalid="true"
+										validarr="required@@numeric@@length:2,2" tovalid="true"
 										onblur="validateTextComponent(this)" title="Country Code"
-										validationmsg="Allows 3 Numeric" maxlength="3">
+										validationmsg="Allows 2 Numeric" maxlength="2">
 								</div>
 							</div>
 							<div class="col-sm-8 col-xs-12">
@@ -280,10 +280,10 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 									<input class="form-control" value="" type="text"
 										placeholder="Country Code :" id="txtcountrycodelandline"
 										onblur="javascript:{if(validateTextComponent(this));}"
-										validarr="numeric@@length:3,3" tovalid="true"
+										validarr="numeric@@length:2,2" tovalid="true"
 										onblur="validateTextComponent(this)" class="form-control"
 										name="txtcountrycodelandline" title="Country Code"
-										validationmsg="Allows 3 Numeric" maxlength="3">
+										validationmsg="Allows 2 Numeric" maxlength="2">
 								</div>
 							</div>
 							<div class="col-sm-6 col-xs-12">
@@ -291,10 +291,10 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 									<input class="form-control" value="" type="text"
 										placeholder="Landline No. :" id="txtlandlineno"
 										onblur="javascript:{if(validateTextComponent(this));}"
-										validarr="numeric@@length:8,8" tovalid="true"
+										validarr="numeric@@length:3,5" tovalid="true"
 										onblur="validateTextComponent(this)" class="form-control"
 										name="txtlandlineno" title="Landline Number"
-										validationmsg="Allows 8 Numeric" maxlength="8">
+										validationmsg="Allows Minimum 3 Numbers" maxlength="5">
 								</div>
 							</div>
 							<div class="col-sm-3 col-xs-12">
@@ -302,11 +302,11 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 									<input class="form-control" value="" type="text"
 										placeholder="Extension :"
 										onblur="javascript:{if(validateTextComponent(this));}"
-										validarr="numeric@@length:4,4" tovalid="true"
+										validarr="numeric@@length:5,10" tovalid="true"
 										onblur="validateTextComponent(this)" class="form-control"
 										name="txtexentionlandline" title="Extention"
-										id="txtexentionlandline" validationmsg="Allows 4 Numeric"
-										maxlength="4">
+										id="txtexentionlandline" validationmsg="Allows Minimum 5 Numbers"
+										maxlength="10">
 								</div>
 							</div>
 						</div>

@@ -21,6 +21,8 @@ public class TblConsultingDoctor implements Serializable {
 	private int consultingdoctorid;
 	@Column(name="consultingdoctorname")
 	private String consultingdoctorname;
+	@Column(name="userid")
+	private long userid;
 	 public TblConsultingDoctor(){
 		 super();
 	 }
@@ -40,6 +42,13 @@ public class TblConsultingDoctor implements Serializable {
 		this.consultingdoctorname = consultingdoctorname;
 	}
 	
+	
+	public long getUserid() {
+		return userid;
+	}
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
 	@Override
 	public String toString() {
 		 StringBuffer sb = new StringBuffer(); 

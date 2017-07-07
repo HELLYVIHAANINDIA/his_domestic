@@ -1,0 +1,1 @@
+ALTER TABLE `hisdomestic`.`tbl_consultingdoctor` ADD COLUMN `userid` INT NULL AFTER `consultingdoctorname`; 

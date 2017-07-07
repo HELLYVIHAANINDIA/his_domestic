@@ -501,15 +501,15 @@
 				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
-						<label>Date Of Birth</label><span class="cm-field">*</span>
+						<label>Date Of Birth</label>
 
 						<div class="form-group">
 							<input type="hidden" name="clientDateFormate"
 								id="clientDateFormate" value='dd-MMM-yyyy'> <input
 								type="text" class="form-control dateBox" name="txtdateofbirth"
-								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"  dtrequired="true"
+								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"  
 								placeholder="dd-MMM-yyyy" title="Date of Birth"  
-								onblur="validateEmptyDt(this);calculateAge(this.value)" value="${patient.birthdate}">
+								onblur="calculateAge(this.value)" value="${patient.birthdate}">
 						</div>
 
 					</div>
@@ -638,9 +638,9 @@
 										placeholder="Country Code :" id="txtcountrycodemobile"
 										name="txtcountrycodemobile"
 										onblur="javascript:{if(validateTextComponent(this));}"
-										validarr="required@@numeric@@length:3,3" tovalid="true"
+										validarr="required@@numeric@@length:2,2" tovalid="true"
 										onblur="validateTextComponent(this)" title="Country Code"
-										validationmsg="Allows 3 Numeric" maxlength="3">
+										validationmsg="Allows 2 Numeric" maxlength="2">
 								</div>
 							</div>
 							<div class="col-sm-8 col-xs-12">
@@ -668,10 +668,10 @@
 										value="${patient.txtcountrycodelandline}" type="text"
 										placeholder="Country Code :" id="txtcountrycodelandline"
 										onblur="javascript:{if(validateTextComponent(this));}"
-										validarr="numeric@@length:3,3"
+										validarr="numeric@@length:2,2"
 										onblur="validateTextComponent(this)" class="form-control"
 										name="txtcountrycodelandline" title="Country Code"
-										validationmsg="Allows 3 Numeric" maxlength="3">
+										validationmsg="Allows 2 Numeric" maxlength="2">
 								</div>
 							</div>
 							<div class="col-sm-6 col-xs-12">
