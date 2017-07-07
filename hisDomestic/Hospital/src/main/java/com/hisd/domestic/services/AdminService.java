@@ -117,7 +117,7 @@ public class AdminService {
 			userdtbean.setDtstateId(pInt(request, "selState"));
 			userdtbean.setTxtcity(request.getParameter("txtcity"));
 			userdtbean.setTxtpincode(request.getParameter("txtpincode"));
-			if(request.getParameter("dtdesignationid") != "-1"){
+			if(request.getParameter("dtdesignationid")!=null && !request.getParameter("dtdesignationid").equalsIgnoreCase("-1")){
 				userdtbean.setDtdesignation(pInt(request, "dtdesignationid"));
 			}else{
 				userdtbean.setDtdesignation(5);
