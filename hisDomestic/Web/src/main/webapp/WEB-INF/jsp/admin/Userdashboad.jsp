@@ -12,7 +12,6 @@ function cancleAppointment(hdAppointmentId){
 } 
 function reseduleAppointment(hdAppointmentId)
 {
-	alert();
 	$("#hdAppointmentId").val(hdAppointmentId);
 	$("#frmcancleAppointment").submit();
 	}

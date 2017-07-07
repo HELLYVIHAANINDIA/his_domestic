@@ -43,8 +43,6 @@ $(document).ready(function() {
 
 	<div class="content">
 		<h4 class="page-content-title b-bottom">
-			<span class="small pull-right cm-field">All (*) marked Fields
-				are mandatory</span>
 			<div class="clear"></div>
 		</h4>
 
@@ -59,7 +57,6 @@ $(document).ready(function() {
 								<th></th>
 								<th>Case Type</th>
 								<th>CR No.</th>
-								<th>Date&Time</th>
 								<th>Name</th>
 								<th>DOB</th>
 								<th>Age</th>
@@ -166,7 +163,6 @@ $(document).ready(function() {
 									</td>	
 									<td>${appdata[0]}</td>
 									<td>${appdata[1]}</td>
-									<td> </td>
 									<td>${appdata[2]} ${appdata[3]}</td>
 									<td><fmt:formatDate type="date" pattern="dd-MMM-yyyy"
 											value="${appdata[4]}"></fmt:formatDate></td>
