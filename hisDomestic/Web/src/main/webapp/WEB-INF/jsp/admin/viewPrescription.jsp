@@ -9,7 +9,7 @@
 	<div class="main-line">
 		<div class="rx-rx">Rx :</div>
 		<div class="p-date"><label><b>Date:</b></label>
-		${currentDate}</div>
+		${currentDate}</b></div>
 	</div>
 
 	<div class="main-line">
@@ -80,9 +80,10 @@
 		</div>
 		<div class="sr-no"></div>
 		<div class="prescription">
-			
+				<lable>Comment:</lable>
 			${clinicalDetail[0].remark}
 		</div>
+		
 
 
 	</div>

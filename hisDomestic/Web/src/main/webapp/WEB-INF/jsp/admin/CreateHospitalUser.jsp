@@ -82,9 +82,10 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 <section id="content-wrapper">
          
 	<div class="site-content-title">
-		<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Create User</h2></div>
-		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>
-		 <div class="col-sm-6 col-xs-12" id="successMsg"></div>
+		<div class="col-sm-6 col-xs-12"><h2 class="float-xs-left content-title-main pull-left">Create User</h2>
+		<div id="successMsg" style="display:inline-block; float:left; margin-top:10px; margin-left:50px; color:#006400;"></div>
+		</div>
+		<div class="col-sm-6 col-xs-12"><span class="small pull-right cm-field-up">All (*) marked Fields are mandatory</span></div>		 
 	</div>
 	
 	<div class="content">
