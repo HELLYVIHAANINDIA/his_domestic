@@ -625,7 +625,7 @@ public class AdminService {
 		return patientbeanlist;
 		
 	}
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public boolean addComplaints(TblComplaints tblComplaints){
 		boolean bSuccess = false;
 		tblComplaintsDao.addEntity(tblComplaints);
@@ -633,14 +633,14 @@ public class AdminService {
 		return bSuccess;
 		
 	}
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public boolean addMedicine(TblMedicine tblMedicine){
 		boolean bSuccess = false;
 		tblMedicineDao.addEntity(tblMedicine);
 		bSuccess = true;
 		return bSuccess;
 	}
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public boolean addReport(TblReports tblReports){
 		boolean bSuccess = false;
 		tblReportDao.addEntity(tblReports);

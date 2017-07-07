@@ -73,7 +73,7 @@ function specialTrim(str) {
 		    	                    $("#txtDocDesc").val('');
 		    	                    $("#fileCount").val(parseInt($("#fileCount").val(),10) + 1);
 		    	                    
-	 	 			   	            	jAlert("Document Uploaded successfully",function () {});
+	 	 			   	            	alert("Document Uploaded successfully");
 	 	 		                	
 		    	                    getDocDetails();
 		    	                }else{
