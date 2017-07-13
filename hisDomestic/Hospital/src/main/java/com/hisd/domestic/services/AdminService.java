@@ -22,6 +22,7 @@ import com.hisd.common.daointerface.TblAppointmentDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
 import com.hisd.common.daointerface.TblConsultingDoctorDao;
 import com.hisd.common.daointerface.TblMedicineDao;
+import com.hisd.common.daointerface.TblMedicineScheduleDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
 import com.hisd.common.daointerface.TblPatientDao;
 import com.hisd.common.daointerface.TblPatientRefrenceDao;
@@ -39,6 +40,7 @@ import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDocument;
 import com.hisd.domestic.model.TblMedicine;
+import com.hisd.domestic.model.TblMedicineSchedule;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
@@ -79,6 +81,8 @@ public class AdminService {
     TblReportDao tblReportDao;
     @Autowired
     TblConsultingDoctorDao tblConsultingDoctorDao;
+    @Autowired
+    TblMedicineScheduleDao tblMedicineScheduleDao;
    
     
     @Value("#{hospitalProperties['client_dateformate_hhmm']}")
@@ -529,7 +533,12 @@ public class AdminService {
 	public List<TblReports> reportList() throws Exception{
 		return tblReportDao.findTblReports("reportstatus",Operation_enum.EQ,0,"report_id",Operation_enum.ORDERBY,Operation_enum.DESC);
 	}
-	
+	@Transactional
+	public List<TblMedicineSchedule> listSchedule() throws Exception{
+		return tblMedicineScheduleDao.findTblMedicineSedule("status",Operation_enum.EQ,0,"seduleid",Operation_enum.ORDERBY,Operation_enum.DESC);
+		
+		
+	}
 	
 	@Transactional
 	public boolean deleteComplatints(int compid, int status) {
@@ -564,6 +573,16 @@ public class AdminService {
 		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(),parameter);
 		return flag != 0 ? true : false;
 		
+	}
+	@Transactional
+	public boolean deleteMedicineSchedule(int scheduleid, int status){
+		StringBuilder query = new StringBuilder();
+		Map<String,Object>parameter = new HashMap<String, Object>();
+		parameter.put("scheduleid", scheduleid);
+		parameter.put("status", status);
+		query.append("UPDATE TblMedicineSchedule set status=:status WHERE seduleid=:scheduleid");
+		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(), parameter);
+		return flag != 0 ? true : false;
 	}
 	
 	
@@ -656,6 +675,13 @@ public class AdminService {
 	public boolean addReport(TblReports tblReports){
 		boolean bSuccess = false;
 		tblReportDao.addEntity(tblReports);
+		bSuccess = true;
+		return bSuccess;
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean addMedicineSchedule(TblMedicineSchedule tblMedicineSchedule){
+		boolean bSuccess = false;
+		tblMedicineScheduleDao.addEntity(tblMedicineSchedule);
 		bSuccess = true;
 		return bSuccess;
 	}

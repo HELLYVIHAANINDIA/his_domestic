@@ -1,0 +1,2 @@
+CREATE TABLE `tbl_medicineschedule`( `seduleid` INT NOT NULL AUTO_INCREMENT, `medicineschedule` TEXT, `status` INT DEFAULT 0, PRIMARY KEY (`seduleid`) );
+ALTER TABLE `tbl_medicineschedule` CHANGE `medicineschedule` `medicineschedule` TEXT CHARSET utf8 COLLATE utf8_general_ci NULL; 

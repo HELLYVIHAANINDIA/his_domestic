@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,7 @@ import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDesignation;
 import com.hisd.domestic.model.TblMedicine;
+import com.hisd.domestic.model.TblMedicineSchedule;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
@@ -141,6 +144,10 @@ public class AdminController {
 				case 10:
 					page="admin/Report";
 					modelMap.addAttribute("report", adminService.reportList());
+					break;
+				case 11:
+					page="admin/MedicineSchedule";
+					modelMap.addAttribute("schedule", adminService.listSchedule());
 					break;
 				
 					
@@ -1018,7 +1025,14 @@ public class AdminController {
 		return page;
 		
 	}
-	
+	@RequestMapping(value = "domestic/complaints/deleteMedicineSchedule/{scheduleId}")
+	public String deleteMedicineSchedule(HttpServletRequest request,ModelMap modelMap,@PathVariable("scheduleId") int scheduleId) throws Exception{
+		adminService.deleteMedicineSchedule(scheduleId, 1);
+		modelMap.addAttribute("schedule", adminService.listSchedule());
+		String page = "admin/MedicineSchedule";
+		return page;
+		
+	}
 	
 	
 	
@@ -1092,6 +1106,23 @@ if(success){
 	modelmap.addAttribute("report", adminService.reportList());
 	page="admin/ReportTable";
 }
+	return page;
+	
+}
+
+@RequestMapping(value ="/domestic/user/addMedicineSchedule/{txtschedule}",method = RequestMethod.POST,produces={"application/json; charset=UTF-8"})
+public String addMedicineSchedule(HttpServletRequest request,@PathVariable("txtschedule")String txtschedule,ModelMap modelMap) throws Exception{
+	
+	boolean success;
+	String page= null;
+	TblMedicineSchedule tblMedicineSchedule = new TblMedicineSchedule();
+	tblMedicineSchedule.setMedicineschedule(txtschedule);
+	success = adminService.addMedicineSchedule(tblMedicineSchedule);
+	if(success){
+		
+		modelMap.addAttribute("schedule", adminService.listSchedule());
+		page="admin/MedicineScheduleTable";
+	}
 	return page;
 	
 }
