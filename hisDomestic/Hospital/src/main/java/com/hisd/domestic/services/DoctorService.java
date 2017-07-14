@@ -1,14 +1,13 @@
 package com.hisd.domestic.services;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.jms.Session;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,19 +31,11 @@ import com.hisd.common.daointerface.TblUserLoginDao;
 import com.hisd.common.services.CommonDAO;
 import com.hisd.common.utility.EncryptDecryptUtils;
 import com.hisd.domestic.databean.Clinicalbean;
-import com.hisd.domestic.databean.PatientBean;
-import com.hisd.domestic.databean.UserDatabean;
-import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblClinical;
 import com.hisd.domestic.model.TblClinicalReport;
 import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblMedicine;
-import com.hisd.domestic.model.TblPatient;
-import com.hisd.domestic.model.TblPatientAddiction;
-import com.hisd.domestic.model.TblPatientRefrence;
 import com.hisd.domestic.model.TblReports;
-import com.hisd.domestic.model.TblUser;
-import com.hisd.domestic.model.TblUserLogin;
 
 @Service
 public class DoctorService {
@@ -141,13 +132,31 @@ public class DoctorService {
 	
 	public Clinicalbean getClinicalDatabean(HttpServletRequest request) throws Exception{
 		Clinicalbean clinicalbean = new Clinicalbean();
-		
 		clinicalbean.setTxthistory(request.getParameter("txthistory"));
 		clinicalbean.setTxtcomments(request.getParameter("txtcomments"));
 		clinicalbean.setComlaintsList(request.getParameterValues("chkcomplain"));
 		clinicalbean.setMedicineList(request.getParameterValues("chkmedicien"));
 		clinicalbean.setReportList(request.getParameterValues("ctkreport"));
 		clinicalbean.setTxtremark(request.getParameter("txtremark"));
+//		String medicineSchedile = request.getParameter("hdJsonValue");
+//		
+//		JSONArray jsonArray = new JSONArray(medicineSchedile);
+//		for (int i = 0; i < jsonArray.length(); i++) {
+//			JSONObject jSONObject = jsonArray.getJSONObject(i);
+//			String[] medicine ;
+//			String[] schedule;
+//			for (Iterator it = jSONObject.keys(); it.hasNext();) {
+//				String key = it.next().toString();
+//				String jsonValue = jSONObject.getString(key);
+//				if( key.equals("schedule")){
+//					schedule.add
+//				}
+//			}
+//		}
+			  
+		 
+	
+		
 		if(request.getParameter("hdclinicalDetailid") != "" ){
 		clinicalbean.setClinical_id(Integer.parseInt(request.getParameter("hdclinicalDetailid")));
 		}
@@ -239,5 +248,6 @@ public class DoctorService {
 		return bSuccess ;
 		
 	}
+	
 	
 }

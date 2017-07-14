@@ -55,6 +55,7 @@
 								<li><a href="#" onclick="changeTab(9,0,1)">Medicine Master <i aria-hidden="true"></i></a></li>
 								<li><a href="#" onclick="changeTab(10,0,1)">Report Master <i aria-hidden="true"></i></a></li>
 								<li><a href="#" onclick="changeTab(11,0,1)">Medicine schedule<i aria-hidden="true"></i></a></li>
+								<li><a href="#" onclick="changeTab(12,0,1)">Finding<i aria-hidden="true"></i></a></li>
 								
 							<!-- 	<li><a href="javascript:void(0)">DropDown-2<i
 										class="fa fa-angle-right arrow_carrot-right submenu-arrow-right"

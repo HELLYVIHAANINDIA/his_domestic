@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -258,8 +261,10 @@ public class DoctorController {
 	public String getacknowlege(@PathVariable("patientid") Integer patientid,HttpServletRequest request,HttpServletResponse response, ModelMap modelMap) throws Exception{
 	    String page = "admin/Patientpriscription";
 	    modelMap.addAttribute("patient",doctorService.getpatientinfo(patientid));
+	    modelMap.addAttribute("schedule", adminService.listSchedule());
 	    List<TblComplaints> listAllComplaints = doctorService.getAllComplaints();
 	    List<Object[]>listComplaints = doctorService.getReportName(patientid,1);
+	    
 	    Map<Integer,String> hashMapComplain = new LinkedHashMap<Integer, String>();
 	    for (TblComplaints tblComplaints : listAllComplaints) {
 	    	if(listComplaints.isEmpty()){
@@ -360,15 +365,38 @@ public class DoctorController {
 			        	  complainList.add(tblClinicalReport);
 			           }
 			       }
-			       if(clinicalbean.getMedicineList() != null){
+			      /* if(clinicalbean.getMedicineList() != null){
 			           for(String obj:clinicalbean.getMedicineList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
 			        	   tblClinicalReport.setTblPatient(new TblPatient(patientid));
-			        	   tblClinicalReport.setClnicalreportid(Integer.parseInt(obj));
+			        	   
+			        	   //tblClinicalReport.setClnicalreportid(Integer.parseInt(obj));
 			        	   tblClinicalReport.setStatusid(2);
 			        	  complainList.add(tblClinicalReport);
 			           }
-			       }
+			       }*/
+			       
+			       String medicineSchedile = request.getParameter("hdJsonValue");
+					
+					JSONArray jsonArray = new JSONArray(medicineSchedile);
+					for (int i = 0; i < jsonArray.length(); i++) {
+						TblClinicalReport tblClinicalReport = new TblClinicalReport();
+						JSONObject jSONObject = jsonArray.getJSONObject(i);
+						tblClinicalReport.setTblPatient(new TblPatient(patientid));
+						for (Iterator it = jSONObject.keys(); it.hasNext();) {
+							
+							String key = it.next().toString();
+							String jsonValue = jSONObject.getString(key);
+							int json = Integer.parseInt(jsonValue);
+							if( key.equals("schedule")){
+								tblClinicalReport.setSchedualid(json);
+							}else{
+								tblClinicalReport.setClnicalreportid(json);
+							}
+							tblClinicalReport.setStatusid(2);
+						}
+						complainList.add(tblClinicalReport);
+					}
 			       if(clinicalbean.getReportList() != null){
 			           for(String obj:clinicalbean.getReportList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();

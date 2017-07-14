@@ -30,6 +30,8 @@ public class TblClinicalReport implements Serializable {
 	private int clnicalreportid;
 	@Column(name="statusid")
 	private int statusid;
+	@Column(name="schedualid")
+	private int schedualid;
 	
 	
 	public TblClinicalReport(){
@@ -74,6 +76,16 @@ public class TblClinicalReport implements Serializable {
 
 	public void setStatusid(int statusid) {
 		this.statusid = statusid;
+	}
+
+
+	public int getSchedualid() {
+		return schedualid;
+	}
+
+
+	public void setSchedualid(int schedualid) {
+		this.schedualid = schedualid;
 	}
 	
 

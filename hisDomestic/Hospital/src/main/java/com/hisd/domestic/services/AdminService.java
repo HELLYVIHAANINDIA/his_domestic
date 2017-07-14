@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import com.hisd.common.daointerface.HibernateQueryDao;
 import com.hisd.common.daointerface.TblAppointmentDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
 import com.hisd.common.daointerface.TblConsultingDoctorDao;
+import com.hisd.common.daointerface.TblFindingDao;
 import com.hisd.common.daointerface.TblMedicineDao;
 import com.hisd.common.daointerface.TblMedicineScheduleDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
@@ -39,6 +41,7 @@ import com.hisd.domestic.model.TblAppointment;
 import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDocument;
+import com.hisd.domestic.model.TblFinding;
 import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblMedicineSchedule;
 import com.hisd.domestic.model.TblPatient;
@@ -83,6 +86,8 @@ public class AdminService {
     TblConsultingDoctorDao tblConsultingDoctorDao;
     @Autowired
     TblMedicineScheduleDao tblMedicineScheduleDao;
+    @Autowired
+    TblFindingDao tblFindingDao;
    
     
     @Value("#{hospitalProperties['client_dateformate_hhmm']}")
@@ -536,10 +541,11 @@ public class AdminService {
 	@Transactional
 	public List<TblMedicineSchedule> listSchedule() throws Exception{
 		return tblMedicineScheduleDao.findTblMedicineSedule("status",Operation_enum.EQ,0,"seduleid",Operation_enum.ORDERBY,Operation_enum.DESC);
-		
-		
 	}
-	
+	@Transactional
+	public List<TblFinding> listFinding() throws Exception{
+		return tblFindingDao.findTblFinding("findingstatus",Operation_enum.EQ,0,"findingid",Operation_enum.ORDERBY,Operation_enum.DESC);
+	}
 	@Transactional
 	public boolean deleteComplatints(int compid, int status) {
 		StringBuilder query = new StringBuilder();
@@ -584,7 +590,16 @@ public class AdminService {
 		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(), parameter);
 		return flag != 0 ? true : false;
 	}
-	
+	@Transactional
+	public boolean deleteFinding(int findingid, int status){
+		StringBuilder query = new StringBuilder();
+		Map<String,Object>parameter = new HashMap<String, Object>();
+		parameter.put("findingid", findingid);
+		parameter.put("status", status);
+		query.append("UPDATE TblFinding set findingstatus=:status WHERE findingid=:findingid");
+		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(), parameter);
+		return flag !=0 ? true : false;
+	}
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteAddiction(int patientId){
@@ -685,5 +700,12 @@ public class AdminService {
 		bSuccess = true;
 		return bSuccess;
 	}
-
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean addFinding(TblFinding tblFinding){
+		boolean bSuccess = false;
+		tblFindingDao.addEntity(tblFinding);
+		bSuccess = true;
+		return bSuccess;
+	}
 }

@@ -41,6 +41,7 @@ import com.hisd.domestic.model.TblCaseType;
 import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDesignation;
+import com.hisd.domestic.model.TblFinding;
 import com.hisd.domestic.model.TblMedicine;
 import com.hisd.domestic.model.TblMedicineSchedule;
 import com.hisd.domestic.model.TblPatient;
@@ -149,7 +150,10 @@ public class AdminController {
 					page="admin/MedicineSchedule";
 					modelMap.addAttribute("schedule", adminService.listSchedule());
 					break;
-				
+				case 12:
+					page="admin/Finding";
+					modelMap.addAttribute("finding", adminService.listFinding());
+				    break;
 					
 					default:page = "admin/Userdashboad";
 					break;
@@ -1034,6 +1038,14 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping(value = "domestic/complaints/deleteFinding/{findingId}")
+	public String deleteFinding(HttpServletRequest request,ModelMap modelMap,@PathVariable("findingId") int findingId) throws Exception{
+		adminService.deleteFinding(findingId, 1);
+		modelMap.addAttribute("finding", adminService.listFinding());
+	  String page="admin/Finding";
+	  return page;
+	}
+	
 	
 	
 	
@@ -1127,6 +1139,21 @@ public String addMedicineSchedule(HttpServletRequest request,@PathVariable("txts
 	
 }
 
+@RequestMapping(value ="/domestic/user/addFinding/{txtFinding}",method = RequestMethod.POST)
+public String addFinding(HttpServletRequest request,@PathVariable("txtFinding")String txtFinding,ModelMap modelMap) throws Exception{
+	boolean success;
+	String page= null;
+	TblFinding tblFinding = new TblFinding();
+	tblFinding.setFindingname(txtFinding);
+	success = adminService.addFinding(tblFinding);
+	if(success){
+		
+		modelMap.addAttribute("finding", adminService.listFinding());
+		page="admin/FindingTable";
+	}
+	return page;
+	
+}
 
 
 	

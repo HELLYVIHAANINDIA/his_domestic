@@ -19,6 +19,8 @@ public class Clinicalbean {
 	private String[] comlaintsList;
 	private String[] medicineList;
 	private String[] reportList;
+	private String[] scheduleid;
+
 	public int getClinical_id() {
 		return clinical_id;
 	}
@@ -115,6 +117,13 @@ public class Clinicalbean {
 	public void setReportList(String[] reportList) {
 		this.reportList = reportList;
 	}
+	public String[] getScheduleid() {
+		return scheduleid;
+	}
+	public void setScheduleid(String[] scheduleid) {
+		this.scheduleid = scheduleid;
+	}
+	
 	
 	
 	

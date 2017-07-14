@@ -9,10 +9,6 @@
 <section id="content-wrapper">
 
 <c:if test="${not empty successMsg}">
-			<script>
-				$(".alert-danger").html("");
-				$(".alert-danger").hide();
-			</script>
 				<c:choose>
 					<c:when test="${fn:contains(successMsg, '_')}">
 						<div class="alert alert-success">
@@ -345,24 +341,35 @@ Prescription
 <label>Medicine:</label>
 <!-- <textarea class="form-control" style="min-height: 200px;"></textarea> -->
 <div class="scr">
-  <c:forEach items="${medicien}" var="medicien">
+  <c:forEach items="${medicien}" var="medicien" varStatus="cnt">
+  <div id="divmedicine@@@${cnt.count}">
   <c:choose>
   <c:when test="${fn:contains(medicien.value, 'checked')}">
     <c:set value="${fn:split(medicien.value, '_')}" var="chkValue"/>
   			<c:set value=" ${chkValue[0]}" var="checkedVal"/>
-  			<input type="checkbox" checked="checked"  id="complain" name="chkmedicien" value="${medicien.key}"/> ${checkedVal} <br />
+  			<input type="checkbox" checked="checked"  id="complain${cnt.count}" name="chkmedicien" value="${medicien.key}" onclick="openDropDown()"/> ${checkedVal} <br />
   </c:when>
   <c:otherwise>
    <c:set value="${fn:split(medicien.value, '_')}" var="chkValue"/>
   			<c:set value=" ${chkValue[0]}" var="checkedVal"/>
-  			<input type="checkbox"  id="complain" name="chkmedicien" value="${medicien.key}"/>${checkedVal} <br />
+  			<input type="checkbox"  id="complain${cnt.count}" name="chkmedicien" value="${medicien.key}"/>${checkedVal} <br />
   </c:otherwise>
   </c:choose>
   
+  <select name="selschedule" id="selschedule${cnt.count}">
+  <option id=""selected="selected" value = -1>Select</option>
+  <c:forEach items="${schedule}" var="schedule">
+  <option value="${schedule.seduleid}">${schedule.medicineschedule}</option>
+
   </c:forEach>
+  </select>
+  </div>
+  </c:forEach>
+  <input type="hidden" id="hdJsonValue" name="hdJsonValue" value="">
 </div>
 </div>
 </div>
+
 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
 <div class="field-set-box">
 <label>Report:</label>
@@ -498,10 +505,27 @@ $(document).ready(function() {
 	var subChildId = $('#txtSubChildId').val();
 	var otherSubChildId = $('#txtOtherSubChildId').val();
 	getDocDetails();
+	$(".alert-danger").html("");
+	$(".alert-danger").hide();
 });
 
 function submitForm() {
 	var vbool = valOnSubmit();
+	var JSONObj = [];
+	var items = {};
+	$('[id^="divmedicine"]').each(function(){
+		var div = this.id.split("@@@");
+		var divid = div[1];
+		if($("#complain"+divid).is(":checked") == true && $("#selschedule"+divid).val() != -1){
+			items = {};
+			items['complain'] = $("#complain"+divid).val();
+			items['schedule'] = $("#selschedule"+divid).val();
+			JSONObj.push(items);
+		}
+	});
+	var jsonString = JSON.stringify(JSONObj);
+	$("#hdJsonValue").val(jsonString);
+	
 	if(vbool){
 		$("#patientPriscriptionForm").submit();
 	}
