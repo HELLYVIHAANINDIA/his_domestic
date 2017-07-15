@@ -5,3 +5,4 @@ DELETE FROM `hisdomestic1`.`tbl_consultingdoctor` WHERE `consultingdoctorid` = '
  DELETE FROM `hisdomestic1`.`tbl_consultingdoctor` WHERE `consultingdoctorid` = '2'; 
  ALTER TABLE `hisdomestic1`.`tbl_user` CHANGE `dob` `dob` DATE NULL; 
  ALTER TABLE `hisdomestic1`.`tbl_clinicalreports` ADD COLUMN `schedualid` INT(11) NULL AFTER `statusid`; 
+ ALTER TABLE `hisdomestic1`.`tbl_clinicalreports` CHANGE `schedualid` `schedualid` INT(11) DEFAULT 0 NOT NULL, CHANGE `findingReport` `findingReport` VARCHAR(50) CHARSET latin1 COLLATE latin1_swedish_ci NULL; 
