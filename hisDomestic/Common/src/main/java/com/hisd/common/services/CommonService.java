@@ -44,7 +44,6 @@ import com.hisd.common.daogeneric.Operation_enum;
 import com.hisd.common.daoimpl.HibernateQueryImpl;
 import com.hisd.common.daointerface.HibernateQueryDao;
 import com.hisd.common.model.CommonListing;
-import com.hisd.common.model.TblMailMessage;
 import com.hisd.common.model.TblMarquee;
 import com.hisd.common.model.TblTimezone;
 import com.hisd.common.utility.SessionBean;
@@ -762,14 +761,7 @@ public class CommonService {
         return data;
 	}
 
-	public List<TblMailMessage> getTblMailMessage() throws Exception {
-		return commonDAO.findEntity(TblMailMessage.class, "mailSent",Operation_enum.EQ,0);
-	}
-	
-	public boolean updateTblMailMessage(String mailmessageid) {
-        String query = "UPDATE TblMailMessage SET mailSent = 1 WHERE mailmessageid IN ("+mailmessageid+")";
-		return  commonDAO.executeUpdate(query, null)!=0;
-	}
+
 	
 	
 }

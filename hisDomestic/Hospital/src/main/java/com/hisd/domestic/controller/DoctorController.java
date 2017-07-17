@@ -336,7 +336,7 @@ public class DoctorController {
 		  }else{
 			  for(Object[] object:listFinding){
 				  if(tblFinding.getFindingid() == Integer.parseInt(object[3].toString())){
-					  hashfindingMap.put(tblFinding.getFindingid(),tblFinding.getFindingname()+"_checked"+"@@"+Integer.parseInt(object[4].toString()));
+					  hashfindingMap.put(tblFinding.getFindingid(),tblFinding.getFindingname()+"_checked"+"@@"+(object[4].toString()));
 					  break;
 				  }else{
 					  hashfindingMap.put(tblFinding.getFindingid(),tblFinding.getFindingname()+"_notselected");

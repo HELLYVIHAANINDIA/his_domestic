@@ -49,7 +49,7 @@ public class TblUserType implements Serializable {
         this.usertypeid = usertypeid ;
     }
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="usertypeid", nullable=false)
     public Integer getUsertypeid() {
         return this.usertypeid;

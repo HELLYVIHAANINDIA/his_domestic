@@ -71,8 +71,8 @@
                 <prop key="hibernate.jdbc.fetch_size">8</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.connection.release_mode">after_transaction</prop>
-<!--                 <prop key="hibernate.hbm2ddl.auto">update</prop>
- -->			</props>
+                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
         </property>
     </bean>
     
@@ -219,5 +219,4 @@
        	   </props>
 	</property>
 	</bean>
-	
 </beans>

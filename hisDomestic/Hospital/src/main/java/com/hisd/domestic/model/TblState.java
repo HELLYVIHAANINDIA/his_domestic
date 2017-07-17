@@ -55,7 +55,7 @@ public class TblState implements Serializable {
         this.stateId = stateId ;
     }
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="stateId", nullable=false)
     public Integer getStateId() {
         return this.stateId;
