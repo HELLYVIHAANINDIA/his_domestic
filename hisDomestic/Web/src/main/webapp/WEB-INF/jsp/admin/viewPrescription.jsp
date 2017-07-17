@@ -64,13 +64,18 @@
                          ${complain[2]},
 			</c:forEach>
 		</div>
+		
+		
 		<div class="sr-no"></div>
 		<div class="prescription">
 			
-			<c:forEach items="${clinicalMedical}" var="medicien">
-  ${medicien[2]}<br><br>
+			<c:forEach items="${clinicalFinding}" var="finging">
+  ${finging[2]} ->  ${finging[4]}<br><br>
+  
+           
 			</c:forEach>
 		</div>
+		
 		<div class="sr-no"></div>
 		<div class="prescription">
 			
@@ -78,6 +83,20 @@
                      ${report[2]},
 			</c:forEach>
 		</div>
+		
+		<div class="sr-no"></div>
+		<div class="prescription">
+			
+			<c:forEach items="${clinicalMedical}" var="medicien">
+  ${medicien[4]}<br>
+  ${medicien[2]} <br><br>
+           
+			</c:forEach>
+		</div>
+		
+			
+		
+		
 		<div class="sr-no"></div>
 		<div class="prescription">
 				<lable>Comment:</lable>

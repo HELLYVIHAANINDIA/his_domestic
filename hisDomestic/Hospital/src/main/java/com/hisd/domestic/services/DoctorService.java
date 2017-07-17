@@ -20,7 +20,9 @@ import com.hisd.common.daointerface.TblAppointmentDao;
 import com.hisd.common.daointerface.TblClinicalDao;
 import com.hisd.common.daointerface.TblClinicalReportDao;
 import com.hisd.common.daointerface.TblComplaintsDao;
+import com.hisd.common.daointerface.TblFindingDao;
 import com.hisd.common.daointerface.TblMedicineDao;
+import com.hisd.common.daointerface.TblMedicineScheduleDao;
 import com.hisd.common.daointerface.TblPatientAddictionDao;
 import com.hisd.common.daointerface.TblPatientDao;
 import com.hisd.common.daointerface.TblPatientRefrenceDao;
@@ -34,7 +36,9 @@ import com.hisd.domestic.databean.Clinicalbean;
 import com.hisd.domestic.model.TblClinical;
 import com.hisd.domestic.model.TblClinicalReport;
 import com.hisd.domestic.model.TblComplaints;
+import com.hisd.domestic.model.TblFinding;
 import com.hisd.domestic.model.TblMedicine;
+import com.hisd.domestic.model.TblMedicineSchedule;
 import com.hisd.domestic.model.TblReports;
 
 @Service
@@ -70,6 +74,10 @@ public class DoctorService {
     TblClinicalDao tblClinicalDao;
     @Autowired
     TblClinicalReportDao tblClinicalReportDao;
+    @Autowired
+    TblFindingDao tblFindingDao;
+    @Autowired
+    TblMedicineScheduleDao tblMedicineScheduleDao;
     
 	@Value("#{projectProperties['passwordkey']}")
 	private String passwordkey;
@@ -129,7 +137,14 @@ public class DoctorService {
 	public List<TblReports> getAllReports(){
 		return tblReportDao.getAllTblReports();
 	}
-	
+	@Transactional
+	public List<TblFinding> getFindingReport(){
+		return tblFindingDao.getAllTblFinding();
+	}
+	@Transactional
+	public List<TblMedicineSchedule> getMedicindeSchedule(){
+		return tblMedicineScheduleDao.getAllTblMedicineSedule();
+	}
 	public Clinicalbean getClinicalDatabean(HttpServletRequest request) throws Exception{
 		Clinicalbean clinicalbean = new Clinicalbean();
 		clinicalbean.setTxthistory(request.getParameter("txthistory"));
@@ -203,27 +218,37 @@ public class DoctorService {
 			query.append(" ,tblComplaints.complaintsname,tblComplaints.complaintsid ");
 		}
 		else if(status == 2){
+			query.append(" ,tblMedicineSchedule.medicineschedule,tblMedicineSchedule.seduleid");
 			query.append(" ,tblMedicine.medicine_name,tblMedicine.medicine_id");
-		}else{
+		}else if(status == 3){
 			query.append(" ,tblReports.report_name,tblReports.report_id");
+		}else if(status == 4){
+			query.append(" ,tblfinding.findingname,tblfinding.findingid");
 		}
-		query.append(" FROM TblClinicalReport tblClinicalReport");
+		query.append(",tblClinicalReport.findingReport FROM TblClinicalReport tblClinicalReport");
 		query.append(" INNER JOIN tblClinicalReport.tblPatient tblPatient");
 		if(status == 1){
 			query.append(" ,TblComplaints tblComplaints");	
 		}else if(status == 2){
+			
+			query.append(" ,TblMedicineSchedule tblMedicineSchedule");
 			query.append(" ,TblMedicine tblMedicine");
-		}else{
+		}else if(status == 3){
 			query.append(" ,TblReports tblReports");	
+		}else if(status == 4){
+			query.append(" ,TblFinding tblfinding");	
 		}
 		query.append(" WHERE tblPatient.patientid=:patientid AND tblClinicalReport.statusid=:status");
 		if(status == 1){
 			query.append(" AND tblComplaints.complaintsid=tblClinicalReport.clnicalreportid");
 		}else if(status == 2){
+			query.append(" AND tblMedicineSchedule.seduleid=tblClinicalReport.schedualid");
 			query.append(" AND tblMedicine.medicine_id=tblClinicalReport.clnicalreportid");
 		}
-		else{
+		else if(status == 3){
 			query.append(" AND tblReports.report_id=tblClinicalReport.clnicalreportid");
+		}else if(status == 4){
+			query.append(" AND tblfinding.findingid=tblClinicalReport.clnicalreportid");
 		}
 		return hibernateQueryDao.createNewQuery(query.toString(), parameter);
 	}

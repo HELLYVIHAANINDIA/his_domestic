@@ -314,7 +314,7 @@ Prescription
 <textarea class="form-control" style="min-height: 200px;"></textarea>
 </div>
 </div> -->
-<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-4">
 <div class="field-set-box">
 <label>Complaints:</label>
 <!-- <textarea class="form-control" style="min-height: 200px;"></textarea> -->
@@ -336,17 +336,24 @@ Prescription
 </div>
 </div>
 </div>
-<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-4">
 <div class="field-set-box">
 <label>Medicine:</label>
 <!-- <textarea class="form-control" style="min-height: 200px;"></textarea> -->
+
 <div class="scr">
   <c:forEach items="${medicien}" var="medicien" varStatus="cnt">
   <div id="divmedicine@@@${cnt.count}">
+  <c:set value="" var="selectedschedule"/> 
   <c:choose>
   <c:when test="${fn:contains(medicien.value, 'checked')}">
     <c:set value="${fn:split(medicien.value, '_')}" var="chkValue"/>
   			<c:set value=" ${chkValue[0]}" var="checkedVal"/>
+  			<c:set value=" ${chkValue[1]}" var="schedulvalue"/>
+  			<c:if test="${fn:contains(schedulvalue,'@@')}"> 
+   			 <c:set value="${fn:split(schedulvalue, '@@')}" var="scheduleTemp"/> 
+  			 	<c:set value="${scheduleTemp[1]}" var="selectedschedule"/>
+ 			</c:if> 
   			<input type="checkbox" checked="checked"  id="complain${cnt.count}" name="chkmedicien" value="${medicien.key}" onclick="openDropDown()"/> ${checkedVal} <br />
   </c:when>
   <c:otherwise>
@@ -358,8 +365,16 @@ Prescription
   
   <select name="selschedule" id="selschedule${cnt.count}">
   <option id=""selected="selected" value = -1>Select</option>
-  <c:forEach items="${schedule}" var="schedule">
-  <option value="${schedule.seduleid}">${schedule.medicineschedule}</option>
+  <c:forEach items="${schedule}" var="schedulelist">
+ <c:choose>
+  <c:when test="${not empty selectedschedule and schedulelist.seduleid eq selectedschedule}">
+     <option value="${schedulelist.seduleid}" selected="selected">${schedulelist.medicineschedule}</option>
+  </c:when>
+  <c:otherwise>
+     <option value="${schedulelist.seduleid}">${schedulelist.medicineschedule}</option>
+  </c:otherwise>
+  </c:choose> 
+ 
 
   </c:forEach>
   </select>
@@ -370,11 +385,12 @@ Prescription
 </div>
 </div>
 
-<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<div class="col-xl-2-lg-2 col-md-4 col-sm-4 col-xs-4">
 <div class="field-set-box">
 <label>Report:</label>
 <!-- <textarea class="form-control" style="min-height: 200px;"></textarea> -->
 <div class="scr">
+
   <c:forEach items="${report}" var="reportloop">
   <c:choose>
   <c:when test="${fn:contains(reportloop.value, 'checked')}">
@@ -389,6 +405,58 @@ Prescription
   </c:otherwise>
   </c:choose>
   </c:forEach>
+</div>
+</div>
+</div>
+
+<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-4">
+<div class="field-set-box">
+<label>Finding:</label>
+<!-- <textarea class="form-control" style="min-height: 200px;"></textarea> -->
+<div class="scr">
+
+  <c:forEach items="${finding}" var="medicien" varStatus="cnt">
+  <c:set value="" var="textFindingvalue"/>
+  <div id="divfinding@@@${cnt.count}">
+  <c:choose>
+  <c:when test="${fn:contains(medicien.value, 'checked')}">
+    <c:set value="${fn:split(medicien.value, '_')}" var="chkValue"/>
+  			<c:set value=" ${chkValue[0]}" var="checkedVal"/>
+  			<c:set value=" ${chkValue[1]}" var="findingValue"/>
+  			<c:if test="${fn:contains(findingValue,'@@')}"> 
+   			 <c:set value="${fn:split(findingValue, '@@')}" var="findingTemp"/> 
+  			 	<c:set value="${findingTemp[1]}_${cnt.count}" var="textFindingvalue"/>
+ 			</c:if> 
+  			<input type="checkbox" checked="checked"  id="finding${cnt.count}" name="chkfinding" value="${medicien.key}" onclick="openDropDown()"/> ${checkedVal} <br />
+  </c:when>
+  <c:otherwise>
+   <c:set value="${fn:split(medicien.value, '_')}" var="chkValue"/>
+  			<c:set value=" ${chkValue[0]}" var="checkedVal"/>
+  			<input type="checkbox"  id="finding${cnt.count}" name="chkfinding" value="${medicien.key}"/>${checkedVal} <br />
+  </c:otherwise>
+  </c:choose>
+  
+  <c:choose>
+  <c:when test="${not empty textFindingvalue}">
+       <c:if test="${fn:contains(textFindingvalue, '_')}">
+          <c:set value="${fn:split(textFindingvalue, '_')}" var="findingvaluetemp"/>
+  			<c:set value="${findingvaluetemp[0]}" var="findingReport"/>
+  			<c:set value="${findingvaluetemp[1]}" var="counter"/>
+  			<c:if test="${cnt.count eq counter}">
+  			  <input type="text" name="txtfinding" id="txtfinding${cnt.count}" value="${findingReport}">
+  			</c:if>
+       </c:if>
+     
+  </c:when>
+  <c:otherwise>
+    <input type="text" name="txtfinding" id="txtfinding${cnt.count}" value=""> 
+  </c:otherwise>
+  </c:choose>
+ 
+  </div>
+  </c:forEach>
+  <input type="hidden" id="hdJsonValue" name="hdJsonValue" value="">
+   <input type="hidden" name="hdfinding" id="hdfinding" value=""> 
 </div>
 </div>
 </div>
@@ -526,6 +594,18 @@ function submitForm() {
 	var jsonString = JSON.stringify(JSONObj);
 	$("#hdJsonValue").val(jsonString);
 	
+	$('[id^="divfindin"]').each(function(){
+		var div = this.id.split("@@@");
+		var divid = div[1];
+		if($("#finding"+divid).is(":checked") == true && $("#txtfinding"+divid).val() !=""){
+			items = {};
+			items['complain'] = $("#finding"+divid).val();
+			items['txtfinding'] = $("#txtfinding"+divid).val();
+			JSONObj.push(items);
+		}
+	});
+	var jsonFinding = JSON.stringify(JSONObj);
+	$("#hdfinding").val(jsonFinding);
 	if(vbool){
 		$("#patientPriscriptionForm").submit();
 	}

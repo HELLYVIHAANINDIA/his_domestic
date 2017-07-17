@@ -32,6 +32,8 @@ public class TblClinicalReport implements Serializable {
 	private int statusid;
 	@Column(name="schedualid")
 	private int schedualid;
+	@Column(name="findingReport")
+	private String findingReport;
 	
 	
 	public TblClinicalReport(){
@@ -86,6 +88,16 @@ public class TblClinicalReport implements Serializable {
 
 	public void setSchedualid(int schedualid) {
 		this.schedualid = schedualid;
+	}
+
+
+	public String getFindingReport() {
+		return findingReport;
+	}
+
+
+	public void setFindingReport(String findingReport) {
+		this.findingReport = findingReport;
 	}
 	
 

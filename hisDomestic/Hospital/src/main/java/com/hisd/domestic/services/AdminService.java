@@ -546,6 +546,8 @@ public class AdminService {
 	public List<TblFinding> listFinding() throws Exception{
 		return tblFindingDao.findTblFinding("findingstatus",Operation_enum.EQ,0,"findingid",Operation_enum.ORDERBY,Operation_enum.DESC);
 	}
+	
+	
 	@Transactional
 	public boolean deleteComplatints(int compid, int status) {
 		StringBuilder query = new StringBuilder();

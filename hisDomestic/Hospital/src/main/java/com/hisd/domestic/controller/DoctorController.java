@@ -44,7 +44,9 @@ import com.hisd.domestic.model.TblClinicalReport;
 import com.hisd.domestic.model.TblComplaints;
 import com.hisd.domestic.model.TblConsultingDoctor;
 import com.hisd.domestic.model.TblDesignation;
+import com.hisd.domestic.model.TblFinding;
 import com.hisd.domestic.model.TblMedicine;
+import com.hisd.domestic.model.TblMedicineSchedule;
 import com.hisd.domestic.model.TblPatient;
 import com.hisd.domestic.model.TblPatientAddiction;
 import com.hisd.domestic.model.TblPatientRefrence;
@@ -262,6 +264,7 @@ public class DoctorController {
 	    String page = "admin/Patientpriscription";
 	    modelMap.addAttribute("patient",doctorService.getpatientinfo(patientid));
 	    modelMap.addAttribute("schedule", adminService.listSchedule());
+	    modelMap.addAttribute("finding", adminService.listFinding());
 	    List<TblComplaints> listAllComplaints = doctorService.getAllComplaints();
 	    List<Object[]>listComplaints = doctorService.getReportName(patientid,1);
 	    
@@ -284,14 +287,16 @@ public class DoctorController {
 		}
 	    Map<Integer,String> hashMapMedicien = new LinkedHashMap<Integer, String>();
 	   List<TblMedicine>listAllMedicine = doctorService.getAllMedicins();
+	   List<TblMedicineSchedule>listAllSchedule = doctorService.getMedicindeSchedule();
 	 List<Object[]>listMedicien = doctorService.getReportName(patientid,2);
 	  for (TblMedicine tblMedicine : listAllMedicine) {
-		  if(listMedicien.isEmpty()){
+		  if(listMedicien.isEmpty()){//create
 			  hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_notselected");
+			  
 		  }else{
-			  for (Object[] objects : listMedicien) {
-					if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[3].toString())){
-						hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_checked");
+			  for (Object[] objects : listMedicien) { //Edit
+					if(tblMedicine.getMedicine_id() == Integer.parseInt(objects[5].toString())){
+						hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_checked"+"@@"+Integer.parseInt(objects[3].toString()));
 						break;
 					}else{
 						hashMapMedicien.put(tblMedicine.getMedicine_id(), tblMedicine.getMedicine_name() +"_notselected");
@@ -321,9 +326,28 @@ public class DoctorController {
 		  }
 		
 	}
+	  
+	  Map<Integer, String>hashfindingMap = new LinkedHashMap<Integer, String>();
+	  List<TblFinding>listFindingReport = doctorService.getFindingReport();
+	  List<Object[]> listFinding = doctorService.getReportName(patientid, 4);
+	  for(TblFinding tblFinding : listFindingReport){
+		  if(listFinding.isEmpty()){
+			  hashfindingMap.put(tblFinding.getFindingid(),tblFinding.getFindingname()+"_notselected");
+		  }else{
+			  for(Object[] object:listFinding){
+				  if(tblFinding.getFindingid() == Integer.parseInt(object[3].toString())){
+					  hashfindingMap.put(tblFinding.getFindingid(),tblFinding.getFindingname()+"_checked"+"@@"+Integer.parseInt(object[4].toString()));
+					  break;
+				  }else{
+					  hashfindingMap.put(tblFinding.getFindingid(),tblFinding.getFindingname()+"_notselected");
+				  }
+			  }
+		  }
+	  }
 	    modelMap.addAttribute("complaints", hashMapComplain);
 	    modelMap.addAttribute("medicien", hashMapMedicien);
 	    modelMap.addAttribute("report", hashMapReport);
+	    modelMap.addAttribute("finding", hashfindingMap);
 	    modelMap.addAttribute("clinicalDetail", doctorService.getClinicalDetail(patientid));
 	    
 	    //Document
@@ -397,6 +421,27 @@ public class DoctorController {
 						}
 						complainList.add(tblClinicalReport);
 					}
+					
+					String findingReport = request.getParameter("hdfinding");
+					 jsonArray = new JSONArray(findingReport);
+					 for(int i =0;i< jsonArray.length();i++){
+						 TblClinicalReport tblClinicalReport = new TblClinicalReport();
+						 JSONObject jsonObject = jsonArray.getJSONObject(i);
+						 tblClinicalReport.setTblPatient(new TblPatient(patientid));
+						 for(Iterator it = jsonObject.keys();it.hasNext();){
+							 String key = it.next().toString();
+							 String value =jsonObject.getString(key);
+							 if(key.equals("txtfinding")){
+								 tblClinicalReport.setFindingReport(value);
+							 }else{
+								 int jsonvalue = Integer.parseInt(value);
+								 tblClinicalReport.setClnicalreportid(jsonvalue);
+							 }
+							 tblClinicalReport.setStatusid(4);
+						 }
+						 complainList.add(tblClinicalReport);
+					 }
+					
 			       if(clinicalbean.getReportList() != null){
 			           for(String obj:clinicalbean.getReportList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
@@ -436,6 +481,7 @@ public class DoctorController {
 		 modelMap.addAttribute("clinicalCompliants", doctorService.getReportName(patientid,1));
 		 modelMap.addAttribute("clinicalMedical", doctorService.getReportName(patientid,2));
 		 modelMap.addAttribute("clinicalReport", doctorService.getReportName(patientid,3));
+		 modelMap.addAttribute("clinicalFinding", doctorService.getReportName(patientid, 4));
 		 SimpleDateFormat newSimpleDateFormat = new SimpleDateFormat(clientDateFormate);
 		 modelMap.addAttribute("currentDate",newSimpleDateFormat.format(commonService.getServerDateTime()));
 		 
