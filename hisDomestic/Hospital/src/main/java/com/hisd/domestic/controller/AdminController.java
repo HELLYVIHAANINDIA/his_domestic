@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -867,6 +868,15 @@ public class AdminController {
 								dateFormat.format(date));
 						List<Object[]> addictionList = commonService
 								.getAddiction();
+						 final AtomicInteger count = new AtomicInteger(0); 
+						  final int jobID;
+						  final String name;
+						  boolean isFilled;
+						  String title = null;
+						  name = title;
+						    isFilled = false;
+						    jobID = count.incrementAndGet(); 
+						   modelMap.addAttribute("crno", jobID);
 						modelMap.addAttribute("addictionlist", addictionList);
 					} else {
 						page = "admin/Follow-UpPatient";
@@ -996,7 +1006,9 @@ public class AdminController {
 			if(!selAddictionList.isEmpty()){
 				c=0;
 			}
+			
 		}
+		
 		modelMap.addAttribute("addictionMap",addictionMap);
 		modelMap.addAttribute("pageStatus", "edit");
 		countryJson = getContryJson();

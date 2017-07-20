@@ -386,9 +386,10 @@
 							<label>Patient CR No. <span class="cm-field">*</span></label>
 							<div class="form-group">
 								<div class="input-group">
+							
 									<span class="input-group-addon"><i
 										class="fa fa-plus-square"></i></span> <input class="form-control" validarr="required"
-										value="${patient.txtpatientcrno}" type="text" title ="Patient CR NO" onblur="validateTextComponent(this)"
+										value="${patientcount.patientid}" type="text" title ="Patient CR NO" onblur="validateTextComponent(this)"
 										id="txtpatientcrno" name="txtpatientcrno" validationmsg="Allows min 3 and max. 200 characters (',- , .,space)">
 								</div>
 							</div>

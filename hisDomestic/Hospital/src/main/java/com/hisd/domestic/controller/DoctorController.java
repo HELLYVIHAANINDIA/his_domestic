@@ -361,7 +361,6 @@ public class DoctorController {
 		// modelMap.addAttribute("clinicalMedical", doctorService.getReportName(patientid,2));
 		// modelMap.addAttribute("clinicalReport", doctorService.getReportName(patientid,3));
 		return page;
-		
 	}
 	@RequestMapping(value="/domestic/doctor/saveClinical/{patientid}",  method= RequestMethod.POST)
 	public String saveClinical(@PathVariable("patientid") int patientid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap,RedirectAttributes attributes){
@@ -373,13 +372,11 @@ public class DoctorController {
 					.getAttribute(CommonKeywords.SESSION_OBJ.toString());
 			Clinicalbean clinicalbean = doctorService.getClinicalDatabean(request);
 			TblClinical tblClinical = new TblClinical();
-		
 			tblClinical.setTblPatient(new TblPatient(patientid));
 			tblClinical.setHistory(clinicalbean.getTxthistory());
 			tblClinical.setComments(clinicalbean.getTxtcomments());
 			tblClinical.setRemark(clinicalbean.getTxtremark());
 			List<TblClinicalReport>complainList = new ArrayList<TblClinicalReport>();
-			         
 			       if(clinicalbean.getComlaintsList() != null){
 			           for(String obj:clinicalbean.getComlaintsList()){
 			        	   TblClinicalReport tblClinicalReport = new TblClinicalReport();
@@ -399,9 +396,7 @@ public class DoctorController {
 			        	  complainList.add(tblClinicalReport);
 			           }
 			       }*/
-			       
 			       String medicineSchedile = request.getParameter("hdJsonValue");
-					
 					JSONArray jsonArray = new JSONArray(medicineSchedile);
 					for (int i = 0; i < jsonArray.length(); i++) {
 						TblClinicalReport tblClinicalReport = new TblClinicalReport();
@@ -460,12 +455,8 @@ public class DoctorController {
 			        	  success = doctorService.deleteClinicalReport(patientid);
 			        	  success  = doctorService.addComplaints(complainList);
 			         }
-			         
 			         attributes.addFlashAttribute(success ? CommonKeywords.SUCCESS_MSG.toString() : CommonKeywords.ERROR_MSG.toString(),"Information Submitted Successfully" );
-			     
 			        	page = "redirect:/domestic/doctor/getacknowlege/"+patientid;
-			      
-			           
 	}
 		
 		catch (Exception e) {
