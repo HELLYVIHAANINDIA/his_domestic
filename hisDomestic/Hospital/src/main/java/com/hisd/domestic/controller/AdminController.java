@@ -155,6 +155,9 @@ public class AdminController {
 					page="admin/Finding";
 					modelMap.addAttribute("finding", adminService.listFinding());
 				    break;
+				case 13:
+					page="admin/SearchUser";
+					break;
 					
 					default:page = "admin/Userdashboad";
 					break;
@@ -1167,6 +1170,28 @@ public String addFinding(HttpServletRequest request,@PathVariable("txtFinding")S
 	}
 	return page;
 	
+}
+
+@RequestMapping(value = "/domestic/patient/searchUser/{search}", method = RequestMethod.POST)
+public String searchUser(HttpServletRequest request,
+		HttpServletResponse response,
+		@PathVariable("search") String search, ModelMap modelMap) {
+	String page = REDIRECT_SESSION_EXPIRED;
+	try {
+		HttpSession session = request.getSession();
+		SessionBean sessionBean = (SessionBean) session
+				.getAttribute(CommonKeywords.SESSION_OBJ.toString());
+		if (sessionBean != null) {
+			modelMap.addAttribute("userData",
+					adminService.getuserDetail(search));
+
+			page = "admin/ViewUserDetail";
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return page;
+
 }
 
 

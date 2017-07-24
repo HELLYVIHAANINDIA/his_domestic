@@ -68,13 +68,15 @@
 							$(this).datetimepicker({
 								format : 'd-M-Y',
 								maxDate : 0
+								
 							});
 						});
 
 						$(".dateBoxappointment").each(function() {
 							$(this).datetimepicker({
 								format : 'd-M-Y H:i',
-								minDate : 0
+								minDate : 0,
+								step: 15
 							});
 						});
 						var obj;

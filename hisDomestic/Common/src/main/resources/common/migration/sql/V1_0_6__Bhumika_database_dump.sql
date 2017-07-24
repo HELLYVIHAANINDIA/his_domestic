@@ -38,7 +38,7 @@ insert  into `tbl_addiction`(`addictionid`,`addictionname`) values
 
 (1,'Other'),
 
-(2,'Tabeco'),
+(2,'Tobeco'),
 
 (3,'Smoking'),
 

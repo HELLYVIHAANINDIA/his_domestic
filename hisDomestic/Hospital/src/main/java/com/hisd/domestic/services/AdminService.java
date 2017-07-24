@@ -721,4 +721,33 @@ public class AdminService {
 		
 	}
 	
+	@Transactional
+	public List<Object[]> getuserDetail(String searchUser) {
+		StringBuilder query = new StringBuilder();
+		List<Object[]> list;
+		query.append(" Select tblUser.userdetailid,tblUser.firstname,tblUser.lastname,tblUser.gender");
+		query.append(",CONCAT(tblUser.address,',',tblUser.landmark,',',tblCountry.countryName,',',tblState.stateName,',',tblUser.city,'-',tblUser.pincode) AS address");// ',',countryName,',',stateName,
+		query.append(",tblUser.mobileno,tblUserLogin.loginid,tblUserType.usertypename");
+		query.append(" FROM TblUser tblUser");
+		query.append(" INNER JOIN TblUserLogin tblUserLogin,TblUserType tblUserType,TblDesignation tblDesignation,TblCountry tblCountry,TblState tblState");
+		query.append(" WHERE tblUser.countryId = tblCountry.countryId");
+		query.append(" AND tblUser.stateId = tblState.stateId");
+		query.append(" AND tblUser.status = 1");
+		query.append(" AND  tblUserLogin.userId = tblUser.userid" );
+		query.append(" AND tblUserType.usertypeid = tblUserLogin.usertypeid" );
+		query.append(" AND tblUserLogin.tblDesignation.designationId = tblDesignation.designationId" );
+		
+		if (!searchUser.isEmpty()) {
+			query.append(" AND (tblUser.userdetailid Like '%"+searchUser+"%'  OR tblUser.firstname Like '%"+searchUser+"%'  OR tblUser.mobileno Like '%"+searchUser+"%')");
+			 list = hibernateQueryDao.createNewQuery(query.toString(), null);
+			
+		}
+		else{
+			 list = hibernateQueryDao.createNewQuery(
+					query.toString(), null);
+		}
+		query.append(" ORDER BY tblUser.userdetailid");
+		return list;
+	}
+	
 }

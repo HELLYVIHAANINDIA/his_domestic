@@ -77,27 +77,11 @@
 						</a>
 							</li>
 
-					<!-- 	<li><a href="javascript:void(0)"> <i
+						<li><a href="#" onclick="changeTab(13,0,1)"> <i
 								class="fa fa-tags icon_tags_alt header-icon" aria-hidden="true"></i>
-								Link-5
+								Search
 						</a>
-							<ul class="dropNav">
-								<li><a href="javascript:void(0)">DropDown-1 <i
-										class="fa fa-angle-right arrow_carrot-right submenu-arrow-right"
-										aria-hidden="true"></i>
-								</a>
-									<ul class="submenu-sub">
-										<li><a href="#">Sub-DropDown-1</a></li>
-										<li><a href="#">Sub-DropDown-2</a></li>
-									</ul></li>
-								<li><a href="javascript:void(0)">DropDown-2<i
-										class="fa fa-angle-right arrow_carrot-right submenu-arrow-right"
-										aria-hidden="true"></i></a>
-									<ul class="submenu-sub">
-										<li><a href="#">Sub-DropDown-1</a></li>
-										<li><a href="#">Sub-DropDown-2</a></li>
-									</ul></li>
-							</ul></li> -->
+							</li>
 
 					</ul>
 				</nav>
