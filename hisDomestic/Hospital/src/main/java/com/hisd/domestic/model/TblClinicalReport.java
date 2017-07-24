@@ -19,7 +19,7 @@ public class TblClinicalReport implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name="clinicalreport_id")
 	private int clinicalreport_id;
 	

@@ -711,5 +711,14 @@ public class AdminService {
 		bSuccess = true;
 		return bSuccess;
 	}
+
+	@Transactional
+	public List<Object[]> getlastpatient(){
+		StringBuilder query = new StringBuilder();
+		query.append("SELECT patientid FROM TblPatient ORDER BY patientid DESC ");
+		List<Object[]>list = hibernateQueryDao.createNewQuery(query.toString(), null);
+		return list;
+		
+	}
 	
 }

@@ -861,6 +861,8 @@ public class AdminController {
 						countryJson = getContryJson();
 						modelMap.addAttribute("countryJson", countryJson);
 						modelMap.addAttribute("pageStatus", "create");
+					List<Object[]>list =adminService.getlastpatient();
+							modelMap.addAttribute("patientcount", list);
 						DateFormat dateFormat = new SimpleDateFormat(
 								clientDateFormate);
 						Date date = new Date();

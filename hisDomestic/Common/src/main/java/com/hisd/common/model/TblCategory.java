@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class TblCategory implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "categoryId", nullable = false)
     private int categoryId;
 	@Column(name = "unspscId")

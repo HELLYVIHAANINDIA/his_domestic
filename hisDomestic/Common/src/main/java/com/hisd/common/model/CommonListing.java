@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class CommonListing implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "listingId", unique = true, nullable = false)
 	private Integer listingId;
 	@Column(name = "columnName")

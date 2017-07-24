@@ -43,7 +43,7 @@ public class TblProcess implements java.io.Serializable {
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="processId",unique=true,nullable=false)
 	public int getProcessId() {
 		return processId;

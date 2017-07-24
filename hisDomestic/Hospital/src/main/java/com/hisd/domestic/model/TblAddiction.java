@@ -16,7 +16,7 @@ public class TblAddiction implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name="addictionid")
 	private int addictionid;
 	@Column(name="addictionname")

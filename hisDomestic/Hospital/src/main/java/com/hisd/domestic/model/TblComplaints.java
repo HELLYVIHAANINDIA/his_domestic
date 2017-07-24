@@ -16,7 +16,7 @@ public class TblComplaints implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "complaintsid")
 	public int complaintsid;
 	@Column(name = "complaintsname")

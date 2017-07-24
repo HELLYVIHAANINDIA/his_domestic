@@ -18,7 +18,6 @@ import javax.persistence.Table;
 public class TblClinical implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="clinical_id")
 	private int clinical_id;
 	@OneToOne(fetch = FetchType.LAZY)

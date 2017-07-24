@@ -16,7 +16,7 @@ public class TblPayBy implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name="paybyid")
 	private int paybyid;
 	@Column(name="paybyname")

@@ -21,7 +21,7 @@ public class TblPatientRefrence implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "referenceid")
 	private int referenceid;
 	@Column(name = "referencedtl")

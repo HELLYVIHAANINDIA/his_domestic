@@ -23,7 +23,7 @@ public class TblAppointment implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "appid")
 	private int appid;
 	@Column(name = "status")

@@ -15,7 +15,7 @@ public class TblSocialEconomicStatus implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name="socialeconomicstatusid")
 	private int socialeconomicstatusid;
 	@Column(name="socialeconomicstatusname")

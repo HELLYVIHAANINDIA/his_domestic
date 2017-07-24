@@ -39,7 +39,7 @@ public class TblColumnType  implements java.io.Serializable {
         }
 
             @Id
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            @GeneratedValue
             @Column(name="columnTypeId",unique=true,nullable=false)   
 			public int getColumnTypeId() {
 				return columnTypeId;

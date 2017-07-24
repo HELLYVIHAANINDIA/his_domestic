@@ -38,7 +38,7 @@ public class TblMarquee implements Serializable {
 	// ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
 	// ----------------------------------------------------------------------
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "marqueeId", nullable = false)
 	private Integer marqueeId;
 

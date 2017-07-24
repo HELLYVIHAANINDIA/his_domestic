@@ -47,7 +47,17 @@
 					function() {
 						//	var hdTabId = $("#hdTabId").val();
 						//	$("#hdNewTabId").val(hdTabId);
-
+						var pageStatus = '${pageStatus}';
+						var patientcrno = '${patient.txtpatientcrno}';
+						if (pageStatus != 'edit'){
+							
+							 var id = '${patientcount[0]}';
+	                            id++;
+	                           $("#txtpatientcrno").val(id);
+						}else{
+							 $("#txtpatientcrno").val(patientcrno);
+						}
+                       
 						var caseSelect = '${selectTabId}';
 						$("#appoinmentPatientTabId").val(caseSelect);
 						if (caseSelect == 2) {
@@ -81,7 +91,7 @@
 							});
 						}
 
-						var pageStatus = '${pageStatus}';
+		
 						
 
 						if (pageStatus == 'edit') {
@@ -386,11 +396,13 @@
 							<label>Patient CR No. <span class="cm-field">*</span></label>
 							<div class="form-group">
 								<div class="input-group">
-							
-									<span class="input-group-addon"><i
+						       
+						      
+						           <span class="input-group-addon"><i
 										class="fa fa-plus-square"></i></span> <input class="form-control" validarr="required"
-										value="${patientcount.patientid}" type="text" title ="Patient CR NO" onblur="validateTextComponent(this)"
+										value="" type="text" title ="Patient CR NO" onblur="validateTextComponent(this)"
 										id="txtpatientcrno" name="txtpatientcrno" validationmsg="Allows min 3 and max. 200 characters (',- , .,space)">
+						      
 								</div>
 							</div>
 						</div>

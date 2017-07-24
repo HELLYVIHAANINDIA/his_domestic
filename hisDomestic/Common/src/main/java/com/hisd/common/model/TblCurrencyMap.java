@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class TblCurrencyMap implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "currencyMapId", nullable = false)
     private int currencyMapId;
 	@Column(name = "departmentId")

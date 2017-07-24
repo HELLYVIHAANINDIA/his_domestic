@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class TblCategoryMap implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name = "categoryMapId", nullable = false)
     private int categoryMapId;
 	@Column(name = "userId")

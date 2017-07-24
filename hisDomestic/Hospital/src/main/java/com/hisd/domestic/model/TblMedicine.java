@@ -13,7 +13,7 @@ public class TblMedicine implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	@Column(name="medicine_id")
 	private int medicine_id;
 	@Column(name="medicine_name")

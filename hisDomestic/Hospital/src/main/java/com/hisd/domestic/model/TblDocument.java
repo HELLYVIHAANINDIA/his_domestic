@@ -53,7 +53,7 @@ public class TblDocument implements Serializable {
 	    }
 	    
 	    @Id
-	    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	    @GeneratedValue
 	    @Column(name="documentid", nullable=false)
 	    public Integer getdocumentid() {
 	        return this.documentid;

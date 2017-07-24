@@ -16,7 +16,7 @@ public class TblConsultingDoctor implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name="consultingdoctorid")
 	private int consultingdoctorid;
 	@Column(name="consultingdoctorname")
