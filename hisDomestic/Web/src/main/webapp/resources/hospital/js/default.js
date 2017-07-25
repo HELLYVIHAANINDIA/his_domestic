@@ -1,4 +1,7 @@
+var  userId = $("#hduserid").val();
+
 function changeTab(tabId,hdPatientId,hdUserTypeId){
+	alert(userId);
 	if(tabId != undefined){
 		var url ;
 		if(hdUserTypeId != 2){
@@ -9,6 +12,7 @@ function changeTab(tabId,hdPatientId,hdUserTypeId){
 		$.ajax({
 			type: "POST",
 			url: url,
+			data:{'hduserid':userId},
 			success: function success(result){
 				$("#divCallPage").html("");
 	 			$("#divCallPage").html(result);
@@ -17,12 +21,13 @@ function changeTab(tabId,hdPatientId,hdUserTypeId){
 	}
 	 $("#hdTabId").val(tabId);
 }
+
 $(document).ready(function() {
 	var hdTabId = $("#hdTabId").val();
 	var hdUserTypeId = $("#hdUserTypeId").val();
 	var hdsuperAdmin = $("#hdsuperAdmin").val();
 	var hdPatientId = $("#hdPatientId").val();
-
+	
 	if(hdTabId == 2){
 		changeTab(hdTabId,hdPatientId,hdUserTypeId);
 	}

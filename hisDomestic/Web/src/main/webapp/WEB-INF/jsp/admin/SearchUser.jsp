@@ -5,7 +5,7 @@ function searchUser() {
 	 
 	var search = $("#txtsearch").val();
 			 $.ajax({
-				type: "POST",
+				type: "GET",
 				url: contextPath+"/domestic/patient/searchUser/"+search,
 				success: function success(result){
 					$("#searchUser").html("");

@@ -138,6 +138,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 				    <input type="hidden" name="hduserid" id="hduserid" value="${user[0][0]}">
+				        <input type="hidden" name="hduserloginid" id="hduserloginid" value="${user[0][24]}">
 						<label>User Role <span class="cm-field">*</span></label>
 						<div class="form-group">
 						<c:choose>

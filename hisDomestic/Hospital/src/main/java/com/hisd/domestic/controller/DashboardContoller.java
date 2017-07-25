@@ -78,7 +78,7 @@ public class DashboardContoller {
 		    		}
 		    	}
 		    	modelMap.addAttribute("hdPatientId", hdPatientId);
-		    	modelMap.addAttribute("hdPatientId", hduserid);
+		    	modelMap.addAttribute("hduserid", hduserid);
 		    	modelMap.addAttribute("tabid", tabid);
 		    	page = "/user/HomePage";
 		    }

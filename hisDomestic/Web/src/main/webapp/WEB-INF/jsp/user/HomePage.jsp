@@ -4,6 +4,7 @@
 <input type="hidden" value="${hdPatientId}" name="hdPatientId" id="hdPatientId">
 <input type="hidden" value="${userType}" name="hdUserTypeId" id="hdUserTypeId">
 <input type="hidden" value="${message}" name="hdmessage" id="hdmessage">
+<input type="hidden" value="${hduserid}" name="hduserid" id="hduserid">
 
 
 

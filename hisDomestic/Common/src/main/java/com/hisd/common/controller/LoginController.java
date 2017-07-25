@@ -207,11 +207,7 @@ public class LoginController {
 	                        	redirect="redirect:loginfailed";
 	                            throw new BadCredentialsException("Bad credentials");	
                         	}else if(cstatus==2) {
-                        		redirectAttributes.addFlashAttribute("message", "Your request is rejected");
-	                        	redirect="redirect:loginfailed";
-	                            throw new BadCredentialsException("Bad credentials");
-                        	}else if(cstatus==3) {
-                        		redirectAttributes.addFlashAttribute("message", "Your account is di-activated");
+                        		redirectAttributes.addFlashAttribute("message", "Your request is di-activated ");
 	                        	redirect="redirect:loginfailed";
 	                            throw new BadCredentialsException("Bad credentials");
                         	}

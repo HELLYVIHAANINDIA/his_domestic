@@ -2,23 +2,36 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script>
-function newAppointment(userid) {
-	
-	
+function deactiveuser(userid) {
+	var search = '${search}';
 			$.ajax({
 				type: "POST",
-				url: contextPath+"/domestic/user/tabcontent/14/"+userid,
+				url: contextPath+"/domestic/patient/deActiveUser/"+userid+"/"+search,
 				success: function success(result){
-					/* $("#viewRegister").html("");
-		 			$("#viewRegister").html(result); */
+					$("#searchUser").html("");
+		 			$("#searchUser").html(result);
+			}
+			});
+	    
+	
+}
+function activeuser(userid) {
+	
+	var search = '${search}';
+			$.ajax({
+				type: "POST",
+				url: contextPath+"/domestic/patient/activeUser/"+userid+"/"+search,
+				success: function success(result){
+					$("#searchUser").html("");
+		 			$("#searchUser").html(result);
 			}
 			});
 	    
 	
 }
  function bookApp(userid){
-	$("#hduserid").val(userid);
-	$("#frmPatientView").submit();
+	
+ 	$("#frmPatientView").submit();
 } 
 </script>
 
@@ -48,21 +61,15 @@ function newAppointment(userid) {
 							</c:if>
 							<c:forEach items="${userData}" var="dtls">
 								<tr>
-									<%-- <td width="7%">
-									<a
-										href="${pageContext.servletContext.contextPath}/domestic/user/tabcontent/6/${dtls[0]}"
-										class="tag square-tag tag-success">Edit</a> 
+								
+									 <td>      
+										<input type="text" id="hduserid" name="hduserid" value="${dtls[0]}">
+										 <button type="button" onclick="bookApp(${dtls[0]})">Edit</button>
 										<c:choose>
-											<c:when test="${serchstatus ne 'search'}">
-												<a href="#" class="tag square-tag tag-danger"
-													data-toggle="modal" data-target="#bordermodal">De-Active</a>
-											</c:when>
-										</c:choose>
-
-										<div class="modal fade border-modal" id="bordermodal"
-											tabindex="-1" role="dialog" aria-labelledby="bordermodal"
-											aria-hidden="true">
-											<div class="modal-dialog" role="document">
+										<c:when test="${dtls[8] eq 1}">
+										 <button type="button" data-toggle="modal" data-target="#bordermodal${dtls[9]}">Deactive</button>
+										 <div class="modal fade border-modal" id="bordermodal${dtls[9]}" tabindex="-1" role="dialog" aria-labelledby="bordermodal" aria-hidden="true">
+											<div class="modal-dialog" role="dialog">
 												<div class="modal-content">
 													<div class="modal-body">
 														<button type="button" class="close" data-dismiss="modal"
@@ -70,21 +77,22 @@ function newAppointment(userid) {
 															<span aria-hidden="true">&times;</span>
 														</button>
 
-														<h3>Modal title</h3>
-														<p>Are You sure De-Active User ${dtls[2]}?</p>
+														<h3>User</h3>
+														<div>Are You sure Deactive ${dtls[1]} ${dtls[2]} ?</div>
 														<button type="button" class="btn btn-danger"
-															data-dismiss="modal" onclick="#">Cancel</button>
-														<button type="button" class="btn btn-success"
-															data-dismiss="modal" onclick="deletePatient(${dtls[8]})">Ok</button>
+															data-dismiss="modal" onclick="#">Cancel </button>
+														<button type="button" class="btn btn-success" onclick="deactiveuser(${dtls[9]})">Ok</button>
 													</div>
 												</div>
 											</div>
-										</div></td> --%>
+										</div>
 										
-<%-- 									<td><a href="${pageContext.servletContext.contextPath}/domestic/user/tabcontent/7/${dtls[0]}" >${dtls[1]}</a></td> --%>
-									<td>
-										<input type="hidden" id="hduserid" name="hduserid" value="">
-										<button type="button" onclick="bookApp(${dtls[0]})">Edit</button>
+										</c:when>
+										<c:otherwise>
+										 <button type="button" onclick="activeuser(${dtls[9]})">Active</button>
+										</c:otherwise>
+										</c:choose>
+										
 									</td>
 									<td>${dtls[1]} ${dtls[2]}</td>
 									<td>${dtls[4]}</td>

@@ -140,10 +140,12 @@ public class AdminService {
 				userdtbean.setDtdesignation(5);
 				userdtbean.setOtherDesignation(request.getParameter("hidOtherDesig"));
 			}
+			userdtbean.setUserloginid(pInt(request, "hduserloginid"));
 			userdtbean.setUserid(pInt(request, "hduserid"));
 			userdtbean.setUsertypeid(pInt(request, "selUserRole"));
 			userdtbean.setCasetypeid(1);
 			userdtbean.setUserid(1);
+			
 		return userdtbean;
 	}
 //get Patient Details
@@ -727,7 +729,7 @@ public class AdminService {
 		List<Object[]> list;
 		query.append(" Select tblUser.userdetailid,tblUser.firstname,tblUser.lastname,tblUser.gender");
 		query.append(",CONCAT(tblUser.address,',',tblUser.landmark,',',tblCountry.countryName,',',tblState.stateName,',',tblUser.city,'-',tblUser.pincode) AS address");// ',',countryName,',',stateName,
-		query.append(",tblUser.mobileno,tblUserLogin.loginid,tblDesignation.designationName");
+		query.append(",tblUser.mobileno,tblUserLogin.loginid,tblDesignation.designationName,tblUserLogin.cstatus,tblUserLogin.userId");
 		query.append(" FROM TblUser tblUser");
 		query.append(" ,TblUserLogin tblUserLogin,TblCountry tblCountry,TblState tblState");
 		query.append(" INNER JOIN tblUserLogin.tblUserType tblusertype");
@@ -759,7 +761,7 @@ public class AdminService {
 		query.append(" Select tblUser.userdetailid,tblusertype.usertypeid,tblusertype.usertypename,tblUser.firstname,tblUser.middlename,tblUser.lastname,tblUser.gender,tblUser.bod");
 		query.append(",tblUser.address,tblUser.landmark,tblCountry.countryName,tblState.stateName,tblUser.city,tblUser.pincode,tblUser.countrycodemobileno");// ',',countryName,',',stateName,
 		query.append(",tblUser.mobileno,tblUser.countrycodelandline,tblUser.landlineno,tblUser.extlandline");
-		query.append(",tblUserLogin.loginid,tblUserLogin.otherdesignation,tblDesignation.designationName,tblState.stateId,tblDesignation.designationId");
+		query.append(",tblUserLogin.loginid,tblUserLogin.otherdesignation,tblDesignation.designationName,tblState.stateId,tblDesignation.designationId,tblUserLogin.userId");
 		query.append(" FROM TblUser tblUser");
 		query.append(" ,TblUserLogin tblUserLogin,TblCountry tblCountry,TblState tblState");
 		query.append(" INNER JOIN tblUserLogin.tblUserType tblusertype");
@@ -780,5 +782,17 @@ public class AdminService {
 		tblUserLoginDao.saveOrUpdateEntity(tblUserLogin);
 		bSuceess = true;
 		return bSuceess;
+	}
+	@Transactional
+	public boolean auctiveDeactiveUser(int userId,int status){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object>parameter = new HashMap<String, Object>();
+		
+		parameter.put("userId", userId);
+		parameter.put("status", status);
+		query.append("UPDATE TblUserLogin set cstatus =:status WHERE userId =:userId");
+		int flag = hibernateQueryDao.updateDeleteNewQuery(query.toString(),parameter);
+		return flag != 0 ? true : false;
+		
 	}
 }

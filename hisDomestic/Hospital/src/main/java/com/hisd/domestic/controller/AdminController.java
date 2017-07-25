@@ -160,7 +160,8 @@ public class AdminController {
 					break;
 				case 14:
 					page = "admin/CreateHospitalUser";
-					getuserdetail(patientid, modelMap);
+					int userid =Integer.parseInt(request.getParameter("hduserid"));
+					getuserdetail(userid, modelMap);
 					
 					break;
 					
@@ -429,6 +430,7 @@ public class AdminController {
 					 success = adminService.addUser(tblUserLogin, tblUser,tblConsultingDoctor);
                  }else{
                 	 tblUser.setUserdetailid(userDatabean.getUserid());
+                	 tblUser.setUserid(userDatabean.getUserloginid());
                 	 success = adminService.edituser(tblUser, tblUserLogin);
                  }
 				
@@ -1068,9 +1070,14 @@ public class AdminController {
 	
 	@RequestMapping(value = "domestic/complaints/deleteFinding/{findingId}")
 	public String deleteFinding(HttpServletRequest request,ModelMap modelMap,@PathVariable("findingId") int findingId) throws Exception{
+		String page = null;
+		try{
 		adminService.deleteFinding(findingId, 1);
 		modelMap.addAttribute("finding", adminService.listFinding());
-	  String page="admin/Finding";
+	   page="admin/Finding";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	  return page;
 	}
 	
@@ -1079,21 +1086,30 @@ public class AdminController {
 	
 	@RequestMapping(value = "/domestic/user/patientReport/{drid}", method = RequestMethod.POST)
 	public String patientReport(@PathVariable("drid") Integer drid,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) throws ParseException{
-		String page;
+		String page = null;
+		try{
 	     String startDate = null;
 	     String endDate = null; 
          modelMap.addAttribute("patient", adminService.search(drid, startDate, endDate));
 	      page="admin/searchPatient";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return page;
 		
 	}
 	@RequestMapping(value = "/domestic/user/appointmentReport/{startdate}/{enddate}", method = RequestMethod.POST)
 	public String appointmentReport(@PathVariable("startdate") String startdate,@PathVariable("enddate") String enddate,HttpServletRequest request,HttpServletResponse response,ModelMap modelMap) throws ParseException{
-		String page;
-	 String startDate = commonService.convertToDBDate(clientdateformatehhmm, sqldateformate,startdate);
-	 String endDate = commonService.convertToDBDate(clientdateformatehhmm, sqldateformate,enddate);
-        modelMap.addAttribute("appointment", adminService.search(0, startDate, endDate));
-	      page="admin/SearchAppointment";
+		String page = null;
+		try{
+			 String startDate = commonService.convertToDBDate(clientdateformatehhmm, sqldateformate,startdate);
+			 String endDate = commonService.convertToDBDate(clientdateformatehhmm, sqldateformate,enddate);
+		        modelMap.addAttribute("appointment", adminService.search(0, startDate, endDate));
+			      page="admin/SearchAppointment";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 		return page;
 		
 	}
@@ -1103,6 +1119,7 @@ public class AdminController {
 	public String addComplaints(HttpServletRequest request,ModelMap modelmap,@PathVariable("complain") String complain) throws Exception{
 		boolean success;
 		String page = null;
+		try{
 		System.out.println(complain);
 		TblComplaints tblComplaints = new TblComplaints();
 		tblComplaints.setComplaintsname(complain);
@@ -1111,6 +1128,10 @@ public class AdminController {
 		modelmap.addAttribute("complaints", adminService.complaintsList());
 		page = "admin/ComplaintsTable";
 	}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return page;
 		
 	}
@@ -1122,14 +1143,19 @@ public class AdminController {
 	public String addMedicine(HttpServletRequest request,ModelMap modelmap,@PathVariable("medicine") String medicine) throws Exception{
 		boolean success;
 		String page = null;
+		try{
+			TblMedicine tblMedicine = new TblMedicine();
+			tblMedicine.setMedicine_name(medicine);
+		success =	adminService.addMedicine(tblMedicine);
+		if(success){
+			modelmap.addAttribute("medicine", adminService.medicineList());
+			page="admin/MedicineTable";
+		}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		TblMedicine tblMedicine = new TblMedicine();
-		tblMedicine.setMedicine_name(medicine);
-	success =	adminService.addMedicine(tblMedicine);
-	if(success){
-		modelmap.addAttribute("medicine", adminService.medicineList());
-		page="admin/MedicineTable";
-	}
 		return page;
 		
 	}
@@ -1138,52 +1164,67 @@ public class AdminController {
 public String addReport(HttpServletRequest request,ModelMap modelmap,@PathVariable("report") String report) throws Exception{
 	boolean success;
 	String page = null;
-	
-	TblReports tblReports = new TblReports();
-	tblReports.setReport_name(report);
-success =	adminService.addReport(tblReports);
-if(success){
-	modelmap.addAttribute("report", adminService.reportList());
-	page="admin/ReportTable";
-}
+	try{
+		TblReports tblReports = new TblReports();
+		tblReports.setReport_name(report);
+	success =	adminService.addReport(tblReports);
+	if(success){
+		modelmap.addAttribute("report", adminService.reportList());
+		page="admin/ReportTable";
+	}
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
 	return page;
 	
 }
 
 @RequestMapping(value ="/domestic/user/addMedicineSchedule/{txtschedule}",method = RequestMethod.POST,produces={"application/json; charset=UTF-8"})
 public String addMedicineSchedule(HttpServletRequest request,@PathVariable("txtschedule")String txtschedule,ModelMap modelMap) throws Exception{
-	
-	boolean success;
 	String page= null;
-	TblMedicineSchedule tblMedicineSchedule = new TblMedicineSchedule();
-	tblMedicineSchedule.setMedicineschedule(txtschedule);
-	success = adminService.addMedicineSchedule(tblMedicineSchedule);
-	if(success){
+	try{
+		boolean success;
 		
-		modelMap.addAttribute("schedule", adminService.listSchedule());
-		page="admin/MedicineScheduleTable";
+		TblMedicineSchedule tblMedicineSchedule = new TblMedicineSchedule();
+		tblMedicineSchedule.setMedicineschedule(txtschedule);
+		success = adminService.addMedicineSchedule(tblMedicineSchedule);
+		if(success){
+			
+			modelMap.addAttribute("schedule", adminService.listSchedule());
+			page="admin/MedicineScheduleTable";
+		}
+	}catch (Exception e) {
+		e.printStackTrace();
 	}
+	
 	return page;
 	
 }
 
 @RequestMapping(value ="/domestic/user/addFinding/{txtFinding}",method = RequestMethod.POST)
 public String addFinding(HttpServletRequest request,@PathVariable("txtFinding")String txtFinding,ModelMap modelMap) throws Exception{
-	boolean success;
 	String page= null;
-	TblFinding tblFinding = new TblFinding();
-	tblFinding.setFindingname(txtFinding);
-	success = adminService.addFinding(tblFinding);
-	if(success){
+	try{
+		boolean success;
+		TblFinding tblFinding = new TblFinding();
+		tblFinding.setFindingname(txtFinding);
+		success = adminService.addFinding(tblFinding);
+		if(success){
+			
+			modelMap.addAttribute("finding", adminService.listFinding());
+			page="admin/FindingTable";
+		}
 		
-		modelMap.addAttribute("finding", adminService.listFinding());
-		page="admin/FindingTable";
+	}catch(Exception e){
+		e.printStackTrace();
 	}
+	
+	
 	return page;
 	
 }
 
-@RequestMapping(value = "/domestic/patient/searchUser/{search}", method = RequestMethod.POST)
+@RequestMapping(value = "/domestic/patient/searchUser/{search}", method = RequestMethod.GET)
 public String searchUser(HttpServletRequest request,
 		HttpServletResponse response,
 		@PathVariable("search") String search, ModelMap modelMap) {
@@ -1231,6 +1272,32 @@ private String getuserdetail(int userid,ModelMap modelMap){
 		e.printStackTrace();
 	}
 	return clientDateFormate;
+	
+}
+@RequestMapping(value = "/domestic/patient/deActiveUser/{userid}/{search}", method = RequestMethod.POST)
+public String deActiveUser(@PathVariable("userid") int userid,@PathVariable("search") String search,HttpServletRequest request, ModelMap modelMap){
+	String page = null;
+	try{
+		adminService.auctiveDeactiveUser(userid, 2);
+		page = "redirect:/domestic/patient/searchUser/"+search;
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	return page;
+	
+}
+@RequestMapping(value = "/domestic/patient/activeUser/{userid}/{search}", method = RequestMethod.POST)
+public String activeUser(@PathVariable("userid") int userid,@PathVariable("search") String search,HttpServletRequest request, ModelMap modelMap){
+	String page = null;
+	try{
+		adminService.auctiveDeactiveUser(userid, 1);
+		 page = "redirect:/domestic/patient/searchUser/"+search;
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	return page;
 	
 }
 	
