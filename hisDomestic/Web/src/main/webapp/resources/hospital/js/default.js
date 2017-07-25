@@ -1,7 +1,6 @@
 var  userId = $("#hduserid").val();
 
 function changeTab(tabId,hdPatientId,hdUserTypeId){
-	alert(userId);
 	if(tabId != undefined){
 		var url ;
 		if(hdUserTypeId != 2){
