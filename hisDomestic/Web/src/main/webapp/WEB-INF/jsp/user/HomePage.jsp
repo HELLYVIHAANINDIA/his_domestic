@@ -6,6 +6,8 @@
 <input type="hidden" value="${message}" name="hdmessage" id="hdmessage">
 
 
+
+
 <c:choose>
 	<c:when test="${issuperadmin}">
 		<%@include file="../includes/SuperAdminMenu.jsp"%>

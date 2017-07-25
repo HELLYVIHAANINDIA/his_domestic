@@ -158,6 +158,11 @@ public class AdminController {
 				case 13:
 					page="admin/SearchUser";
 					break;
+				case 14:
+					page = "admin/CreateHospitalUser";
+					getuserdetail(patientid, modelMap);
+					
+					break;
 					
 					default:page = "admin/Userdashboad";
 					break;
@@ -380,7 +385,7 @@ public class AdminController {
 			if (sessionBean != null) {
 				UserDatabean userDatabean = adminService
 						.getUserDataBean(request);
-
+                 
 				TblUserLogin tblUserLogin = new TblUserLogin();
 				tblUserLogin.setIsCTPLUser(0);
 				tblUserLogin.setLoginid(userDatabean.getTxtloginid());
@@ -420,7 +425,13 @@ public class AdminController {
 					tblConsultingDoctor= new TblConsultingDoctor();
 					tblConsultingDoctor.setConsultingdoctorname(userDatabean.getTxtfirstname() +" "+userDatabean.getTxtlastname());
 				}
-				success = adminService.addUser(tblUserLogin, tblUser,tblConsultingDoctor);
+				 if(userDatabean.getUserid() == 0 ){
+					 success = adminService.addUser(tblUserLogin, tblUser,tblConsultingDoctor);
+                 }else{
+                	 tblUser.setUserdetailid(userDatabean.getUserid());
+                	 success = adminService.edituser(tblUser, tblUserLogin);
+                 }
+				
 				if (success) {
 					
 					redirectAttributes.addFlashAttribute("message", "User Created Successfully");
@@ -1194,7 +1205,34 @@ public String searchUser(HttpServletRequest request,
 
 }
 
-
+private String getuserdetail(int userid,ModelMap modelMap){
+	String page = REDIRECT_SESSION_EXPIRED;
+	
+	String countryJson;
+	String designationJson;
+	String userTypeJson;
+	try {
+		countryJson = getContryJson();
+		userTypeJson = getUserTypeJson();
+		 modelMap.addAttribute("user", adminService.getUserObject(userid));
+		 modelMap.addAttribute("pageStatus", "edit");
+		 countryJson = getContryJson();
+			userTypeJson = getUserTypeJson();
+			modelMap.addAttribute("countryJson", countryJson);
+//			modelMap.addAttribute("designationJson", designationJson);
+			modelMap.addAttribute("userType", userTypeJson);
+			modelMap.addAttribute("objectId", -1);
+		    modelMap.addAttribute("childId", 0);
+		    modelMap.addAttribute("subChildId", 0);
+		    modelMap.addAttribute("otherSubChildId", 0);
+			page = "admin/CreateHospitalUser";
+	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return clientDateFormate;
+	
+}
 	
 	
 }

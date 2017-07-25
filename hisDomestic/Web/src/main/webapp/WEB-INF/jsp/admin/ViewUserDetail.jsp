@@ -1,0 +1,104 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<script>
+function newAppointment(userid) {
+	
+	
+			$.ajax({
+				type: "POST",
+				url: contextPath+"/domestic/user/tabcontent/14/"+userid,
+				success: function success(result){
+					/* $("#viewRegister").html("");
+		 			$("#viewRegister").html(result); */
+			}
+			});
+	    
+	
+}
+ function bookApp(userid){
+	$("#hduserid").val(userid);
+	$("#frmPatientView").submit();
+} 
+</script>
+
+<div class="row">
+	<div class="col-xs-12">
+				<div class="basic_table table-responsive">
+				<form id="frmPatientView" action="${pageContext.servletContext.contextPath}/domestic/user/dashboard" method="post">
+					<table class="table table-bordered" id="tblpatient">
+						<thead>
+							<tr>
+								
+								<th></th>
+								<th>Name</th>
+								<th>Address</th>
+								<th>Mobile NO</th>
+								<th>Login Id</th>
+								<th>Designation</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty userData}">
+							<tr>
+								<td colspan="7">
+									<label ><spring:message code="lbl_no_record_found" /></label>
+								</td>
+							</tr>								
+							</c:if>
+							<c:forEach items="${userData}" var="dtls">
+								<tr>
+									<%-- <td width="7%">
+									<a
+										href="${pageContext.servletContext.contextPath}/domestic/user/tabcontent/6/${dtls[0]}"
+										class="tag square-tag tag-success">Edit</a> 
+										<c:choose>
+											<c:when test="${serchstatus ne 'search'}">
+												<a href="#" class="tag square-tag tag-danger"
+													data-toggle="modal" data-target="#bordermodal">De-Active</a>
+											</c:when>
+										</c:choose>
+
+										<div class="modal fade border-modal" id="bordermodal"
+											tabindex="-1" role="dialog" aria-labelledby="bordermodal"
+											aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-body">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+
+														<h3>Modal title</h3>
+														<p>Are You sure De-Active User ${dtls[2]}?</p>
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal" onclick="#">Cancel</button>
+														<button type="button" class="btn btn-success"
+															data-dismiss="modal" onclick="deletePatient(${dtls[8]})">Ok</button>
+													</div>
+												</div>
+											</div>
+										</div></td> --%>
+										
+<%-- 									<td><a href="${pageContext.servletContext.contextPath}/domestic/user/tabcontent/7/${dtls[0]}" >${dtls[1]}</a></td> --%>
+									<td>
+										<input type="hidden" id="hduserid" name="hduserid" value="">
+										<button type="button" onclick="bookApp(${dtls[0]})">Edit</button>
+									</td>
+									<td>${dtls[1]} ${dtls[2]}</td>
+									<td>${dtls[4]}</td>
+									<td>${dtls[5]}</td>
+									<td>${dtls[6]}</td>
+									<td>${dtls[7]}</td>
+								</tr>
+								
+							</c:forEach>
+						</tbody>
+					</table>
+					<input type="hidden" id="hdRecpPatFollowTabId" name="hdRecpPatFollowTabId" value="4">
+					</form>
+				</div>
+			</div>
+</div>
+			

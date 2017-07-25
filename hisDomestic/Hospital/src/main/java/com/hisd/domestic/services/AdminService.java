@@ -140,7 +140,7 @@ public class AdminService {
 				userdtbean.setDtdesignation(5);
 				userdtbean.setOtherDesignation(request.getParameter("hidOtherDesig"));
 			}
-			
+			userdtbean.setUserid(pInt(request, "hduserid"));
 			userdtbean.setUsertypeid(pInt(request, "selUserRole"));
 			userdtbean.setCasetypeid(1);
 			userdtbean.setUserid(1);
@@ -727,15 +727,15 @@ public class AdminService {
 		List<Object[]> list;
 		query.append(" Select tblUser.userdetailid,tblUser.firstname,tblUser.lastname,tblUser.gender");
 		query.append(",CONCAT(tblUser.address,',',tblUser.landmark,',',tblCountry.countryName,',',tblState.stateName,',',tblUser.city,'-',tblUser.pincode) AS address");// ',',countryName,',',stateName,
-		query.append(",tblUser.mobileno,tblUserLogin.loginid,tblUserType.usertypename");
+		query.append(",tblUser.mobileno,tblUserLogin.loginid,tblDesignation.designationName");
 		query.append(" FROM TblUser tblUser");
-		query.append(" INNER JOIN TblUserLogin tblUserLogin,TblUserType tblUserType,TblDesignation tblDesignation,TblCountry tblCountry,TblState tblState");
+		query.append(" ,TblUserLogin tblUserLogin,TblCountry tblCountry,TblState tblState");
+		query.append(" INNER JOIN tblUserLogin.tblUserType tblusertype");
+		query.append(" INNER JOIN tblUserLogin.tblDesignation tblDesignation");
 		query.append(" WHERE tblUser.countryId = tblCountry.countryId");
 		query.append(" AND tblUser.stateId = tblState.stateId");
 		query.append(" AND tblUser.status = 1");
-		query.append(" AND  tblUserLogin.userId = tblUser.userid" );
-		query.append(" AND tblUserType.usertypeid = tblUserLogin.usertypeid" );
-		query.append(" AND tblUserLogin.tblDesignation.designationId = tblDesignation.designationId" );
+		query.append(" AND  tblUserLogin.userId = tblUser.userid");
 		
 		if (!searchUser.isEmpty()) {
 			query.append(" AND (tblUser.userdetailid Like '%"+searchUser+"%'  OR tblUser.firstname Like '%"+searchUser+"%'  OR tblUser.mobileno Like '%"+searchUser+"%')");
@@ -750,4 +750,35 @@ public class AdminService {
 		return list;
 	}
 	
+	@Transactional
+	public List<Object[]> getUserObject(int userid){
+		StringBuilder query = new StringBuilder();
+		Map<String, Object>paramenter = new HashMap<String, Object>();
+		paramenter.put("userid", userid);
+		List<Object[]> list;
+		query.append(" Select tblUser.userdetailid,tblusertype.usertypeid,tblusertype.usertypename,tblUser.firstname,tblUser.middlename,tblUser.lastname,tblUser.gender,tblUser.bod");
+		query.append(",tblUser.address,tblUser.landmark,tblCountry.countryName,tblState.stateName,tblUser.city,tblUser.pincode,tblUser.countrycodemobileno");// ',',countryName,',',stateName,
+		query.append(",tblUser.mobileno,tblUser.countrycodelandline,tblUser.landlineno,tblUser.extlandline");
+		query.append(",tblUserLogin.loginid,tblUserLogin.otherdesignation,tblDesignation.designationName,tblState.stateId,tblDesignation.designationId");
+		query.append(" FROM TblUser tblUser");
+		query.append(" ,TblUserLogin tblUserLogin,TblCountry tblCountry,TblState tblState");
+		query.append(" INNER JOIN tblUserLogin.tblUserType tblusertype");
+		query.append(" INNER JOIN tblUserLogin.tblDesignation tblDesignation");
+		query.append(" WHERE tblUser.countryId = tblCountry.countryId");
+		query.append(" AND tblUser.stateId = tblState.stateId");
+		query.append(" AND tblUser.status = 1");
+		query.append(" AND  tblUserLogin.userId = tblUser.userid");
+		query.append(" AND tblUser.userdetailid=:userid");
+		list = hibernateQueryDao.createNewQuery(query.toString(), paramenter);
+		return list;
+		
+	}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public boolean edituser(TblUser tblUser, TblUserLogin tblUserLogin ) {
+		boolean bSuceess;
+		tblUserDao.saveOrUpdateEntity(tblUser);
+		tblUserLoginDao.saveOrUpdateEntity(tblUserLogin);
+		bSuceess = true;
+		return bSuceess;
+	}
 }

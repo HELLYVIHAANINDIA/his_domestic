@@ -46,12 +46,55 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 				}));
 			});
 		}
+		
 		$(".dateBox").each(function() {
 			$(this).datetimepicker({
 				format : 'd-M-Y',
 				maxDate : 0
 			});
 		});
+		  var pageStatus = '${pageStatus}';
+		if (pageStatus == 'edit') {
+			var countryId = '${user[0][10]}';
+			var stateId = '${user[0][22]}';
+			var usertype = '${user[0][1]}';
+			var gender = '${user[0][6]}';
+			var designation = '${user[0][23]}';
+			$('select[id="selCountry"] option:selected').attr(
+					"selected", null);
+			$(
+					'select[id="selCountry"] option[value="'
+							+ countryId + '"]').attr(
+					"selected", "selected");
+			getState();
+
+			$('select[id="selState"] option:selected').attr(
+					"selected", null);
+			$(
+					'select[id="selState"] option[value="'
+							+ stateId + '"]').attr("selected",
+					"selected");
+			
+			$('select[id="selUserRole"] option:selected').attr(
+					"selected", null);
+			$(
+					'select[id="selUserRole"] option[value="'
+							+ usertype + '"]').attr("selected",
+					"selected");
+			$('select[id="dtgender"] option:selected').attr(
+					"selected", null);
+			$(
+					'select[id="dtgender"] option[value="'
+							+ gender + '"]').attr("selected",
+					"selected");
+			$('select[id="dtdesignationid"] option:selected').attr(
+					"selected", null);
+			$(
+					'select[id="dtdesignationid"] option[value="'
+							+ designation + '"]').attr("selected",
+					"selected");
+
+		}
 	});
 
 	function validate() {
@@ -92,24 +135,36 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 	
 		<form action="${pageContext.servletContext.contextPath}/domestic/user/SaveCreateUser" method="post" onsubmit="return validate()">
 			<div class="row">
-			
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
+				    <input type="hidden" name="hduserid" id="hduserid" value="${user[0][0]}">
 						<label>User Role <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<select class="form-control" id="selUserRole" name="selUserRole"
+						<c:choose>
+						<c:when test="${pageStatus eq edit }">
+						   <select class="form-control" id="selUserRole" name="selUserRole"
+								isrequired="true" onchange=validateCombo(this)"
+								title="UserRole" validationmsg="Select UserRole">
+								<option value="${user[0][1]}">${user[0][2]}</option>
+							</select>
+						</c:when>
+						<c:otherwise>
+						<select class="form-control" id="selUserRole" name="selUserRole"
 								isrequired="true" onchange=validateCombo(this)"
 								title="UserRole" validationmsg="Select UserRole">
 							</select>
+						</c:otherwise>
+						</c:choose>
+							
 						</div>
 					</div>
 				</div>
-                     	
+                   
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="field-set-box">
 						<label>First Name <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text"
+							<input class="form-control" value="${user[0][3]}" type="text"
 								id="txtfirstname" placeholder="Enter First Name"
 								name="txtfirstname"
 								onblur="javascript:{if(validateTextComponent(this));}"
@@ -125,7 +180,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>Middle Name </label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text"
+							<input class="form-control" value="${user[0][4]}" type="text"
 								placeholder="Enter Middle Name" id="txtmiddlename"
 								name="txtmiddlename"
 								onblur="javascript:{if(validateTextComponent(this));}"
@@ -141,7 +196,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>Last Name <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text"
+							<input class="form-control" value="${user[0][5]}" type="text"
 								placeholder="Enter Last Name" id="txtlastname"
 								name="txtlastname"
 								onblur="javascript:{if(validateTextComponent(this));}"
@@ -167,8 +222,8 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 								validationmsg="Allows min 3 and max. 200 characters and special character (',- , .,space)">
 								<option disabled="disabled" selected="selected">Please
 									select gender</option>
-								<option>Male</option>
-								<option>Female</option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
 							</select>
 						</div>
 						<span id="verifyGender" style="display: block; color: red"></span>
@@ -180,7 +235,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						<label>Date Of Birth</label>
 						<div class="form-group">
 							<input type="hidden" name="clientDateFormate"
-								id="clientDateFormate" value='dd-MMM-yyyy'> <input
+								id="clientDateFormate" value='${user[0][7]}'> <input
 								type="text" class="form-control dateBox" name="txtdateofbirth"
 								datepicker="yes" id="txtstartDate" datevalidate="lt:txtendDate"
 								placeholder="dd-MMM-yyyy"
@@ -194,7 +249,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>E-mail ID <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="txtloginid"
+							<input class="form-control" value="${user[0][19]}" type="text" id="txtloginid"
 								validarr="required@@email" tovalid="true" name="txtloginid"
 								onblur="javascript:{if(validateTextComponent(this)){checkDuplicateEmail();}}"
 								title="Email ID"
@@ -245,7 +300,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						<div class="row">
 							<div class="col-sm-4 col-xs-12">
 								<div class="form-group">
-									<input class="form-control" value="" type="text"
+									<input class="form-control" value="${user[0][14]}" type="text"
 										placeholder="Country Code :" id="txtcountrycodemobile"
 										name="txtcountrycodemobile"
 										onblur="javascript:{if(validateTextComponent(this));}"
@@ -256,7 +311,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 							</div>
 							<div class="col-sm-8 col-xs-12">
 								<div class="form-group">
-									<input class="form-control" value="" type="text"
+									<input class="form-control" value="${user[0][15]}" type="text"
 										placeholder="Mobile No. :" id="txtmobileno" name="txtmobileno"
 										onblur="javascript:{if(validateTextComponent(this));}"
 										validarr="required@@numeric@@length:10,10" tovalid="true"
@@ -277,7 +332,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 						<div class="row">
 							<div class="col-sm-3 col-xs-12">
 								<div class="form-group">
-									<input class="form-control" value="" type="text"
+									<input class="form-control" value="${user[0][16]}" type="text"
 										placeholder="Country Code :" id="txtcountrycodelandline"
 										onblur="javascript:{if(validateTextComponent(this));}"
 										validarr="numeric@@length:2,2" tovalid="true"
@@ -288,7 +343,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 							</div>
 							<div class="col-sm-6 col-xs-12">
 								<div class="form-group">
-									<input class="form-control" value="" type="text"
+									<input class="form-control" value="${user[0][17]}" type="text"
 										placeholder="Landline No. :" id="txtlandlineno"
 										onblur="javascript:{if(validateTextComponent(this));}"
 										validarr="numeric@@length:3,5" tovalid="true"
@@ -299,7 +354,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 							</div>
 							<div class="col-sm-3 col-xs-12">
 								<div class="form-group">
-									<input class="form-control" value="" type="text"
+									<input class="form-control" value="${user[0][18]}" type="text"
 										placeholder="Extension :"
 										onblur="javascript:{if(validateTextComponent(this));}"
 										validarr="numeric@@length:5,10" tovalid="true"
@@ -317,7 +372,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>Address <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="txtaddress"
+							<input class="form-control" value="${user[0][8]}" type="text" id="txtaddress"
 								name="txtaddress"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="required@@alphanumspecial@@length:3,200"
@@ -335,7 +390,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>Landmark</label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="txtlandmark"
+							<input class="form-control" value="${user[0][9]}" type="text" id="txtlandmark"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="alphanum@@length:3,200" class="form-control"
 								name="txtlandmark" title="LandMark"
@@ -387,7 +442,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>City <span class="cm-field">*</span></label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="txtcity"
+							<input class="form-control" value="${user[0][12]}" type="text" id="txtcity"
 								name="txtcity"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="required@@alphabet@@length:3,100" tovalid="true"
@@ -402,7 +457,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>Pincode</label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="txtpincode"
+							<input class="form-control" value="${user[0][13]}" type="text" id="txtpincode"
 								name="txtpincode"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="numeric@@length:6,6" tovalid="true"
@@ -438,7 +493,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 											<div class="row">
 												<div class="col-xs-12">
 													<label class="lbl-1">Enter Designation</label> <input
-														type="text" class="form-control" id="otherDedignation">
+														type="text" class="form-control" id="otherDedignation" value="${user[0][20]}">
 												</div>
 											</div>
 										</div>
