@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class TblReports implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="report_id")
 	private int report_id;
 	@Column(name="report_name")

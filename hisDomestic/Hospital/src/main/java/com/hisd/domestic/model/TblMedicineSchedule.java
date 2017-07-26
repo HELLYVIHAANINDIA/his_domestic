@@ -19,7 +19,7 @@ public class TblMedicineSchedule implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="seduleid")
 	private int seduleid;
 	@Column(name ="medicineschedule")
