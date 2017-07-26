@@ -18,7 +18,7 @@ import org.springframework.core.style.ToStringCreator;
 public class ListingDemo implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "Id", unique = true, nullable = false)
 	private String id;
 	@Column(name = "engine")

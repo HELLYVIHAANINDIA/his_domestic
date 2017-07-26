@@ -66,7 +66,7 @@ public class TblExceptionLog implements java.io.Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "exceptionLogId", unique = true, nullable = false)
     public int getExceptionLogId() {
         return this.exceptionLogId;
