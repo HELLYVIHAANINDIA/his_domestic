@@ -63,7 +63,7 @@ function activeuser(userid) {
 								<tr>
 								
 									 <td>      
-										<input type="text" id="hduserid" name="hduserid" value="${dtls[0]}">
+										<input type="hidden" id="hduserid" name="hduserid" value="${dtls[0]}">
 										 <button type="button" onclick="bookApp(${dtls[0]})">Edit</button>
 										<c:choose>
 										<c:when test="${dtls[8] eq 1}">

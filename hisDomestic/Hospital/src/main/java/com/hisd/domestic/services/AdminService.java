@@ -141,7 +141,7 @@ public class AdminService {
 				userdtbean.setOtherDesignation(request.getParameter("hidOtherDesig"));
 			}
 			userdtbean.setUserloginid(pInt(request, "hduserloginid"));
-			userdtbean.setUserid(pInt(request, "hduserid"));
+			userdtbean.setUserdetailid(pInt(request, "hduserid"));
 			userdtbean.setUsertypeid(pInt(request, "selUserRole"));
 			userdtbean.setCasetypeid(1);
 			userdtbean.setUserid(1);

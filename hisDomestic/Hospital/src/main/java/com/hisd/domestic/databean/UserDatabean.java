@@ -28,6 +28,7 @@ public class UserDatabean {
 	private String txtcity;
 	private String txtpincode;
 	private int dtdesignation;
+	private int userdetailid;
 
 	
 	private String txtdateofbirth;
@@ -200,6 +201,12 @@ public class UserDatabean {
 	}
 	public void setUserloginid(int userloginid) {
 		this.userloginid = userloginid;
+	}
+	public int getUserdetailid() {
+		return userdetailid;
+	}
+	public void setUserdetailid(int userdetailid) {
+		this.userdetailid = userdetailid;
 	}
 	
 	

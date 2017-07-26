@@ -426,10 +426,10 @@ public class AdminController {
 					tblConsultingDoctor= new TblConsultingDoctor();
 					tblConsultingDoctor.setConsultingdoctorname(userDatabean.getTxtfirstname() +" "+userDatabean.getTxtlastname());
 				}
-				 if(userDatabean.getUserid() == 0 ){
+				 if(userDatabean.getUserdetailid() == 0 ){
 					 success = adminService.addUser(tblUserLogin, tblUser,tblConsultingDoctor);
                  }else{
-                	 tblUser.setUserdetailid(userDatabean.getUserid());
+                	 tblUser.setUserdetailid(userDatabean.getUserdetailid());
                 	 tblUser.setUserid(userDatabean.getUserloginid());
                 	 success = adminService.edituser(tblUser, tblUserLogin);
                  }
