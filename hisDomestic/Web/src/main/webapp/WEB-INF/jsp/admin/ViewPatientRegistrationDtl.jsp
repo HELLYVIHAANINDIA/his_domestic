@@ -2,20 +2,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script>
-function newAppointment(patientid) {
-	
-	
-			$.ajax({
-				type: "POST",
-				url: contextPath+"/domestic/user/tabcontent/7/"+patientid,
-				success: function success(result){
-					/* $("#viewRegister").html("");
-		 			$("#viewRegister").html(result); */
-			}
-			});
-	    
-	
-}
  function bookApp(patientid){
 	$("#hdPatientId1").val(patientid);
 	$("#frmPatientView").submit();

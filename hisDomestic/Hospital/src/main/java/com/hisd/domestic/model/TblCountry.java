@@ -48,7 +48,7 @@ public class TblCountry implements Serializable {
     }
     
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="countryId", nullable=false)
     public Integer getCountryId() {
         return this.countryId;

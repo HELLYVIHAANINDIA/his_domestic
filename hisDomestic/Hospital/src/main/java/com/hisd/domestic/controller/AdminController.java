@@ -80,10 +80,8 @@ public class AdminController {
 	private static final String REDIRECT_SESSION_EXPIRED = "redirect:/notloggedin";
 
 	// CreateUser
-	@RequestMapping(value = "/domestic/user/tabcontent/{tabid}/{patientid}", method = {RequestMethod.POST})
-	public String createUser(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable("tabid") Integer tabid,
-			@PathVariable("patientid") Integer patientid, ModelMap modelMap) {
+	@RequestMapping(value = "/domestic/user/tabcontent/{tabid}/{patientid}",  method = {RequestMethod.POST})
+	public String createUser(HttpServletRequest request,HttpServletResponse response, @PathVariable("tabid") Integer tabid,@PathVariable("patientid") Integer patientid, ModelMap modelMap) {
 		String page = REDIRECT_SESSION_EXPIRED;
 		try {
 			HttpSession session = request.getSession();
@@ -110,8 +108,6 @@ public class AdminController {
 				    modelMap.addAttribute("childId", 0);
 				    modelMap.addAttribute("subChildId", 0);
 				    modelMap.addAttribute("otherSubChildId", 0);
-			        
-					
 					break;
 				case 2:
 					page = "admin/PatientType";
@@ -160,12 +156,8 @@ public class AdminController {
 					break;
 				case 14:
 					page = "admin/CreateHospitalUser";
-					int userid =Integer.parseInt(request.getParameter("hduserid"));
+					int userid =request.getParameter("hduserid")!= null && !request.getParameter("hduserid").toString().isEmpty()?Integer.parseInt(request.getParameter("hduserid")):0 ;
 					getuserdetail(userid, modelMap);
-					
-					break;
-					
-					default:page = "admin/Userdashboad";
 					break;
 					
 				}
@@ -1246,32 +1238,15 @@ public String searchUser(HttpServletRequest request,
 
 }
 
-private String getuserdetail(int userid,ModelMap modelMap){
-	String page = REDIRECT_SESSION_EXPIRED;
-	
-	String countryJson;
-	String designationJson;
-	String userTypeJson;
-	try {
-		countryJson = getContryJson();
-		userTypeJson = getUserTypeJson();
-		 modelMap.addAttribute("user", adminService.getUserObject(userid));
+private void getuserdetail(int userid,ModelMap modelMap){
+		 modelMap.addAttribute("user",adminService.getUserObject(userid) );
 		 modelMap.addAttribute("pageStatus", "edit");
-		 countryJson = getContryJson();
-			userTypeJson = getUserTypeJson();
-			modelMap.addAttribute("countryJson", countryJson);
-//			modelMap.addAttribute("designationJson", designationJson);
-			modelMap.addAttribute("userType", userTypeJson);
+			modelMap.addAttribute("countryJson", getContryJson());
+			modelMap.addAttribute("userType", getUserTypeJson());
 			modelMap.addAttribute("objectId", -1);
 		    modelMap.addAttribute("childId", 0);
 		    modelMap.addAttribute("subChildId", 0);
 		    modelMap.addAttribute("otherSubChildId", 0);
-			page = "admin/CreateHospitalUser";
-	
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	return clientDateFormate;
 	
 }
 @RequestMapping(value = "/domestic/patient/deActiveUser/{userid}/{search}", method = RequestMethod.POST)

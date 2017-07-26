@@ -1,0 +1,2 @@
+ALTER TABLE `hisdomestic`.`tbl_clinicaldetail` CHANGE `clinical_id` `clinical_id` INT(11) NOT NULL, ADD PRIMARY KEY (`clinical_id`); 
+ALTER TABLE `hisdomestic`.`tbl_clinicaldetail` CHANGE `clinical_id` `clinical_id` INT(11) NOT NULL AUTO_INCREMENT; 

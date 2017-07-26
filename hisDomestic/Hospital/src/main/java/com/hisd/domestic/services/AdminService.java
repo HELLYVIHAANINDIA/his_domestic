@@ -757,11 +757,10 @@ public class AdminService {
 		StringBuilder query = new StringBuilder();
 		Map<String, Object>paramenter = new HashMap<String, Object>();
 		paramenter.put("userid", userid);
-		List<Object[]> list;
 		query.append(" Select tblUser.userdetailid,tblusertype.usertypeid,tblusertype.usertypename,tblUser.firstname,tblUser.middlename,tblUser.lastname,tblUser.gender,tblUser.bod");
 		query.append(",tblUser.address,tblUser.landmark,tblCountry.countryName,tblState.stateName,tblUser.city,tblUser.pincode,tblUser.countrycodemobileno");// ',',countryName,',',stateName,
 		query.append(",tblUser.mobileno,tblUser.countrycodelandline,tblUser.landlineno,tblUser.extlandline");
-		query.append(",tblUserLogin.loginid,tblUserLogin.otherdesignation,tblDesignation.designationName,tblState.stateId,tblDesignation.designationId,tblUserLogin.userId");
+		query.append(",tblUserLogin.loginid,tblUserLogin.otherdesignation,tblDesignation.designationName,tblState.stateId,tblDesignation.designationId,tblUserLogin.userId,tblUser.area");
 		query.append(" FROM TblUser tblUser");
 		query.append(" ,TblUserLogin tblUserLogin,TblCountry tblCountry,TblState tblState");
 		query.append(" INNER JOIN tblUserLogin.tblUserType tblusertype");
@@ -771,8 +770,7 @@ public class AdminService {
 		query.append(" AND tblUser.status = 1");
 		query.append(" AND  tblUserLogin.userId = tblUser.userid");
 		query.append(" AND tblUser.userdetailid=:userid");
-		list = hibernateQueryDao.createNewQuery(query.toString(), paramenter);
-		return list;
+		return hibernateQueryDao.createNewQuery(query.toString(), paramenter);
 		
 	}
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })

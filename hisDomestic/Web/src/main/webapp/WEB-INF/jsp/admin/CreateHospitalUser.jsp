@@ -404,7 +404,7 @@ var lbl_pass_should_not_as_old = '<spring:message code="lbl_pass_should_not_as_o
 					<div class="field-set-box">
 						<label>Area</label>
 						<div class="form-group">
-							<input class="form-control" value="" type="text" id="txtarea"
+							<input class="form-control" value="${user[0][25]}" type="text" id="txtarea"
 								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="alphanum@@length:3,200" tovalid="true"
 								onblur="validateTextComponent(this)" class="form-control"

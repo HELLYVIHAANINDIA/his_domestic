@@ -1,9 +1,7 @@
 function changeTabDoctor(tabId,hdPatientId,hdUserTypeId){
 	if(tabId != undefined){
 		var url ;
-		if(hdUserTypeId != 2){
-			url = contextPath+"/domestic/user/tabcontent/"+tabId+"/"+hdPatientId;	
-		}else{
+		if(hdUserTypeId == 2){
 			url = contextPath+"/domestic/doctor/tabcontent/"+tabId+"/"+hdPatientId+"/"+hdUserTypeId;
 		}
 		$.ajax({
@@ -22,12 +20,16 @@ $(document).ready(function() {
 	var hdUserTypeId = $("#hdUserTypeId").val();
 	var hdsuperAdmin = $("#hdsuperAdmin").val();
 	var hdPatientId = $("#hdPatientId").val();
-	if(hdTabId == 2){
-		changeTabDoctor(hdTabId,hdPatientId,hdUserTypeId);
+	if(hdUserTypeId==2){
+//		if(hdTabId == 2){
+			/*PatientType*/
+			changeTabDoctor(hdTabId,hdPatientId,hdUserTypeId);
+//		}
+		/*else if(hdsuperAdmin){
+			changeTabDoctor(hdTabId,hdPatientId,hdUserTypeId);
+		}	*/
 	}
-	else if(hdsuperAdmin){
-		changeTabDoctor(hdTabId,hdPatientId,hdUserTypeId);
-	}
+	
 });
 
 function checkDuplicateEmail() {

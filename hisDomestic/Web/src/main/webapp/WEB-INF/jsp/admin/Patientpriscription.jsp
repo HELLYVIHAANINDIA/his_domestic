@@ -563,7 +563,6 @@ Prescription
 
 </div>		
 </section>
-
 <script
 	src="${pageContext.servletContext.contextPath}/resources/hospital/js/jquery.min.js"></script>
 <script type="text/javascript">

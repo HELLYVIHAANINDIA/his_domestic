@@ -97,7 +97,7 @@ public class TblUserLogin implements Serializable {
         this.userId = userId ;
     }
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="userId")
     public Long getUserId() {
         return this.userId;

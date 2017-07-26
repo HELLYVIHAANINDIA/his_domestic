@@ -43,7 +43,6 @@ Clinical
 </div>
 </div>
 </div>
-
 </header>
 
 <div class="search-overlay">

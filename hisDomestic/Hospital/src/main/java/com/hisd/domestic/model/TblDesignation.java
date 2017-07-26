@@ -49,7 +49,7 @@ public class TblDesignation implements Serializable {
         this.designationId = designationId ;
     }
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name="designationid", nullable=false)
     public Integer getDesignationId() {
         return this.designationId;
