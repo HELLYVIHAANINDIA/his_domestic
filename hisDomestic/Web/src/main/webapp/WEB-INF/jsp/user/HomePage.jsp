@@ -10,7 +10,7 @@
 
 
 <c:choose>
-	<c:when test="${issuperadmin}">
+	<c:when test="${issuperadmin or userType eq 1}">
 		<%@include file="../includes/SuperAdminMenu.jsp"%>
 	</c:when>
 	<c:otherwise>

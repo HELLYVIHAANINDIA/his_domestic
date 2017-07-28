@@ -8,7 +8,7 @@
 	<!--main-print-header-->
 
 	<div class="main-line">
-		<div class="rx-rx">Rx :</div>
+		<div class="rx-rx">Rx ,</div>
 		<div class="p-date">
 			<label><b>Date:</b></label> ${currentDate}</b>
 		</div>
@@ -18,20 +18,18 @@
 		<div class="sr-no"></div>
 		<div class="prescription">
 			<!-- <lable> First Name:</lable> -->
-			${patient[0][1]} ${patient[0][2]}</br>
+		<b>	${patient[0][1]} ${patient[0][2]}</b></br>
 		</div>
 		<br>
 		<br>
 		<div class="sr-no"></div>
 		<div class="prescription">
-		<label>History:</label>
 			<p>${clinicalDetail[0].history}</p>
 		</div>
 		<br>
 		<br>
 		<div class="sr-no"></div>
 		<div class="prescription">
-			<label>Complains:</label>
 			<c:forEach items="${clinicalCompliants}" var="complain">
                          ${complain[2]},
 			</c:forEach>
@@ -40,8 +38,6 @@
 		<br>
 		<div class="sr-no"></div>
 		<div class="prescription">
-			<label>Findings:</label>
-
 			<c:forEach items="${clinicalFinding}" var="finging">
   ${finging[2]} ->  ${finging[4]}<br>
 				
@@ -51,7 +47,6 @@
 		<br>
 		<div class="sr-no"></div>
 		<div class="prescription">
-		<label>Reports:</label>
 			<c:forEach items="${clinicalReport}" var="report">
                      ${report[2]},
 			</c:forEach>
@@ -70,7 +65,6 @@
 		</div>
 		<div class="sr-no"></div>
 		<div class="prescription">
-			<lable>Comment:</lable>
 			${clinicalDetail[0].remark}
 		</div>
 

@@ -45,7 +45,7 @@ public class DashboardContoller {
 		    		}
 		    	}else{
 		    		if(sessionBean.getUserTypeId() == 1){
-		    			tabid = 0;
+		    			tabid = 1;
 		    			if(model.asMap().get("redirectTabId")!=null){
 		    				tabid = Integer.parseInt(model.asMap().get("redirectTabId").toString());
 				    	}else if(hdPatientId != 0){
