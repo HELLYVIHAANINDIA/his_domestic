@@ -872,10 +872,10 @@
 													 <div class="checkbox-squared">
 													 	<c:choose >
 													 		<c:when test="${addictionData[1]  eq  'checked'}">
-													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" checked="checked" onchange="addictionother()">
+													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" checked="checked" onclick="addictionother()">
 													 		</c:when>
 															<c:otherwise>
-													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" onchange="addictionother()">
+													 			<input value="${addiction.key}" id="chk${addiction.key}" name="chkaddiction" type="checkbox" onclick="addictionother()">
 													 		</c:otherwise>													 		
 													 	</c:choose>
 															<label for="chk${addiction.key}"></label> 
