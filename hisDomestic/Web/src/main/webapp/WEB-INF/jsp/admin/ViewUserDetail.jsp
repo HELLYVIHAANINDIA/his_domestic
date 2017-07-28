@@ -63,10 +63,11 @@ function activeuser(userid) {
 								<tr>
 								
 									 <td>      
-										<input type="hidden" id="hduserid" name="hduserid" value="${dtls[0]}">
-										 <button type="button" onclick="bookApp(${dtls[0]})">Edit</button>
+										
 										<c:choose>
 										<c:when test="${dtls[8] eq 1}">
+										<input type="hidden" id="hduserid" name="hduserid" value="${dtls[0]}">
+										 <button type="button" onclick="bookApp(${dtls[0]})">Edit</button>
 										 <button type="button" data-toggle="modal" data-target="#bordermodal${dtls[9]}">Deactive</button>
 										 <div class="modal fade border-modal" id="bordermodal${dtls[9]}" tabindex="-1" role="dialog" aria-labelledby="bordermodal" aria-hidden="true">
 											<div class="modal-dialog" role="dialog">
