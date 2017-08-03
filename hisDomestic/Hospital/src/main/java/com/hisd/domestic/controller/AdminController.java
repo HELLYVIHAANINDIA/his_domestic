@@ -423,12 +423,21 @@ public class AdminController {
                  }else{
                 	 tblUser.setUserdetailid(userDatabean.getUserdetailid());
                 	 tblUser.setUserid(userDatabean.getUserloginid());
-                	 success = adminService.edituser(tblUser, tblUserLogin);
+                	 tblUserLogin.setUserId(userDatabean.getUserloginid());
+                	 if(userDatabean.getUsertypeid() ==2){
+                		tblConsultingDoctor.setUserid(userDatabean.getUserloginid());
+                		 
+                	 }
+                	 success = adminService.edituser(tblUser, tblUserLogin,tblConsultingDoctor);
                  }
 				
 				if (success) {
+					if(userDatabean.getUserdetailid() == 0){
+						redirectAttributes.addFlashAttribute("message", "User Created Successfully");
+					}else{
+						redirectAttributes.addFlashAttribute("message", "User Updated Successfully");
+					}
 					
-					redirectAttributes.addFlashAttribute("message", "User Created Successfully");
 					page = "redirect:/domestic/user/dashboard";
 				}
 			}

@@ -748,14 +748,13 @@
 				
 				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" id="divreferredDetail">
 					<div class="field-set-box">
-						<label>Referred Details</label>
+						<label>Reference Details</label>
 						<div class="form-group">
 							<textarea class="form-control" type="text"
 								placeholder="Referred Detail" id="txtrefrenceDetail"
 								name="txtrefrenceDetail"
-								onblur="javascript:{if(validateTextComponent(this));}"
 								validarr="required@@alphabet@@length:3,100"
-								onblur="validateTextComponent(this)" title="Referred Detail"
+								title="Referred Detail"
 								validationmsg="Allows min 3 and max. 200 characters (',- , .,space)">${patient.txtreferencedetail}</textarea>
 						</div>
 					</div>

@@ -93,8 +93,8 @@ public class TblUserLogin implements Serializable {
     public TblUserLogin() {
     }
     
-    public void setUserId( Long userId ) {
-        this.userId = userId ;
+    public void setUserId( long i ) {
+        this.userId = i ;
     }
     @Id
     @GeneratedValue

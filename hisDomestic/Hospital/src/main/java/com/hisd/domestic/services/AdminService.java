@@ -774,10 +774,13 @@ public class AdminService {
 		
 	}
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public boolean edituser(TblUser tblUser, TblUserLogin tblUserLogin ) {
+	public boolean edituser(TblUser tblUser, TblUserLogin tblUserLogin,TblConsultingDoctor tblConsultingDoctor ) {
 		boolean bSuceess;
 		tblUserDao.saveOrUpdateEntity(tblUser);
 		tblUserLoginDao.saveOrUpdateEntity(tblUserLogin);
+		if(tblConsultingDoctor != null){
+			tblConsultingDoctorDao.saveOrUpdateEntity(tblConsultingDoctor);
+		}
 		bSuceess = true;
 		return bSuceess;
 	}
