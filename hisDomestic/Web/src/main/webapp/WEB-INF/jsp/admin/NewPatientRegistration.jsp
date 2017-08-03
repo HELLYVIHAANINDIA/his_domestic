@@ -54,6 +54,7 @@
 							 var id = '${patientcount[0]}';
 	                            id++;
 	                           $("#txtpatientcrno").val(id);
+	                           $("#txtpatientcrno").attr("disabled", "disabled");
 						}else{
 							 $("#txtpatientcrno").val(patientcrno);
 						}
@@ -278,6 +279,7 @@
 			removeattribute();
 			
 		}
+		$("#txtpatientcrno").removeAttr("disabled");
 		
 		return vbool;
 
@@ -887,7 +889,7 @@
 												<c:forEach items="${addictionlist}" var="addiction">
 													 <div class="checkbox-squared">
 													 <input value="${addiction[0]}" id="chk${addiction[0]}" name="chkaddiction"
-															type="checkbox"> 
+															type="checkbox" onclick="addictionother()"> 
 															 <label for="chk${addiction[0]}"></label> 
 													 <span>${addiction[1]}</span> 
 													</div>
